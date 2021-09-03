@@ -1,0 +1,327 @@
+{
+	"2011": [{
+			"Classe ambientale": "EURO 0",
+			"Numero autovetture": 82529
+		},
+		{
+			"Classe ambientale": "EURO 1",
+			"Numero autovetture": 28067
+		},
+		{
+			"Classe ambientale": "EURO 2",
+			"Numero autovetture": 103387
+		},
+		{
+			"Classe ambientale": "EURO 3",
+			"Numero autovetture": 128149
+		},
+		{
+			"Classe ambientale": "EURO 4",
+			"Numero autovetture": 277675
+		},
+		{
+			"Classe ambientale": "EURO 5",
+			"Numero autovetture": 104173
+		},
+		{
+			"Classe ambientale": "EURO 6",
+			"Numero autovetture": 173
+		},
+		{
+			"Classe ambientale": "Non contemplato",
+			"Numero autovetture": 43
+		},
+		{
+			"Classe ambientale": "Non identificato",
+			"Numero autovetture": 254
+		}
+	],
+	"2012": [{
+			"Classe ambientale": "EURO 0",
+			"Numero autovetture": 81084
+		},
+		{
+			"Classe ambientale": "EURO 1",
+			"Numero autovetture": 25269
+		},
+		{
+			"Classe ambientale": "EURO 2",
+			"Numero autovetture": 91749
+		},
+		{
+			"Classe ambientale": "EURO 3",
+			"Numero autovetture": 117272
+		},
+		{
+			"Classe ambientale": "EURO 4",
+			"Numero autovetture": 261126
+		},
+		{
+			"Classe ambientale": "EURO 5",
+			"Numero autovetture": 138913
+		},
+		{
+			"Classe ambientale": "EURO 6",
+			"Numero autovetture": 405
+		},
+		{
+			"Classe ambientale": "Non contemplato",
+			"Numero autovetture": 41
+		},
+		{
+			"Classe ambientale": "Non identificato",
+			"Numero autovetture": 235
+		}
+	],
+	"2013": [{
+			"Classe ambientale": "EURO 0",
+			"Numero autovetture": 79521
+		},
+		{
+			"Classe ambientale": "EURO 1",
+			"Numero autovetture": 22609
+		},
+		{
+			"Classe ambientale": "EURO 2",
+			"Numero autovetture": 82652
+		},
+		{
+			"Classe ambientale": "EURO 3",
+			"Numero autovetture": 107618
+		},
+		{
+			"Classe ambientale": "EURO 4",
+			"Numero autovetture": 247485
+		},
+		{
+			"Classe ambientale": "EURO 5",
+			"Numero autovetture": 149360
+		},
+		{
+			"Classe ambientale": "EURO 6",
+			"Numero autovetture": 11604
+		},
+		{
+			"Classe ambientale": "Non identificato",
+			"Numero autovetture": 452
+		}
+	],
+	"2014": [{
+			"Classe ambientale": "EURO 0",
+			"Numero autovetture": 78765
+		},
+		{
+			"Classe ambientale": "EURO 1",
+			"Numero autovetture": 20655
+		},
+		{
+			"Classe ambientale": "EURO 2",
+			"Numero autovetture": 73239
+		},
+		{
+			"Classe ambientale": "EURO 3",
+			"Numero autovetture": 99246
+		},
+		{
+			"Classe ambientale": "EURO 4",
+			"Numero autovetture": 234046
+		},
+		{
+			"Classe ambientale": "EURO 5",
+			"Numero autovetture": 172062
+		},
+		{
+			"Classe ambientale": "EURO 6",
+			"Numero autovetture": 7916
+		},
+		{
+			"Classe ambientale": "Non identificato",
+			"Numero autovetture": 450
+		}
+	],
+	"2015": [{
+			"Classe ambientale": "EURO 0",
+			"Numero autovetture": 77460
+		},
+		{
+			"Classe ambientale": "EURO 1",
+			"Numero autovetture": 19375
+		},
+		{
+			"Classe ambientale": "EURO 2",
+			"Numero autovetture": 66156
+		},
+		{
+			"Classe ambientale": "EURO 3",
+			"Numero autovetture": 92302
+		},
+		{
+			"Classe ambientale": "EURO 4",
+			"Numero autovetture": 224268
+		},
+		{
+			"Classe ambientale": "EURO 5",
+			"Numero autovetture": 183983
+		},
+		{
+			"Classe ambientale": "EURO 6",
+			"Numero autovetture": 22613
+		},
+		{
+			"Classe ambientale": "Non contemplato",
+			"Numero autovetture": 316
+		},
+		{
+			"Classe ambientale": "Non identificato",
+			"Numero autovetture": 449
+		}
+	],
+	"2016": [{
+			"Classe ambientale": "EURO 0",
+			"Numero autovetture": 76607
+		},
+		{
+			"Classe ambientale": "EURO 1",
+			"Numero autovetture": 18299
+		},
+		{
+			"Classe ambientale": "EURO 2",
+			"Numero autovetture": 59378
+		},
+		{
+			"Classe ambientale": "EURO 3",
+			"Numero autovetture": 83863
+		},
+		{
+			"Classe ambientale": "EURO 4",
+			"Numero autovetture": 212322
+		},
+		{
+			"Classe ambientale": "EURO 5",
+			"Numero autovetture": 160675
+		},
+		{
+			"Classe ambientale": "EURO 6",
+			"Numero autovetture": 78697
+		},
+		{
+			"Classe ambientale": "Non contemplato",
+			"Numero autovetture": 536
+		},
+		{
+			"Classe ambientale": "Non identificato",
+			"Numero autovetture": 447
+		}
+	],
+	"2017": [{
+			"Classe ambientale": "EURO 0",
+			"Numero autovetture": 76134
+		},
+		{
+			"Classe ambientale": "EURO 1",
+			"Numero autovetture": 17247
+		},
+		{
+			"Classe ambientale": "EURO 2",
+			"Numero autovetture": 52525
+		},
+		{
+			"Classe ambientale": "EURO 3",
+			"Numero autovetture": 75783
+		},
+		{
+			"Classe ambientale": "EURO 4",
+			"Numero autovetture": 199074
+		},
+		{
+			"Classe ambientale": "EURO 5",
+			"Numero autovetture": 152077
+		},
+		{
+			"Classe ambientale": "EURO 6",
+			"Numero autovetture": 126813
+		},
+		{
+			"Classe ambientale": "Non contemplato",
+			"Numero autovetture": 626
+		},
+		{
+			"Classe ambientale": "Non identificato",
+			"Numero autovetture": 444
+		}
+	],
+	"2018": [{
+			"Classe ambientale": "EURO 0",
+			"Numero autovetture": 75736
+		},
+		{
+			"Classe ambientale": "EURO 1",
+			"Numero autovetture": 16450
+		},
+		{
+			"Classe ambientale": "EURO 2",
+			"Numero autovetture": 47013
+		},
+		{
+			"Classe ambientale": "EURO 3",
+			"Numero autovetture": 66027
+		},
+		{
+			"Classe ambientale": "EURO 4",
+			"Numero autovetture": 183835
+		},
+		{
+			"Classe ambientale": "EURO 5",
+			"Numero autovetture": 143157
+		},
+		{
+			"Classe ambientale": "EURO 6",
+			"Numero autovetture": 159787
+		},
+		{
+			"Classe ambientale": "Non contemplato",
+			"Numero autovetture": 635
+		},
+		{
+			"Classe ambientale": "Non identificato",
+			"Numero autovetture": 444
+		}
+	],
+	"2019": [{
+			"Classe ambientale": "Euro 0",
+			"Numero autovetture": 75385
+		},
+		{
+			"Classe ambientale": "Euro 1",
+			"Numero autovetture": 15983
+		},
+		{
+			"Classe ambientale": "Euro 2",
+			"Numero autovetture": 42529
+		},
+		{
+			"Classe ambientale": "Euro 3",
+			"Numero autovetture": 56164
+		},
+		{
+			"Classe ambientale": "Euro 4",
+			"Numero autovetture": 165063
+		},
+		{
+			"Classe ambientale": "Euro 5",
+			"Numero autovetture": 135608
+		},
+		{
+			"Classe ambientale": "Euro 6",
+			"Numero autovetture": 198684
+		},
+		{
+			"Classe ambientale": "Non contemplato",
+			"Numero autovetture": 1050
+		},
+		{
+			"Classe ambientale": "Non identificato",
+			"Numero autovetture": 448
+		}
+	]
+}

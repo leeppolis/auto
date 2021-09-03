@@ -1,0 +1,335 @@
+{
+	"2011": [{
+			"classe": "EURO0",
+			"numero": 82529
+		},
+		{
+			"classe": "EURO1",
+			"numero": 28067
+		},
+		{
+			"classe": "EURO2",
+			"numero": 103387
+		},
+		{
+			"classe": "EURO3",
+			"numero": 128149
+		},
+		{
+			"classe": "EURO4",
+			"numero": 277675
+		},
+		{
+			"classe": "EURO5",
+			"numero": 104173
+		},
+		{
+			"classe": "EURO6",
+			"numero": 173
+		},
+		{
+			"classe": "ANC",
+			"numero": 43
+		},
+		{
+			"classe": "ANI",
+			"numero": 254
+		}
+	],
+	"2012": [{
+			"classe": "EURO0",
+			"numero": 81084
+		},
+		{
+			"classe": "EURO1",
+			"numero": 25269
+		},
+		{
+			"classe": "EURO2",
+			"numero": 91749
+		},
+		{
+			"classe": "EURO3",
+			"numero": 117272
+		},
+		{
+			"classe": "EURO4",
+			"numero": 261126
+		},
+		{
+			"classe": "EURO5",
+			"numero": 138913
+		},
+		{
+			"classe": "EURO6",
+			"numero": 405
+		},
+		{
+			"classe": "ANC",
+			"numero": 41
+		},
+		{
+			"classe": "ANI",
+			"numero": 235
+		}
+	],
+	"2013": [{
+			"classe": "EURO0",
+			"numero": 79521
+		},
+		{
+			"classe": "EURO1",
+			"numero": 22609
+		},
+		{
+			"classe": "EURO2",
+			"numero": 82652
+		},
+		{
+			"classe": "EURO3",
+			"numero": 107618
+		},
+		{
+			"classe": "EURO4",
+			"numero": 247485
+		},
+		{
+			"classe": "EURO5",
+			"numero": 149360
+		},
+		{
+			"classe": "EURO6",
+			"numero": 11604
+		},
+		{
+			"classe": "ANI",
+			"numero": 452
+		},
+		{
+			"classe": "ANC",
+			"numero": 0
+		}
+	],
+	"2014": [{
+			"classe": "EURO0",
+			"numero": 78765
+		},
+		{
+			"classe": "EURO1",
+			"numero": 20655
+		},
+		{
+			"classe": "EURO2",
+			"numero": 73239
+		},
+		{
+			"classe": "EURO3",
+			"numero": 99246
+		},
+		{
+			"classe": "EURO4",
+			"numero": 234046
+		},
+		{
+			"classe": "EURO5",
+			"numero": 172062
+		},
+		{
+			"classe": "EURO6",
+			"numero": 7916
+		},
+		{
+			"classe": "ANI",
+			"numero": 450
+		},
+		{
+			"classe": "ANC",
+			"numero": 0
+		}
+	],
+	"2015": [{
+			"classe": "EURO0",
+			"numero": 77460
+		},
+		{
+			"classe": "EURO1",
+			"numero": 19375
+		},
+		{
+			"classe": "EURO2",
+			"numero": 66156
+		},
+		{
+			"classe": "EURO3",
+			"numero": 92302
+		},
+		{
+			"classe": "EURO4",
+			"numero": 224268
+		},
+		{
+			"classe": "EURO5",
+			"numero": 183983
+		},
+		{
+			"classe": "EURO6",
+			"numero": 22613
+		},
+		{
+			"classe": "ANC",
+			"numero": 316
+		},
+		{
+			"classe": "ANI",
+			"numero": 449
+		}
+	],
+	"2016": [{
+			"classe": "EURO0",
+			"numero": 76607
+		},
+		{
+			"classe": "EURO1",
+			"numero": 18299
+		},
+		{
+			"classe": "EURO2",
+			"numero": 59378
+		},
+		{
+			"classe": "EURO3",
+			"numero": 83863
+		},
+		{
+			"classe": "EURO4",
+			"numero": 212322
+		},
+		{
+			"classe": "EURO5",
+			"numero": 160675
+		},
+		{
+			"classe": "EURO6",
+			"numero": 78697
+		},
+		{
+			"classe": "ANC",
+			"numero": 536
+		},
+		{
+			"classe": "ANI",
+			"numero": 447
+		}
+	],
+	"2017": [{
+			"classe": "EURO0",
+			"numero": 76134
+		},
+		{
+			"classe": "EURO1",
+			"numero": 17247
+		},
+		{
+			"classe": "EURO2",
+			"numero": 52525
+		},
+		{
+			"classe": "EURO3",
+			"numero": 75783
+		},
+		{
+			"classe": "EURO4",
+			"numero": 199074
+		},
+		{
+			"classe": "EURO5",
+			"numero": 152077
+		},
+		{
+			"classe": "EURO6",
+			"numero": 126813
+		},
+		{
+			"classe": "ANC",
+			"numero": 626
+		},
+		{
+			"classe": "ANI",
+			"numero": 444
+		}
+	],
+	"2018": [{
+			"classe": "EURO0",
+			"numero": 75736
+		},
+		{
+			"classe": "EURO1",
+			"numero": 16450
+		},
+		{
+			"classe": "EURO2",
+			"numero": 47013
+		},
+		{
+			"classe": "EURO3",
+			"numero": 66027
+		},
+		{
+			"classe": "EURO4",
+			"numero": 183835
+		},
+		{
+			"classe": "EURO5",
+			"numero": 143157
+		},
+		{
+			"classe": "EURO6",
+			"numero": 159787
+		},
+		{
+			"classe": "ANC",
+			"numero": 635
+		},
+		{
+			"classe": "ANI",
+			"numero": 444
+		}
+	],
+	"2019": [{
+			"classe": "EURO0",
+			"numero": 75385
+		},
+		{
+			"classe": "EURO1",
+			"numero": 15983
+		},
+		{
+			"classe": "EURO2",
+			"numero": 42529
+		},
+		{
+			"classe": "EURO3",
+			"numero": 56164
+		},
+		{
+			"classe": "EURO4",
+			"numero": 165063
+		},
+		{
+			"classe": "EURO5",
+			"numero": 135608
+		},
+		{
+			"classe": "EURO6",
+			"numero": 198684
+		},
+		{
+			"classe": "ANC",
+			"numero": 1050
+		},
+		{
+			"classe": "ANI",
+			"numero": 448
+		}
+	]
+}

@@ -1,0 +1,372 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Auto</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coda:wght@400;800&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background: #fefefe;
+        border: 0;
+        color: #333;
+        font-family: 'Coda', cursive;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+      }
+
+      .wrapper {
+        display: block;
+        margin: 0 auto;
+        width: 1320px;
+      }
+
+      h2,
+      h1 {
+        font-size: 42px;
+        font-weight: 800;
+        margin: 40px 0 0 0;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        font-size: 32px;
+        margin: 0 0 40px 0;
+      }
+
+      .header {
+        alignment-baseline: middle;
+        font-size: 14px;
+        font-weight: 300;
+      }
+
+      .column-header {
+        text-anchor: middle;
+      }
+
+      .row-header {
+        font-size: 12px;
+        text-anchor: end;
+      }
+
+      .summary {
+        font-size: 12px;
+        alignment-baseline: middle;
+      }
+
+      .summary-year {
+        text-anchor: middle;
+      }
+
+      .bar-label {
+        alignment-baseline: bottom;
+        font-size: 12px;
+        opacity: 0;
+        text-anchor: middle;
+      }
+
+      .bar {
+        stroke-width: 1;
+      }
+
+      .bar-cat-shadow {
+        opacity: .15;
+      }
+
+      .line-line,
+      .connector {
+        fill: none;
+        stroke-width: 1;
+        stroke-dasharray: 1 2;
+      }
+
+      .line-dot {
+        fill: #fff;
+        stroke: #333;
+        stroke-width: 1;
+      }
+
+      .line-label {
+        alignment-baseline: bottom;
+        font-size: 12px;
+        text-anchor: middle;
+      }
+
+      .line-guide {
+        stroke: #333;
+        stroke-width: 1;
+        stroke-dasharray: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Autovetture Private a Milano</h1> 
+      <h2>Serie storica 2011 - 2019</h2>
+      <div id="line"></div>
+      <div id="parallel"></div>
+      <div id="small-m"></div>
+    </div>
+
+    <script>
+      // Constants
+      const dictionary = {
+        EURO6: 'Euro 6',
+        EURO5: 'Euro 5',
+        EURO4: 'Euro 4',
+        EURO3: 'Euro 3',
+        EURO2: 'Euro 2',
+        EURO1: 'Euro 1',
+        EURO0: 'Euro 0',
+        ANI: 'Non Identificato',
+        ANC: 'Non Classificato',
+      };
+      const colors = {
+        EURO6: '#79B598',
+        EURO5: '#6AAB9E',
+        EURO4: '#5C9AA0',
+        EURO3: '#4E7B95',
+        EURO2: '#40557E',
+        EURO1: '#323566',
+        EURO0: '#2D254D',
+        ANI: '#9D4E7A',
+        ANC: '#803D7E',
+        NEUTRAL: '#CCCCCC',
+      };
+      const maxBarWidth = 100;
+      const barHeight = 10;
+      const rowHeight = 30;
+      const columnWidth = 120;
+      const lineChartHeight = 80;
+
+      // Functions
+      const getWidth = (value, maxValue) => {
+        return Math.round(maxBarWidth * value / maxValue) || 5;
+      };
+
+      const getExtremes = (width, row, column) => {
+        const half = (width / 2);
+        const y = getYPos(row) + Math.round(barHeight / 2);
+        return [[Math.ceil(getXPos(column) - half), y], [Math.floor(getXPos(column) + half), y]];
+      }
+
+      const getYPos = line => (rowHeight + (line * rowHeight) + Math.round((rowHeight - barHeight) / 2));
+
+      const getXPos = column => (columnWidth + (column * columnWidth) + Math.round(columnWidth / 2));
+
+      const formatNumber = (n) => d3Locale.format(',.0f')(n);
+
+      const d3Locale = d3.formatLocale({
+        decimal: ',',
+        thousands: '.',
+        grouping: [3],
+        currency: ['', '€']
+      });
+      
+      // Load Data
+      d3.json('./data/data.json')
+        .then((data) => {
+          console.log(data);
+          const years = Object.keys(data).sort((a,b) => a - b);
+          const categories = data[years[0]].sort((a, b) => b.numero - a.numero).map(c => c.classe);
+          const svgW = columnWidth * (years.length + 2);
+          const svgH = rowHeight * (categories.length + 1);
+          const connectors = {};
+
+          console.log(years, categories);
+
+          categories.forEach((c) => { connectors[c] = [] });
+          const total = {};
+          years.forEach((y) => {
+            total[y] = data[y].reduce((acc, d) => acc + d.numero, 0);
+          });
+          // Lines
+          (() => {
+            const svgL = d3.select('#line')
+              .append('svg')
+              .attr('width', svgW)
+              .attr('height', lineChartHeight)
+              .attr('viewport', `0 0 ${svgW} 200`)
+              .attr('preserveAspectRatio', 'xMidYMid meet');
+
+            const gG = svgL.append('g');
+            const gL = svgL.append('g');
+            const gD = svgL.append('g');
+            const gLB = svgL.append('g');
+
+            let maxValue = Number.MIN_SAFE_INTEGER;
+            let minValue = Number.MAX_SAFE_INTEGER;
+            years.forEach((y, i) => {
+              maxValue = total[y] > maxValue ? total[y] : maxValue;
+              minValue = total[y] < minValue ? total[y] : minValue;
+            });
+            const yScale = d3.scaleLinear()
+              .domain([ minValue, maxValue ])
+              .range([lineChartHeight - 20, 20]);
+            let path = [`M ${getXPos(0)} ${yScale(total[years[0]])}`];
+            years.forEach((y, i) => {
+              const xp = getXPos(i);
+              const yp = yScale(total[y]);
+              path.push(`L ${xp} ${yp}`);
+
+              gD.append('circle')
+                .attr('cx', xp)
+                .attr('cy', yp)
+                .attr('r', 5)
+                .attr('class','line-dot');
+
+              gLB.append('text')
+                .attr('x', xp)
+                .attr('y', yp)
+                .attr('dy', -8)
+                .attr('class','line-label')
+                .text(formatNumber(total[y]));
+
+              gG.append('line')
+                .attr('x1', xp)
+                .attr('x2', xp)
+                .attr('y1', lineChartHeight)
+                .attr('y2', yp)
+                .attr('class', 'line-guide');
+            });
+            gL.append('path')
+              .attr('d', path.join(','))
+              .attr('stroke', colors.NEUTRAL)
+              .attr('class', 'line-line');
+          })();
+
+          // Parallel Coordinates
+          (() => {
+            const maxValue = 277675;
+            const svgP = d3.select('#parallel').append('svg')
+              .attr('width', svgW)
+              .attr('height', svgH)
+              .attr('viewport', `0 0 ${svgW} ${svgH}`)
+              .attr('preserveAspectRatio', 'xMidYMid meet');
+
+            // Connectors Container needs to stay below everything
+            const gCC = svgP.append('g')
+              .attr('class', 'connectors');
+            
+            // Row / Column Header
+            const gRH = svgP.append('g')
+              .attr('class', 'headers row-headers');
+            categories.forEach((c, i) => {
+              gRH.append('text')
+                .attr('x', columnWidth)
+                .attr('dx', -15)
+                .attr('y', ((i + 1) * rowHeight) + (rowHeight / 2))
+                .attr('class', 'header row-header')
+                .attr('id', `row-header-${c}`)
+                .attr('data-category', `cat-${c}`)
+                .text(dictionary[c]);
+              gRH.append('circle')
+                .attr('cx', columnWidth - 5)
+                .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2))
+                .attr('r', 3)
+                .attr('fill', colors[c]);
+            });
+
+            const gCH = svgP.append('g')
+              .attr('class', 'headers columns-headers');
+            years.forEach((c, i) => {
+              gCH.append('text')
+                .attr('x', getXPos(i))
+                .attr('y', rowHeight / 2)
+                .attr('class', 'header column-header')
+                .attr('id', `column-header-${c}`)
+                .attr('data-category', `year-${c}`)
+                .text(c);
+            });
+
+            // Years
+            years.forEach((y, i) => {
+              const barSources = data[y].sort((a, b) => b.numero - a.numero);
+              const xPos = getXPos(i);
+              const gYB = svgP.append('g')
+                .attr('class', `year year-${y}`);
+              
+              barSources.forEach((b,l) => {
+                const width = (b.numero > 0) ? getWidth(b.numero, maxValue) : 2;
+                gYB.append('rect')
+                  .attr('x', xPos)
+                  .attr('y', getYPos(l))
+                  .attr('width', width)
+                  .attr('height', barHeight)
+                  .attr('data-category', `cat-${b.classe} cat-${y}`)
+                  .attr('transform',`translate(-${Math.round(width / 2)})`)
+                  .attr('stroke', colors[b.classe])
+                  .attr('fill', colors[b.classe])
+                  .attr('class', `bar bar-year-${y} bar-cat-${b.classe} ${(b.numero > 0) ? '' : 'bar-cat-shadow'}`);
+                gYB.append('text')
+                  .attr('x', xPos)
+                  .attr('y', getYPos(l))
+                  .attr('dy', -2)
+                  .attr('data-category', `cat-${b.classe} cat-${y}`)
+                  .attr('class', 'bar-label')
+                  .text(formatNumber(b.numero));
+                connectors[b.classe].push(getExtremes(width, l, i));
+              });
+            });
+
+            // Connectors
+            console.log(connectors);
+            categories.forEach((c) => {
+              const gCCS = gCC.append('g')
+                .attr('class', `connector connector-${c}`)
+                .attr('data-category', `cat-${c}`);
+              connectors[c].forEach((d, i) => {
+                if (i > 0) {
+                  gCCS.append('line')
+                    .attr('x1', connectors[c][i -1][1][0])
+                    .attr('y1', connectors[c][i -1][1][1])
+                    .attr('x2', d[0][0])
+                    .attr('y2', d[0][1])
+                    .attr('stroke', colors[c])
+                    .attr('class', 'connector');
+                } else {
+                  gCCS.append('line')
+                    .attr('x1', columnWidth)
+                    .attr('y1', d[0][1])
+                    .attr('x2', d[0][0])
+                    .attr('y2', d[0][1])
+                    .attr('stroke', colors[c])
+                    .attr('class', 'connector');
+                }
+              });
+              gCCS.append('line')
+                .attr('x1', svgW - columnWidth)
+                .attr('y1', connectors[c][connectors[c].length - 1][1][1])
+                .attr('x2', connectors[c][connectors[c].length - 1][1][0])
+                .attr('y2', connectors[c][connectors[c].length - 1][1][1])
+                .attr('stroke', colors[c])
+                .attr('class', 'connector');
+            });
+
+            // Summaries
+            const gSY = svgP.append('g')
+              .attr('class', 'summary-categories');
+            const lastYear = data[years[years.length - 1]].sort((a, b) => b.numero - a.numero);
+            lastYear.forEach((y, i) => {
+              gSY.append('text')
+                .attr('x', svgW - columnWidth)
+                .attr('dx', 15)
+                .attr('y', ((i + 1) * rowHeight) + (rowHeight / 2))
+                .attr('class', 'summary summary-category')
+                .text(formatNumber(y.numero));
+              gRH.append('circle')
+                .attr('cx', svgW - columnWidth + 5)
+                .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2))
+                .attr('r', 3)
+                .attr('fill', colors[y.classe]);
+            });
+          })();
+
+        });
+    </script>
+  </body>
+</html>
