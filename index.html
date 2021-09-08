@@ -540,14 +540,21 @@
                 .attr('class', 'axis-label')
                 .attr('text-anchor', 'end')
                 .attr('alignment-baseline', 'top')
-                .text('2019')
+                .text('2019');
               svgS.append('text')
                 .attr('x', margin)
                 .attr('y', chartHeight - vMargin + 20)
                 .attr('class', 'axis-label')
                 .attr('text-anchor', 'start')
                 .attr('alignment-baseline', 'top')
-                .text('2011')
+                .text('2011');
+              svgS.append('text')
+                .attr('x', 210)
+                .attr('y', chartHeight - vMargin + 20)
+                .attr('class', 'axis-label')
+                .attr('text-anchor', 'middle')
+                .attr('alignment-baseline', 'top')
+                .text('← Anni →');
 
               const min = smallMultiples[c][0];
               const max = smallMultiples[c][smallMultiples[c].length - 1];
@@ -610,6 +617,14 @@
                 .attr('text-anchor', 'end')
                 .attr('alignment-baseline', 'middle')
                 .text(formatNumber(smallMultiples[c][0]));
+
+              svgS.append('text')
+                .attr('x', data[0].x)
+                .attr('y', data[0].y)
+                .attr('class', 'numbers')
+                .attr('text-anchor', 'start')
+                .attr('alignment-baseline', 'middle')
+                .text('Veicoli');
 
               svgS.append('text')
                 .attr('x', data[data.length - 1].x)
