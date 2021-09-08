@@ -137,6 +137,7 @@
       }
 
       .single h3 {
+        font-size: 14px;
         font-weight: 400;
         left: 50%;
         margin: 0;
@@ -498,7 +499,7 @@
               const area = d3.area()
                 .x(p => p.x)
                 .y1(p => p.y)
-                .y0(chartHeight)
+                .y0(chartHeight - vMargin)
                 .curve(d3.curveCatmullRom.alpha(0.5));
               
               const line = d3.line()
@@ -585,7 +586,7 @@
                 .attr('class', `sm-area sm-area-${c}`)
                 .attr('id', `sm-area-${c}`)
                 .attr('stroke', 'none')
-                .attr('fill', 'none');
+                .attr('fill', 'url(#fill)');
               svgS.append('path')
                 .attr('d', line(data))
                 .attr('class', `sm-line sm-line-${c}`)
@@ -796,6 +797,25 @@
               y2="60"
               stroke-width="80"
               stroke="#803D7E"
+            />
+          </pattern>
+          <pattern
+            id="fill"
+            width="5px"
+            height="5px"
+            patternUnits="userSpaceOnUse"
+            patternContentUnits="userSpaceOnUse"
+            viewBox="0 0 60 60"
+            preserveAspectRatio="none"
+            patternTransform="rotate(-45)"
+          >
+            <line
+              x1="0"
+              x2="90"
+              y1="60"
+              y2="60"
+              stroke-width="20"
+              stroke="#eee"
             />
           </pattern>
         </defs>
