@@ -9,10 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Coda:wght@400;800&display=swap" rel="stylesheet">
     <style>
       body {
-        background: #fefefe;
+        background: #EDEAE3;
         border: 0;
-        color: #333;
-        font-family: 'Coda', cursive;
+        color: #2F4858;
+        font-family: Montserrat, 'Coda', cursive;
         font-weight: 400;
         margin: 0;
         padding: 0;
@@ -38,6 +38,10 @@
         margin: 0 0 40px 0;
       }
 
+      svg text {
+        fill: #2F4858;
+      }
+
       .header {
         alignment-baseline: middle;
         font-size: 14px;
@@ -45,17 +49,27 @@
       }
 
       .column-header {
+        font-weight: 500;
         text-anchor: middle;
       }
 
       .row-header {
         font-size: 12px;
+        font-weight: 500;
         text-anchor: end;
+      }
+
+      .row-header.selected {
+        font-weight: 700;
       }
 
       .summary {
         font-size: 12px;
         alignment-baseline: middle;
+      }
+
+      .summary.selected {
+        font-weight: 700;
       }
 
       .summary-year {
@@ -65,8 +79,22 @@
       .bar-label {
         alignment-baseline: bottom;
         font-size: 12px;
+        font-weight: 600;
         opacity: 0;
         text-anchor: middle;
+        text-shadow: 1px 0 0 #EDEAE3,
+          0 1px 0 #EDEAE3,
+          -1px 0 0 #EDEAE3,
+          0 -1px 0 #EDEAE3,
+          1px 1px 0 #EDEAE3,
+          -1px -1px 0 #EDEAE3,
+          -1px 1px 0 #EDEAE3,
+          1px -1px 0 #EDEAE3;
+
+      }
+
+      .bar-label.selected {
+        opacity: 1;
       }
 
       .bar {
@@ -86,12 +114,12 @@
       .connector {
         fill: none;
         stroke-width: 1;
-        stroke-dasharray: 2 2;
+        stroke-dasharray: 4 4;
       }
 
       .line-dot {
         fill: #fff;
-        stroke: #333;
+        stroke: #2F4858;
         stroke-width: 1;
       }
 
@@ -102,7 +130,7 @@
       }
 
       .line-guide {
-        stroke: #333;
+        stroke: #2F4858;
         stroke-width: 1;
         stroke-dasharray: none;
       }
@@ -163,10 +191,28 @@
 
       .annotation {
         font-size: 18px;
+        font-weight: 700;
+        text-shadow: 1px 0 0 #EDEAE3,
+          0 1px 0 #EDEAE3,
+          -1px 0 0 #EDEAE3,
+          0 -1px 0 #EDEAE3,
+          1px 1px 0 #EDEAE3,
+          -1px -1px 0 #EDEAE3,
+          -1px 1px 0 #EDEAE3,
+          1px -1px 0 #EDEAE3;
       }
 
       .numbers {
         font-size: 12px;
+        font-weight: 500;
+        text-shadow: 1px 0 0 #EDEAE3,
+          0 1px 0 #EDEAE3,
+          -1px 0 0 #EDEAE3,
+          0 -1px 0 #EDEAE3,
+          1px 1px 0 #EDEAE3,
+          -1px -1px 0 #EDEAE3,
+          -1px 1px 0 #EDEAE3,
+          1px -1px 0 #EDEAE3;
       }
     </style>
   </head>
@@ -203,16 +249,17 @@
         EURO1: '#323566',
         EURO0: '#2D254D',
         ANI: '#9D4E7A',
-        ANC: '#803D7E',
-        NEUTRAL: '#CCCCCC',
-        DEFAULT: '#333333',
-        EMPTY: '#FFFFFF',
-        HIGHLIGHT: '#fff',
+        ANC: '#99A89E',
+        NEUTRAL: '#6F8884',
+        DEFAULT: '#2F4858333',
+        EMPTY: '#EDEAE3',
+        HIGHLIGHT: '#EDEAE3',
+        TEXT: '#2F4858',
       };
       const maxBarWidth = 100;
       const barHeight = 8;
       const selectedBarHeight = 16;
-      const rowHeight = 30;
+      const rowHeight = 45;
       const columnWidth = 120;
       const lineChartHeight = 80;
 
@@ -254,8 +301,6 @@
           const svgW = columnWidth * (years.length + 2);
           const svgH = rowHeight * (categories.length + 1);
           const connectors = {};
-
-          console.log(years, categories);
 
           categories.forEach((c) => { connectors[c] = [] });
           const total = {};
@@ -381,14 +426,14 @@
                   .attr('data-category', `cat-${b.classe} cat-${y}`)
                   .attr('transform',`translate(-${Math.round(width / 2)})`)
                   .attr('stroke', colors[b.classe])
-                  .attr('fill', b.classe === SELECTED ? colors[b.classe] : `url('#${b.classe}')`)
+                  .attr('fill', b.classe === SELECTED ? colors[b.classe] : `url('#fill')`)
                   .attr('class', `bar bar-year-${y} bar-cat-${b.classe} ${(b.numero > 0) ? '' : 'bar-cat-shadow'} ${b.classe === SELECTED ? 'selected' : ''}`);
                 gYB.append('text')
                   .attr('x', xPos)
                   .attr('y', getYPos(l, b.classe === SELECTED))
-                  .attr('dy', -2)
+                  .attr('dy', b.classe === SELECTED ? 12 : -2)
                   .attr('data-category', `cat-${b.classe} cat-${y}`)
-                  .attr('class', 'bar-label')
+                  .attr('class', `bar-label ${b.classe === SELECTED ? 'selected' : ''}`)
                   .text(formatNumber(b.numero));
                 connectors[b.classe].push(getExtremes(width, l, i));
               });
@@ -436,8 +481,8 @@
                 .attr('x', svgW - columnWidth)
                 .attr('dx', 15)
                 .attr('y', ((i + 1) * rowHeight) + (rowHeight / 2))
-                .attr('class', 'summary summary-category')
-                .text(formatNumber(y.numero));
+                .attr('class', `summary summary-category ${y.classe === SELECTED ? 'selected' : ''}`)
+                .text(`${formatNumber(y.numero)} ${y.classe === SELECTED ? 'veicoli' : ''}`);
               gRH.append('circle')
                 .attr('cx', svgW - columnWidth + 5)
                 .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2))
@@ -578,6 +623,7 @@
                 .attr('stroke-width', 1)
                 .attr('stroke-dasharray', '1 1')
                 .attr('fill', 'none');
+
               svgS.append('line')
                 .attr('x1', (margin))
                 .attr('x2', 420 - (margin))
@@ -585,7 +631,7 @@
                 .attr('y2', scaleY(max))
                 .attr('stroke', colors.NEUTRAL)
                 .attr('stroke-width', 1)
-                .attr('stroke-dasharray', '1 1')
+                .attr('stroke-dasharray', '2 1')
                 .attr('fill', 'none');
 
               svgS.append('path')
@@ -599,6 +645,7 @@
                 .attr('class', `sm-line sm-line-${c}`)
                 .attr('id', `sm-line-${c}`)
                 .attr('stroke', colors[c])
+                .attr('stroke-width', 2)
                 .attr('fill', 'none');
 
               svgS.append('text')
@@ -644,180 +691,9 @@
       <svg>
         <defs>
           <pattern
-            id="EURO6"
-            width="5px"
-            height="5px"
-            patternUnits="userSpaceOnUse"
-            patternContentUnits="userSpaceOnUse"
-            viewBox="0 0 60 60"
-            preserveAspectRatio="none"
-            patternTransform="rotate(-45)"
-          >
-            <line
-              x1="0"
-              x2="90"
-              y1="60"
-              y2="60"
-              stroke-width="80"
-              stroke="#79B598"
-            />
-          </pattern>
-          <pattern
-            id="EURO5"
-            width="5px"
-            height="5px"
-            patternUnits="userSpaceOnUse"
-            patternContentUnits="userSpaceOnUse"
-            viewBox="0 0 60 60"
-            preserveAspectRatio="none"
-            patternTransform="rotate(45)"
-          >
-            <line
-              x1="0"
-              x2="90"
-              y1="60"
-              y2="60"
-              stroke-width="80"
-              stroke="#6AAB9E"
-            />
-          </pattern>
-          <pattern
-            id="EURO4"
-            width="5px"
-            height="5px"
-            patternUnits="userSpaceOnUse"
-            patternContentUnits="userSpaceOnUse"
-            viewBox="0 0 60 60"
-            preserveAspectRatio="none"
-            patternTransform="rotate(-45)"
-          >
-            <line
-              x1="0"
-              x2="90"
-              y1="60"
-              y2="60"
-              stroke-width="80"
-              stroke="#5C9AA0"
-            />
-          </pattern>
-          <pattern
-            id="EURO3"
-            width="5px"
-            height="5px"
-            patternUnits="userSpaceOnUse"
-            patternContentUnits="userSpaceOnUse"
-            viewBox="0 0 60 60"
-            preserveAspectRatio="none"
-            patternTransform="rotate(45)"
-          >
-            <line
-              x1="0"
-              x2="90"
-              y1="60"
-              y2="60"
-              stroke-width="80"
-              stroke="#4E7B95"
-            />
-          </pattern>
-          <pattern
-            id="EURO2"
-            width="5px"
-            height="5px"
-            patternUnits="userSpaceOnUse"
-            patternContentUnits="userSpaceOnUse"
-            viewBox="0 0 60 60"
-            preserveAspectRatio="none"
-            patternTransform="rotate(-45)"
-          >
-            <line
-              x1="0"
-              x2="90"
-              y1="60"
-              y2="60"
-              stroke-width="80"
-              stroke="#40557E"
-            />
-          </pattern>
-          <pattern
-            id="EURO1"
-            width="5px"
-            height="5px"
-            patternUnits="userSpaceOnUse"
-            patternContentUnits="userSpaceOnUse"
-            viewBox="0 0 60 60"
-            preserveAspectRatio="none"
-            patternTransform="rotate(45)"
-          >
-            <line
-              x1="0"
-              x2="90"
-              y1="60"
-              y2="60"
-              stroke-width="80"
-              stroke="#323566"
-            />
-          </pattern>
-          <pattern
-            id="EURO0"
-            width="5px"
-            height="5px"
-            patternUnits="userSpaceOnUse"
-            patternContentUnits="userSpaceOnUse"
-            viewBox="0 0 60 60"
-            preserveAspectRatio="none"
-            patternTransform="rotate(-45)"
-          >
-            <line
-              x1="0"
-              x2="90"
-              y1="60"
-              y2="60"
-              stroke-width="80"
-              stroke="#2D254D"
-            />
-          </pattern>
-          <pattern
-            id="ANI"
-            width="5px"
-            height="5px"
-            patternUnits="userSpaceOnUse"
-            patternContentUnits="userSpaceOnUse"
-            viewBox="0 0 60 60"
-            preserveAspectRatio="none"
-            patternTransform="rotate(45)"
-          >
-            <line
-              x1="0"
-              x2="90"
-              y1="60"
-              y2="60"
-              stroke-width="80"
-              stroke="#9D4E7A"
-            />
-          </pattern>
-          <pattern
-            id="ANC"
-            width="5px"
-            height="5px"
-            patternUnits="userSpaceOnUse"
-            patternContentUnits="userSpaceOnUse"
-            viewBox="0 0 60 60"
-            preserveAspectRatio="none"
-            patternTransform="rotate(-45)"
-          >
-            <line
-              x1="0"
-              x2="90"
-              y1="60"
-              y2="60"
-              stroke-width="80"
-              stroke="#803D7E"
-            />
-          </pattern>
-          <pattern
             id="fill"
-            width="5px"
-            height="5px"
+            width="3px"
+            height="3px"
             patternUnits="userSpaceOnUse"
             patternContentUnits="userSpaceOnUse"
             viewBox="0 0 60 60"
@@ -829,8 +705,8 @@
               x2="90"
               y1="60"
               y2="60"
-              stroke-width="20"
-              stroke="#eee"
+              stroke-width="10"
+              stroke="#6F8884"
             />
           </pattern>
         </defs>
