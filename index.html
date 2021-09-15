@@ -54,6 +54,7 @@
       }
 
       .row-header {
+        cursor: pointer;
         font-size: 12px;
         font-weight: 500;
         text-anchor: end;
@@ -64,6 +65,7 @@
       }
 
       .summary {
+        cursor: pointer;
         font-size: 12px;
         alignment-baseline: middle;
       }
@@ -77,19 +79,11 @@
       }
 
       .bar-label {
-        alignment-baseline: bottom;
+        alignment-baseline: top;
         font-size: 12px;
         font-weight: 600;
         opacity: 0;
         text-anchor: middle;
-        text-shadow: 1px 0 0 #EDEAE3,
-          0 1px 0 #EDEAE3,
-          -1px 0 0 #EDEAE3,
-          0 -1px 0 #EDEAE3,
-          1px 1px 0 #EDEAE3,
-          -1px -1px 0 #EDEAE3,
-          -1px 1px 0 #EDEAE3,
-          1px -1px 0 #EDEAE3;
 
       }
 
@@ -123,16 +117,29 @@
         stroke-width: 1;
       }
 
+      .line-label-ab,
+      .line-axis-label,
       .line-label {
         alignment-baseline: bottom;
         font-size: 12px;
         text-anchor: middle;
       }
 
+      .line-axis-label {
+        alignment-baseline: top;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .line-guide-ab,
       .line-guide {
         stroke: #2F4858;
         stroke-width: 1;
         stroke-dasharray: none;
+      }
+
+      .line-guide-ab {
+        stroke-dasharray: 1 2;
       }
 
       #small-m {
@@ -221,6 +228,7 @@
       <h1>La Scalata degli Euro 6</h1> 
       <h2>Automobili private intestate a residenti nel Comune di Milano, serie storica 2011 - 2019</h2>
       <div id="line"></div>
+      <br /><br /><br /><br /><br /><br />
       <div id="parallel"></div>
       <br /><br /><br /><br /><br /><br />
       <div id="small-m"></div>
@@ -228,7 +236,7 @@
 
     <script>
       // Constants
-      const SELECTED = 'EURO6';
+      let SELECTED = '';
       const dictionary = {
         EURO6: 'Euro 6',
         EURO5: 'Euro 5',
@@ -237,8 +245,8 @@
         EURO2: 'Euro 2',
         EURO1: 'Euro 1',
         EURO0: 'Euro 0',
-        ANI: 'Non Identificato',
-        ANC: 'Non Classificato',
+        ANI: 'Non Ident.',
+        ANC: 'Non Class.',
       };
       const colors = {
         EURO6: '#79B598',
@@ -256,12 +264,12 @@
         HIGHLIGHT: '#EDEAE3',
         TEXT: '#2F4858',
       };
-      const maxBarWidth = 100;
+      const maxBarWidth = 60;
       const barHeight = 8;
       const selectedBarHeight = 16;
       const rowHeight = 45;
-      const columnWidth = 120;
-      const lineChartHeight = 80;
+      const columnWidth = 80;
+      const lineChartHeight = 120;
 
       // Functions
       const getWidth = (value, maxValue) => {
@@ -291,205 +299,260 @@
         grouping: [3],
         currency: ['', '€']
       });
+
+      // Select Category
+      const selectCategory = (c, svgW, svgH, years, categories, data) => {
+        SELECTED = c;
+        parallel(svgW, svgH, years, categories, data);
+      };
+
+      // Parallel coords
+      const parallel = (svgW, svgH, years, categories, data) => {
+        const connectors = {};
+        categories.forEach((c) => { connectors[c] = [] });
+        const maxValue = 277675;
+        document.querySelector('#parallel').innerHTML = '';
+        const svgP = d3.select('#parallel').append('svg')
+          .attr('width', svgW)
+          .attr('height', svgH)
+          .attr('viewbox', `0 0 ${svgW} ${svgH}`)
+          .attr('preserveAspectRatio', 'xMidYMid meet');
+
+        // Connectors Container needs to stay below everything
+        const gCC = svgP.append('g')
+          .attr('class', 'connectors');
+        
+        // Row / Column Header
+        const gRH = svgP.append('g')
+          .attr('class', 'headers row-headers');
+        categories.forEach((c, i) => {
+          gRH.append('text')
+            .attr('x', columnWidth)
+            .attr('dx', -15)
+            .attr('y', ((i + 1) * rowHeight) + (rowHeight / 2))
+            .attr('class', `header row-header ${c === SELECTED ? 'selected' : ''}`)
+            .attr('id', `row-header-${c}`)
+            .attr('data-category', `cat-${c}`)
+            .text(dictionary[c])
+            .on('click', () => { selectCategory(c, svgW, svgH, years, categories, data); });
+          gRH.append('circle')
+            .attr('cx', columnWidth - 5)
+            .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2))
+            .attr('r', 3)
+            .attr('fill', colors[c]);
+        });
+
+        const gCH = svgP.append('g')
+          .attr('class', 'headers columns-headers');
+        years.forEach((c, i) => {
+          gCH.append('text')
+            .attr('x', getXPos(i))
+            .attr('y', rowHeight / 2)
+            .attr('class', 'header column-header')
+            .attr('id', `column-header-${c}`)
+            .attr('data-category', `year-${c}`)
+            .text(c);
+        });
+
+        // Years
+        years.forEach((y, i) => {
+          const barSources = data.auto[y].sort((a, b) => b.numero - a.numero);
+          const xPos = getXPos(i);
+          const gYB = svgP.append('g')
+            .attr('class', `year year-${y}`);
+          
+          barSources.forEach((b,l) => {
+            const width = (b.numero > 0) ? getWidth(b.numero, maxValue) : 2;
+            gYB.append('rect')
+              .attr('x', xPos)
+              .attr('y', getYPos(l, b.classe === SELECTED))
+              .attr('width', width)
+              .attr('height', b.classe === SELECTED ? selectedBarHeight : barHeight)
+              .attr('data-category', `cat-${b.classe} cat-${y}`)
+              .attr('transform',`translate(-${Math.round(width / 2)})`)
+              .attr('stroke', colors[b.classe])
+              .attr('fill', b.classe === SELECTED ? colors[b.classe] : `url('#fill')`)
+              .attr('class', `bar bar-year-${y} bar-cat-${b.classe} ${(b.numero > 0) ? '' : 'bar-cat-shadow'} ${b.classe === SELECTED ? 'selected' : ''}`)
+              .style('cursor', 'pointer')
+              .on('click', () => { selectCategory(b.classe, svgW, svgH, years, categories, data); });;
+            gYB.append('text')
+              .attr('x', xPos)
+              .attr('y', getYPos(l, b.classe === SELECTED))
+              .attr('dy', -4)
+              .attr('data-category', `cat-${b.classe} cat-${y}`)
+              .attr('class', `bar-label ${b.classe === SELECTED ? 'selected' : ''}`)
+              .text(`${formatNumber(b.numero)} ${y === '2007' ? ' veicoli' : ''}`);
+            connectors[b.classe].push(getExtremes(width, l, i));
+          });
+        });
+
+        // Connectors
+        categories.forEach((c) => {
+          const gCCS = gCC.append('g')
+            .attr('class', `connector connector-${c}`)
+            .attr('data-category', `cat-${c}`);
+          connectors[c].forEach((d, i) => {
+            if (i > 0) {
+              gCCS.append('line')
+                .attr('x1', connectors[c][i -1][1][0])
+                .attr('y1', connectors[c][i -1][1][1])
+                .attr('x2', d[0][0])
+                .attr('y2', d[0][1])
+                .attr('stroke', colors[c])
+                .attr('class', `connector ${c === SELECTED ? 'selected' : ''}`);
+            } else {
+              gCCS.append('line')
+                .attr('x1', columnWidth)
+                .attr('y1', d[0][1])
+                .attr('x2', d[0][0])
+                .attr('y2', d[0][1])
+                .attr('stroke', colors[c])
+                .attr('class', `connector ${c === SELECTED ? 'selected' : ''}`);
+            }
+          });
+          gCCS.append('line')
+            .attr('x1', svgW - columnWidth)
+            .attr('y1', connectors[c][connectors[c].length - 1][1][1])
+            .attr('x2', connectors[c][connectors[c].length - 1][1][0])
+            .attr('y2', connectors[c][connectors[c].length - 1][1][1])
+            .attr('stroke', colors[c])
+            .attr('class', `connector ${c === SELECTED ? 'selected' : ''}`);
+        });
+
+        // Summaries
+        const gSY = svgP.append('g')
+          .attr('class', 'summary-categories');
+        const lastYear = data.auto[years[years.length - 1]].sort((a, b) => b.numero - a.numero);
+        lastYear.forEach((y, i) => {
+          gSY.append('text')
+            .attr('x', svgW - columnWidth)
+            .attr('dx', 15)
+            .attr('y', ((i + 1) * rowHeight) + (rowHeight / 2))
+            .attr('class', `summary summary-category ${y.classe === SELECTED ? 'selected' : ''}`)
+            .text(`${formatNumber(y.numero)}`)
+            .on('click', () => { selectCategory(y.classe, svgW, svgH, years, categories, data); });
+          gRH.append('circle')
+            .attr('cx', svgW - columnWidth + 5)
+            .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2))
+            .attr('r', 3)
+            .attr('fill', colors[y.classe]);
+        });
+      };
+      
+      // Lollipop
+      const lollipop = (svgW, svgH, years, total, persone) => {
+        const svgL = d3.select('#line')
+          .append('svg')
+          .attr('width', svgW)
+          .attr('height', lineChartHeight)
+          .attr('viewbox', `0 0 ${svgW} 200`)
+          .attr('preserveAspectRatio', 'xMidYMid meet');
+
+        const gL = svgL.append('g');
+        const gG = svgL.append('g');
+        const gD = svgL.append('g');
+        const gLB = svgL.append('g');
+
+        let maxValue = Number.MIN_SAFE_INTEGER;
+        let minValue = Number.MAX_SAFE_INTEGER;
+        years.forEach((y, i) => {
+          maxValue = total[y] > maxValue ? total[y] : maxValue;
+          minValue = total[y] < minValue ? total[y] : minValue;
+          maxValue = persone[y] > maxValue ? persone[y] : maxValue;
+          minValue = persone[y] < minValue ? persone[y] : minValue;
+        });
+        const yScale = d3.scaleLinear()
+          .domain([ minValue, maxValue ])
+          .range([lineChartHeight - 40, 20]);
+        let path = [`M${getXPos(0)} ${yScale(total[years[0]])}`];
+        let path2 = [`M${getXPos(0)} ${yScale(persone[years[0]])}`];
+        years.forEach((y, i) => {
+          const xp = getXPos(i);
+          const yp = yScale(total[y]);
+          const yab = yScale(persone[y]);
+          path.push(`L${xp} ${yp}`);
+          path2.push(`L${xp} ${yab}`);
+
+          gD.append('circle')
+            .attr('cx', xp)
+            .attr('cy', yp)
+            .attr('r', 5)
+            .attr('stroke', colors.DEFAULT)
+            .attr('fill', colors.EMPTY)
+            .attr('class','line-dot');
+
+          gD.append('circle')
+            .attr('cx', xp)
+            .attr('cy', yab)
+            .attr('r', 5)
+            .attr('stroke', colors.DEFAULT)
+            .attr('fill', colors.EMPTY)
+            .attr('class','line-dot');
+
+          gLB.append('text')
+            .attr('x', xp)
+            .attr('y', yp)
+            .attr('dy', -8)
+            .attr('class','line-label')
+            .text(formatNumber(total[y]));
+
+          gLB.append('text')
+            .attr('x', xp)
+            .attr('y', yab)
+            .attr('dy', -8)
+            .attr('class','line-label-ab')
+            .text(formatNumber(persone[y]));
+
+          gLB.append('text')
+            .attr('x', xp)
+            .attr('y', lineChartHeight - 20)
+            .attr('dy', 20)
+            .attr('class','line-axis-label')
+            .text(y);
+
+          gG.append('line')
+            .attr('x1', xp)
+            .attr('x2', xp)
+            .attr('y1', lineChartHeight - 20)
+            .attr('y2', yp)
+            .attr('stroke', colors.DEFAULT)
+            .attr('class', 'line-guide');
+
+          gG.append('line')
+            .attr('x1', xp)
+            .attr('x2', xp)
+            .attr('y1', lineChartHeight - 20)
+            .attr('y2', yab)
+            .attr('stroke', colors.DEFAULT)
+            .attr('class', 'line-guide-ab');
+        });
+        gL.append('path')
+          .attr('d', path.join(','))
+          .attr('stroke', colors.NEUTRAL)
+          .attr('class', 'line-line');
+        gL.append('path')
+          .attr('d', path2.join(','))
+          .attr('stroke', colors.NEUTRAL)
+          .attr('class', 'line-line');
+      };
       
       // Load Data
       d3.json('./data/data.json')
         .then((data) => {
           console.log(data);
-          const years = Object.keys(data).sort((a,b) => a - b);
-          const categories = data[years[0]].sort((a, b) => b.numero - a.numero).map(c => c.classe);
+          const years = Object.keys(data.auto).sort((a,b) => a - b);
+          const categories = data.auto[years[0]].sort((a, b) => b.numero - a.numero).map(c => c.classe);
           const svgW = columnWidth * (years.length + 2);
           const svgH = rowHeight * (categories.length + 1);
-          const connectors = {};
+          
 
-          categories.forEach((c) => { connectors[c] = [] });
           const total = {};
           years.forEach((y) => {
-            total[y] = data[y].reduce((acc, d) => acc + d.numero, 0);
+            total[y] = data.auto[y].reduce((acc, d) => acc + d.numero, 0);
           });
-          // Lollipop
-          (() => {
-            const svgL = d3.select('#line')
-              .append('svg')
-              .attr('width', svgW)
-              .attr('height', lineChartHeight)
-              .attr('viewbox', `0 0 ${svgW} 200`)
-              .attr('preserveAspectRatio', 'xMidYMid meet');
 
-            const gL = svgL.append('g');
-            const gG = svgL.append('g');
-            const gD = svgL.append('g');
-            const gLB = svgL.append('g');
-
-            let maxValue = Number.MIN_SAFE_INTEGER;
-            let minValue = Number.MAX_SAFE_INTEGER;
-            years.forEach((y, i) => {
-              maxValue = total[y] > maxValue ? total[y] : maxValue;
-              minValue = total[y] < minValue ? total[y] : minValue;
-            });
-            const yScale = d3.scaleLinear()
-              .domain([ minValue, maxValue ])
-              .range([lineChartHeight - 20, 20]);
-            let path = [`M${getXPos(0)} ${yScale(total[years[0]])}`];
-            years.forEach((y, i) => {
-              const xp = getXPos(i);
-              const yp = yScale(total[y]);
-              path.push(`L${xp} ${yp}`);
-
-              gD.append('circle')
-                .attr('cx', xp)
-                .attr('cy', yp)
-                .attr('r', 5)
-                .attr('stroke', colors.DEFAULT)
-                .attr('fill', colors.EMPTY)
-                .attr('class','line-dot');
-
-              gLB.append('text')
-                .attr('x', xp)
-                .attr('y', yp)
-                .attr('dy', -8)
-                .attr('class','line-label')
-                .text(formatNumber(total[y]));
-
-              gG.append('line')
-                .attr('x1', xp)
-                .attr('x2', xp)
-                .attr('y1', lineChartHeight)
-                .attr('y2', yp)
-                .attr('stroke', colors.DEFAULT)
-                .attr('class', 'line-guide');
-            });
-            gL.append('path')
-              .attr('d', path.join(','))
-              .attr('stroke', colors.NEUTRAL)
-              .attr('class', 'line-line');
-          })();
-
-          // Parallel Coordinates
-          (() => {
-            const maxValue = 277675;
-            const svgP = d3.select('#parallel').append('svg')
-              .attr('width', svgW)
-              .attr('height', svgH)
-              .attr('viewbox', `0 0 ${svgW} ${svgH}`)
-              .attr('preserveAspectRatio', 'xMidYMid meet');
-
-            // Connectors Container needs to stay below everything
-            const gCC = svgP.append('g')
-              .attr('class', 'connectors');
-            
-            // Row / Column Header
-            const gRH = svgP.append('g')
-              .attr('class', 'headers row-headers');
-            categories.forEach((c, i) => {
-              gRH.append('text')
-                .attr('x', columnWidth)
-                .attr('dx', -15)
-                .attr('y', ((i + 1) * rowHeight) + (rowHeight / 2))
-                .attr('class', `header row-header ${c === SELECTED ? 'selected' : ''}`)
-                .attr('id', `row-header-${c}`)
-                .attr('data-category', `cat-${c}`)
-                .text(dictionary[c]);
-              gRH.append('circle')
-                .attr('cx', columnWidth - 5)
-                .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2))
-                .attr('r', 3)
-                .attr('fill', colors[c]);
-            });
-
-            const gCH = svgP.append('g')
-              .attr('class', 'headers columns-headers');
-            years.forEach((c, i) => {
-              gCH.append('text')
-                .attr('x', getXPos(i))
-                .attr('y', rowHeight / 2)
-                .attr('class', 'header column-header')
-                .attr('id', `column-header-${c}`)
-                .attr('data-category', `year-${c}`)
-                .text(c);
-            });
-
-            // Years
-            years.forEach((y, i) => {
-              const barSources = data[y].sort((a, b) => b.numero - a.numero);
-              const xPos = getXPos(i);
-              const gYB = svgP.append('g')
-                .attr('class', `year year-${y}`);
-              
-              barSources.forEach((b,l) => {
-                const width = (b.numero > 0) ? getWidth(b.numero, maxValue) : 2;
-                gYB.append('rect')
-                  .attr('x', xPos)
-                  .attr('y', getYPos(l, b.classe === SELECTED))
-                  .attr('width', width)
-                  .attr('height', b.classe === SELECTED ? selectedBarHeight : barHeight)
-                  .attr('data-category', `cat-${b.classe} cat-${y}`)
-                  .attr('transform',`translate(-${Math.round(width / 2)})`)
-                  .attr('stroke', colors[b.classe])
-                  .attr('fill', b.classe === SELECTED ? colors[b.classe] : `url('#fill')`)
-                  .attr('class', `bar bar-year-${y} bar-cat-${b.classe} ${(b.numero > 0) ? '' : 'bar-cat-shadow'} ${b.classe === SELECTED ? 'selected' : ''}`);
-                gYB.append('text')
-                  .attr('x', xPos)
-                  .attr('y', getYPos(l, b.classe === SELECTED))
-                  .attr('dy', b.classe === SELECTED ? 12 : -2)
-                  .attr('data-category', `cat-${b.classe} cat-${y}`)
-                  .attr('class', `bar-label ${b.classe === SELECTED ? 'selected' : ''}`)
-                  .text(formatNumber(b.numero));
-                connectors[b.classe].push(getExtremes(width, l, i));
-              });
-            });
-
-            // Connectors
-            categories.forEach((c) => {
-              const gCCS = gCC.append('g')
-                .attr('class', `connector connector-${c}`)
-                .attr('data-category', `cat-${c}`);
-              connectors[c].forEach((d, i) => {
-                if (i > 0) {
-                  gCCS.append('line')
-                    .attr('x1', connectors[c][i -1][1][0])
-                    .attr('y1', connectors[c][i -1][1][1])
-                    .attr('x2', d[0][0])
-                    .attr('y2', d[0][1])
-                    .attr('stroke', colors[c])
-                    .attr('class', `connector ${c === SELECTED ? 'selected' : ''}`);
-                } else {
-                  gCCS.append('line')
-                    .attr('x1', columnWidth)
-                    .attr('y1', d[0][1])
-                    .attr('x2', d[0][0])
-                    .attr('y2', d[0][1])
-                    .attr('stroke', colors[c])
-                    .attr('class', `connector ${c === SELECTED ? 'selected' : ''}`);
-                }
-              });
-              gCCS.append('line')
-                .attr('x1', svgW - columnWidth)
-                .attr('y1', connectors[c][connectors[c].length - 1][1][1])
-                .attr('x2', connectors[c][connectors[c].length - 1][1][0])
-                .attr('y2', connectors[c][connectors[c].length - 1][1][1])
-                .attr('stroke', colors[c])
-                .attr('class', `connector ${c === SELECTED ? 'selected' : ''}`);
-            });
-
-            // Summaries
-            const gSY = svgP.append('g')
-              .attr('class', 'summary-categories');
-            const lastYear = data[years[years.length - 1]].sort((a, b) => b.numero - a.numero);
-            lastYear.forEach((y, i) => {
-              gSY.append('text')
-                .attr('x', svgW - columnWidth)
-                .attr('dx', 15)
-                .attr('y', ((i + 1) * rowHeight) + (rowHeight / 2))
-                .attr('class', `summary summary-category ${y.classe === SELECTED ? 'selected' : ''}`)
-                .text(`${formatNumber(y.numero)} ${y.classe === SELECTED ? 'veicoli' : ''}`);
-              gRH.append('circle')
-                .attr('cx', svgW - columnWidth + 5)
-                .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2))
-                .attr('r', 3)
-                .attr('fill', colors[y.classe]);
-            });
-          })();
+          lollipop(svgW, svgH, years, total, data.persone);
+          parallel(svgW, svgH, years, categories, data);
 
           // Small Multiples
           (() => {
@@ -500,7 +563,7 @@
             const margin = 80;
             const vMargin = 40;
             years.forEach((y, i) => {
-              data[y].forEach((c, i) => {
+              data.auto[y].forEach((c, i) => {
                 if (!smallMultiples[c.classe]) {
                   smallMultiples[c.classe] = [];
                 }
@@ -536,7 +599,7 @@
 
               const scaleX = d3.scaleLinear()
                 .range([margin, 420 - (margin)])
-                .domain([0, 8]);
+                .domain([0, 12]);
               const scaleY = d3.scaleLinear()
                 .range([chartHeight - (vMargin), vMargin])
                 .domain([minMin, maxMax]);
@@ -592,7 +655,7 @@
                 .attr('class', 'axis-label')
                 .attr('text-anchor', 'start')
                 .attr('alignment-baseline', 'top')
-                .text('2011');
+                .text('2007');
               svgS.append('text')
                 .attr('x', 210)
                 .attr('y', chartHeight - vMargin + 20)
