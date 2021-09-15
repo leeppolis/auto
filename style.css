@@ -28,7 +28,7 @@ p {
 .wrapper {
   display: block;
   margin: 0 auto;
-  width: 1320px;
+  width: 1200px;
 }
 
 h1 {
@@ -192,7 +192,15 @@ svg text {
   stroke-width: 1;
 }
 
+#line {
+  display: inline-block;
+  margin: 0 auto;
+  width: 1200px;
+}
 
+#line .line-legend {
+  width: 100%;
+}
 
 .line-label-ab,
 .line-axis-label,
