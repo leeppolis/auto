@@ -5,17 +5,24 @@
     <title>Auto</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Coda:wght@400;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
       body {
         background: #EDEAE3;
         border: 0;
         color: #2F4858;
-        font-family: Montserrat, 'Coda', cursive;
+        font-family: Montserrat, sans-serif;
         font-weight: 400;
         margin: 0;
         padding: 0;
+      }
+
+      p {
+        font-family: 'Playfair Display', serif;
+        font-weight: 400;
+        line-height: 1.5;
       }
 
       .wrapper {
@@ -23,19 +30,22 @@
         margin: 0 auto;
         width: 1320px;
       }
-
-      h2,
+      
       h1 {
-        font-size: 42px;
+        font-size: 48px;
         font-weight: 800;
-        margin: 40px 0 0 0;
+        margin: 40px auto;
         text-align: center;
         text-transform: uppercase;
       }
 
       h2 {
-        font-size: 18px;
-        margin: 0 0 40px 0;
+        font-family: 'Playfair Display', serif;
+        font-size: 24px;
+        font-weight: 400;
+        margin: 0 auto 40px auto;
+        max-width: 600px;
+        text-align: center;
       }
 
       svg text {
@@ -104,6 +114,7 @@
         opacity: .15;
       }
 
+      .line-line-2,
       .line-line,
       .connector {
         fill: none;
@@ -111,24 +122,39 @@
         stroke-dasharray: 4 4;
       }
 
+      .line-line-2 {
+        stroke: #0084C4;
+      }
+
+      .line-dot-ab,
       .line-dot {
         fill: #fff;
         stroke: #2F4858;
         stroke-width: 1;
       }
 
+      .line-dot-ab {
+        stroke: #0084C4;
+      }
+
+
+
       .line-label-ab,
       .line-axis-label,
       .line-label {
         alignment-baseline: bottom;
         font-size: 12px;
-        text-anchor: middle;
+      }
+
+      .line-label-ab {
+        fill: #0084C4;
       }
 
       .line-axis-label {
         alignment-baseline: top;
         font-size: 14px;
         font-weight: 500;
+        text-anchor: middle;
       }
 
       .line-guide-ab,
@@ -139,7 +165,26 @@
       }
 
       .line-guide-ab {
+        stroke: #0084C4;
         stroke-dasharray: 1 2;
+      }
+
+      .line-legend {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      .line-legend .legend-residente {
+        color: #0084C4;
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+      .line-legend .legend-auto {
+        font-size: 14px;
+        padding: 0 10px;
       }
 
       #small-m {
@@ -221,15 +266,77 @@
           -1px 1px 0 #EDEAE3,
           1px -1px 0 #EDEAE3;
       }
+
+      header {
+        margin: 160px 0;
+      }
+
+      .text {
+        display: block;
+        margin: 40px auto;
+        width: 900px;
+      }
+
+      .text .title {
+        font-size: 24px;
+        font-weight: 900;
+        margin: 0 0 40px 0;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .text .body {
+        columns: 2;
+      }
+
+      .text .body p {
+        margin: 0 0 20px 0;
+      }
+
+      .text .body p:last-child {
+        margin-bottom: 0;
+      }
+
+      .text .body p strong {
+        background: #FDF9F0;
+        font-weight: 700;
+      }
     </style>
   </head>
   <body>
     <div class="wrapper">
-      <h1>La Scalata degli Euro 6</h1> 
-      <h2>Automobili private intestate a residenti nel Comune di Milano, serie storica 2011 - 2019</h2>
+      <header>
+        <h1>La grande corsa</h1>
+        <h2>Negli ultimi anni incentivi statali e sempre più stringenti limitazioni al traffico privato hanno cambiato il parco macchine dei milanesi. Usando come fonte i dati pubblici forniti dal Comune di Milano 🏴󠁧󠁢󠁥󠁮󠁧󠁿 abbiamo provato a vedere cosa è cambiato, e come.</h2>
+      </header>
+
+      <div class="text">
+        <h3 class="title">Auto Registrate</h3>
+        <div class="body">
+          <p>A partire dal 2007 al 2019 (ultimo anno disponibile per cui i dati sono disponibili), il numero di vetture private 🚘 intestate a residenti 👨‍🦲 nel Comune di Milano 🏴󠁧󠁢󠁥󠁮󠁧󠁿 è sceso del <strong>4,95%</strong>. Il calo è stato leggero, dopo un picco negativo registrato <strong>tra il 2013 e il 2014</strong> (<strong>-14.922 unità</strong>).</p>
+          <p>Nello stesso periodo <strong>i residenti sono saliti</strong> da 1.299.633 a 1.406242 unità (<strong>+8,2%</strong>) portando il rapporto veicoli per residente da <strong>0,55</strong> a <strong>0.49</strong>: i milanesi posseggono sempre meno auto.</p>
+        </div>
+      </div>
+      
       <div id="line"></div>
-      <br /><br /><br /><br /><br /><br />
+
+      <div class="text">
+        <h3 class="title">Evoluzione delle classi Ambientali</h3>
+        <div class="body">
+          <p>In un continuo tentativo di ridurre le emissioni dannose per la salute in quella che è una delle città più inquinate d’Europa, negli ultimi anni il <strong>Comune di Milano</strong> 🏴󠁧󠁢󠁥󠁮󠁧󠁿 ha imposto limitazioni sempre più stringenti al traffico privato: è del <strong>2008</strong> l’introduzione da parte della <strong>giunta Moratti</strong> dell’<strong>Ecopass</strong>: si trattava in sostanza di un ticket da pagare per poter entrare con mezzi privati all’interno della cerchia più interna della città, la cosiddetta cerchia dei navigli. Dal pagamento del ticket erano esentati i mezzi allora meno inquinanti, autoveicoli a benzina Euro 3 e 4 e veicoli Diesel Euro 4 e 5.</p>
+          <p><strong>È del 2012 l’introduzione di Area C</strong>, che cambia le regole: divieto di accesso totale per i veicoli più inquinanti e pagamento di un ticket per tutti i veicoli autorizzati. Esenti da ticket sono solo i veicoli elettrici, ciclomotori e motocicli.</p>
+          <p><strong>Nel 2019 l’amministrazione Sala</strong> compie un ulteriore passo per la riduzione delle emissioni istituendo <strong>Area B</strong>: in praticamente tutto il territorio comunale <strong>è vietata la circolazione ai mezzi più inquinanti</strong>, secondo un calendario predefinito che <strong>prevede la messa al bando di tutti i veicoli Diesel nel 2030</strong> (prossima scadenza ottobre 2022 con la messa la bando dei veicoli Euro 2 a benzina e di tutti i Diesel fino a Euro 5).</p>
+          <p>Queste regole hanno contribuito allo svecchiamento del parco auto circolante? Quello che notiamo (e che si vede bene nel grafico qui sotto) è che i veicoli Euro 6 sono al 31 dicembre 2019 diventati dominanti. Che questo serva da solo a migliorare la qualità dell’aria, però, non è certo.</p>
+        </div>
+      </div>
       <div id="parallel"></div>
+      <div class="text">
+        <div class="body">
+          <p>Mentre la crescita esponenziale nel numero di veicoli Euro 6 non ci ha stupiti, la variaizone numerica di vecoli appartenenti ad altre categorie ambientali ci ha invece stupiti: <strong>il numero di veicoli Euro 0</strong>, ad esempio, <strong>è rimasto sostanzialmente invariato (-7.144 unità)</strong> benché questa classe sia stata la prima a subire restrizioni, mentre <strong>il numero</strong> di veicoli più efficienti (seppur ormai obsoleti: <strong>Euro 1, 2, 3</strong>) si sia <strong>più che dimezzato</strong> nella stessa finestra temporale. Quale sia il motivo non ci è noto. Possiamo speculare sul fatto che le fasce più a basso reddito non possono permettersi di cambiare spesso auto, oppure supporre che gran parte di questi veicoli siano d’epoca.</p>
+          <p>Nei grafici che seguono è possibile vedere il dettaglio per ogni categoria.</p>
+        </div>
+      </div>
+
       <br /><br /><br /><br /><br /><br />
       <div id="small-m"></div>
     </div>
@@ -429,7 +536,7 @@
             .attr('dx', 15)
             .attr('y', ((i + 1) * rowHeight) + (rowHeight / 2))
             .attr('class', `summary summary-category ${y.classe === SELECTED ? 'selected' : ''}`)
-            .text(`${formatNumber(y.numero)}`)
+            .text(`${formatNumber(y.numero)} 🚘`)
             .on('click', () => { selectCategory(y.classe, svgW, svgH, years, categories, data); });
           gRH.append('circle')
             .attr('cx', svgW - columnWidth + 5)
@@ -487,21 +594,23 @@
             .attr('r', 5)
             .attr('stroke', colors.DEFAULT)
             .attr('fill', colors.EMPTY)
-            .attr('class','line-dot');
+            .attr('class','line-dot-ab');
 
           gLB.append('text')
             .attr('x', xp)
             .attr('y', yp)
             .attr('dy', -8)
             .attr('class','line-label')
-            .text(formatNumber(total[y]));
+            .attr('text-anchor', `${(i === years.length - 1 ? 'start' : (i === 0 ? 'end' : 'middle'))}`)
+            .text(`${(i === 0 ? '🚘' : '')} ${formatNumber(total[y])} ${(i === years.length - 1 ? '🚘' : '')}`);
 
           gLB.append('text')
             .attr('x', xp)
             .attr('y', yab)
             .attr('dy', -8)
             .attr('class','line-label-ab')
-            .text(formatNumber(persone[y]));
+            .attr('text-anchor', `${(i === years.length - 1 ? 'start' : (i === 0 ? 'end' : 'middle'))}`)
+            .text(`${(i === 0 ? '👨‍' : '')} ${formatNumber(persone[y])} ${(i === years.length - 1 ? '👨‍' : '')}`);
 
           gLB.append('text')
             .attr('x', xp)
@@ -533,7 +642,19 @@
         gL.append('path')
           .attr('d', path2.join(','))
           .attr('stroke', colors.NEUTRAL)
-          .attr('class', 'line-line');
+          .attr('class', 'line-line-2');
+
+        const legend = d3.select('#line')
+          .append('div')
+            .attr('class', 'line-legend');
+        
+          legend.append('div')
+            .attr('class', 'legend-residente')
+            .text('👨‍🦲 Residenti');
+        
+        legend.append('div')
+          .attr('class', 'legend-auto')
+          .text('🚘 Veicoli');
       };
       
       // Load Data
