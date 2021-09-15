@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="include" href="https://visualize.news/remotes/footer/corporate_it.html" id="corporate" />
+    <link rel="include" href="https://visualize.news/remotes/footer/legal_it.html" id="legal" />
+    <link rel="stylesheet" href="https://visualize.news/remotes/footer/footer.css" type="text/css" />
     <style>
       body {
         background: #EDEAE3;
@@ -17,6 +20,10 @@
         font-weight: 400;
         margin: 0;
         padding: 0;
+      }
+
+      * {
+        box-sizing: border-box;
       }
 
       p {
@@ -299,7 +306,48 @@
 
       .text .body p strong {
         background: #FDF9F0;
+        box-shadow: 0 0 0 2px #FDF9F0;;
         font-weight: 700;
+      }
+
+      .assets {
+        display: block;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        width: 0;
+      }
+
+      .footer {
+        background: #2F4858;
+        border: 0;
+        color: #EDEAE3;
+        display: block;
+        margin-top: 80px;
+        padding: 80px 0;
+        width: auto;
+      }
+
+      .sources {
+        display: block;
+        margin: 0 auto;
+        padding: 0 20px;
+        width: 900px;
+      }
+
+      .cols {
+        display: flex;
+        margin: 0 auto;
+        width: 900px;
+      }
+
+      .footer .col {
+        flex: 0 0 70%;
+        padding: 0 20px;
+      }
+
+      .footer .corporate {
+        flex: 0 0 30%;
       }
     </style>
   </head>
@@ -327,6 +375,7 @@
           <p><strong>È del 2012 l’introduzione di Area C</strong>, che cambia le regole: divieto di accesso totale per i veicoli più inquinanti e pagamento di un ticket per tutti i veicoli autorizzati. Esenti da ticket sono solo i veicoli elettrici, ciclomotori e motocicli.</p>
           <p><strong>Nel 2019 l’amministrazione Sala</strong> compie un ulteriore passo per la riduzione delle emissioni istituendo <strong>Area B</strong>: in praticamente tutto il territorio comunale <strong>è vietata la circolazione ai mezzi più inquinanti</strong>, secondo un calendario predefinito che <strong>prevede la messa al bando di tutti i veicoli Diesel nel 2030</strong> (prossima scadenza ottobre 2022 con la messa la bando dei veicoli Euro 2 a benzina e di tutti i Diesel fino a Euro 5).</p>
           <p>Queste regole hanno contribuito allo svecchiamento del parco auto circolante? Quello che notiamo (e che si vede bene nel grafico qui sotto) è che i veicoli Euro 6 sono al 31 dicembre 2019 diventati dominanti. Che questo serva da solo a migliorare la qualità dell’aria, però, non è certo.</p>
+          <p><em>Clicca sul nome di una classe ambientale per evidenziare la sua evoluzione nel tempo</em>.</p>
         </div>
       </div>
       <div id="parallel"></div>
@@ -340,6 +389,19 @@
       <br /><br /><br /><br /><br /><br />
       <div id="small-m"></div>
     </div>
+
+    <footer id="footer" class="footer vn">
+      <div class="footer-wrapper">
+        <div class="sources">
+          <h3>Fonti</h3>
+          <p><a href="https://dati.comune.milano.it/" target="_new">Portale Open Data Comune di Milano</a>, <a href="https://www.istat.it/" target="_new">Istat</a>.</p>
+        </div>
+        <div class="cols">
+          <div class="legal col" id="footer-legal"></div>
+          <div class="corporate col" id="footer-corporate"></div>
+        </div>
+      </div>
+    </footer>
 
     <script>
       // Constants
@@ -536,7 +598,7 @@
             .attr('dx', 15)
             .attr('y', ((i + 1) * rowHeight) + (rowHeight / 2))
             .attr('class', `summary summary-category ${y.classe === SELECTED ? 'selected' : ''}`)
-            .text(`${formatNumber(y.numero)} 🚘`)
+            .text(`${dictionary[y.classe]}`)
             .on('click', () => { selectCategory(y.classe, svgW, svgH, years, categories, data); });
           gRH.append('circle')
             .attr('cx', svgW - columnWidth + 5)
@@ -870,6 +932,17 @@
           })();
 
         });
+
+        fetch(document.querySelector('#corporate').getAttribute('href'))
+          .then(response => response.text())
+          .then(content => {
+            document.querySelector('#footer-corporate').innerHTML =content;
+          });
+        fetch(document.querySelector('#legal').getAttribute('href'))
+          .then(response => response.text())
+          .then(content => {
+            document.querySelector('#footer-legal').innerHTML =content;
+          });
     </script>
     <div class="assets">
       <svg>
