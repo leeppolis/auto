@@ -1,3 +1,11 @@
+
+
+// Select Category
+const selectCategory = (c, container) => {
+  SELECTED = c;
+  container.attr('data-selected', c);
+};
+
 const parallel = (svgW, svgH, notesH, legendH, years, categories, data) => {
 
   console.log(years);
@@ -6,7 +14,8 @@ const parallel = (svgW, svgH, notesH, legendH, years, categories, data) => {
   categories.forEach((c) => { connectors[c] = [] });
   const maxValue = 277675;
   document.querySelector('#parallel').innerHTML = '';
-  const svgP = d3.select('#parallel').append('svg')
+  const container = d3.select('#parallel');
+  const svgP = container.append('svg')
     .attr('width', svgW)
     .attr('height', svgH)
     .attr('viewbox', `0 0 ${svgW} ${svgH}`)
@@ -28,7 +37,7 @@ const parallel = (svgW, svgH, notesH, legendH, years, categories, data) => {
       .attr('id', `row-header-${c}`)
       .attr('data-category', `cat-${c}`)
       .text(dictionary[c])
-      .on('click', () => { selectCategory(c, svgW, svgH, notesH, legendH, years, categories, data); });
+      .on('click', () => { selectCategory(c, container); });
     gRH.append('circle')
       .attr('cx', columnWidth - 5)
       .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2) + notesH)
@@ -62,20 +71,21 @@ const parallel = (svgW, svgH, notesH, legendH, years, categories, data) => {
         .attr('y', getYPos(l, b.classe === SELECTED) + notesH)
         .attr('width', width)
         .attr('height', b.classe === SELECTED ? selectedBarHeight : barHeight)
-        .attr('data-category', `cat-${b.classe} cat-${y}`)
+        .attr('data-category', `cat-${b.classe}`)
         .attr('transform',`translate(-${Math.round(width / 2)})`)
+        .attr('stroke-width', 1)
         .attr('stroke', colors[b.classe])
-        .attr('fill', b.classe === SELECTED ? colors[b.classe] : `url('#fill')`)
+        .attr('fill', `url('#fill')`)
         .attr('class', `bar bar-year-${y} bar-cat-${b.classe} ${(b.numero > 0) ? '' : 'bar-cat-shadow'} ${b.classe === SELECTED ? 'selected' : ''}`)
         .style('cursor', 'pointer')
-        .on('click', () => { selectCategory(b.classe, svgW, svgH, notesH, legendH, years, categories, data); });;
+        .on('click', () => { selectCategory(b.classe, container); });;
       gYB.append('text')
         .attr('x', xPos)
-        .attr('y', getYPos(l, b.classe === SELECTED) + notesH)
+        .attr('y', getYPos(l, false) + notesH)
         .attr('dy', -4)
-        .attr('data-category', `cat-${b.classe} cat-${y}`)
-        .attr('class', `bar-label ${b.classe === SELECTED ? 'selected' : ''}`)
-        .text(`${formatNumber(b.numero)} ${y === '2007' ? ' veicoli' : ''}`);
+        .attr('data-category', `cat-${b.classe}`)
+        .attr('class', `bar-label bar-label-${b.classe} bar-label-${y}`)
+        .text(`${formatNumber(b.numero)} ${y === '2007' ? ' 🚘' : ''}`);
       connectors[b.classe].push(getExtremes(width, l, i));
     });
   });
@@ -122,9 +132,10 @@ const parallel = (svgW, svgH, notesH, legendH, years, categories, data) => {
       .attr('x', svgW - columnWidth)
       .attr('dx', 15)
       .attr('y', ((i + 1) * rowHeight) + (rowHeight / 2) + notesH)
-      .attr('class', `summary summary-category ${y.classe === SELECTED ? 'selected' : ''}`)
+      .attr('data-category', `cat-${y.classe}`)
+      .attr('class', `summary summary-category`)
       .text(`${dictionary[y.classe]}`)
-      .on('click', () => { selectCategory(y.classe, svgW, svgH, notesH, legendH, years, categories, data); });
+      .on('click', () => { selectCategory(y.classe, container); });
     gRH.append('circle')
       .attr('cx', svgW - columnWidth + 5)
       .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2) + notesH)

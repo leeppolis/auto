@@ -39,7 +39,6 @@ svg text {
   display: block;
   height: 0;
   overflow: hidden;
-  visibility: hidden;
   width: 0;
 }
 
@@ -92,7 +91,7 @@ h2 {
 
 .text .body p strong {
   background: #FDF9F0;
-  box-shadow: 0 0 0 2px #FDF9F0;;
+  box-shadow: 0 0 0 2px #FDF9F0;
   font-weight: 700;
 }
 
@@ -236,6 +235,135 @@ h2 {
 
 
 /* Parallel */
+/* Interactions */
+.parallel .chart[data-selected="EURO0"] .summary[data-category="cat-EURO0"],
+.parallel .chart[data-selected="EURO0"] .row-header[data-category="cat-EURO0"] {
+  font-weight: 700;
+}
+.parallel .chart[data-selected="EURO0"] .connector[data-category="cat-EURO0"] .connector {
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+.parallel .chart[data-selected="EURO0"] .bar-label[data-category="cat-EURO0"] {
+  opacity: 1;
+}
+.parallel .chart[data-selected="EURO0"] .bar[data-category="cat-EURO0"] {
+  stroke-width: 2;
+}
+.parallel .chart[data-selected="EURO1"] .summary[data-category="cat-EURO1"],
+.parallel .chart[data-selected="EURO1"] .row-header[data-category="cat-EURO1"] {
+  font-weight: 700;
+}
+.parallel .chart[data-selected="EURO1"] .connector[data-category="cat-EURO1"] .connector {
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+.parallel .chart[data-selected="EURO1"] .bar-label[data-category="cat-EURO1"] {
+  opacity: 1;
+}
+.parallel .chart[data-selected="EURO1"] .bar[data-category="cat-EURO1"] {
+  stroke-width: 2;
+}
+.parallel .chart[data-selected="EURO2"] .summary[data-category="cat-EURO2"],
+.parallel .chart[data-selected="EURO2"] .row-header[data-category="cat-EURO2"] {
+  font-weight: 700;
+}
+.parallel .chart[data-selected="EURO2"] .connector[data-category="cat-EURO2"] .connector {
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+.parallel .chart[data-selected="EURO2"] .bar-label[data-category="cat-EURO2"] {
+  opacity: 1;
+}
+.parallel .chart[data-selected="EURO2"] .bar[data-category="cat-EURO2"] {
+  stroke-width: 2;
+}
+.parallel .chart[data-selected="EURO3"] .summary[data-category="cat-EURO3"],
+.parallel .chart[data-selected="EURO3"] .row-header[data-category="cat-EURO3"] {
+  font-weight: 700;
+}
+.parallel .chart[data-selected="EURO3"] .connector[data-category="cat-EURO3"] .connector {
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+.parallel .chart[data-selected="EURO3"] .bar-label[data-category="cat-EURO3"] {
+  opacity: 1;
+}
+.parallel .chart[data-selected="EURO3"] .bar[data-category="cat-euro3"] {
+  stroke-width: 2;
+}
+.parallel .chart[data-selected="EURO4"] .summary[data-category="cat-EURO4"],
+.parallel .chart[data-selected="EURO4"] .row-header[data-category="cat-EURO4"] {
+  font-weight: 700;
+}
+.parallel .chart[data-selected="EURO4"] .connector[data-category="cat-EURO4"] .connector {
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+.parallel .chart[data-selected="EURO4"] .bar-label[data-category="cat-EURO4"] {
+  opacity: 1;
+}
+.parallel .chart[data-selected="EURO4"] .bar[data-category="cat-EURO4"] {
+  stroke-width: 2;
+}
+.parallel .chart[data-selected="EURO5"] .summary[data-category="cat-EURO5"],
+.parallel .chart[data-selected="EURO5"] .row-header[data-category="cat-EURO5"] {
+  font-weight: 700;
+}
+.parallel .chart[data-selected="EURO5"] .connector[data-category="cat-EURO5"] .connector {
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+.parallel .chart[data-selected="EURO5"] .bar-label[data-category="cat-EURO5"] {
+  opacity: 1;
+}
+.parallel .chart[data-selected="EURO5"] .bar[data-category="cat-EURO5"] {
+  stroke-width: 2;
+}
+.parallel .chart[data-selected="EURO6"] .summary[data-category="cat-EURO6"],
+.parallel .chart[data-selected="EURO6"] .row-header[data-category="cat-EURO6"] {
+  font-weight: 700;
+}
+.parallel .chart[data-selected="EURO6"] .connector[data-category="cat-EURO6"] .connector {
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+.parallel .chart[data-selected="EURO6"] .bar-label[data-category="cat-EURO6"] {
+  opacity: 1;
+}
+.parallel .chart[data-selected="EURO6"] .bar[data-category="cat-EURO6"] {
+  stroke-width: 2;
+}
+.parallel .chart[data-selected="ANC"] .summary[data-category="cat-ANC"],
+.parallel .chart[data-selected="ANC"] .row-header[data-category="cat-ANC"] {
+  font-weight: 700;
+}
+.parallel .chart[data-selected="ANC"] .connector[data-category="cat-ANC"] .connector {
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+.parallel .chart[data-selected="ANC"] .bar-label[data-category="cat-ANC"] {
+  opacity: 1;
+}
+.parallel .chart[data-selected="ANC"] .bar[data-category="cat-ANC"] {
+  stroke-width: 2;
+}
+.parallel .chart[data-selected="ANI"] .summary[data-category="cat-ANI"],
+.parallel .chart[data-selected="ANI"] .row-header[data-category="cat-ANI"] {
+  font-weight: 700;
+}
+.parallel .chart[data-selected="ANI"] .connector[data-category="cat-ANI"] .connector {
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+.parallel .chart[data-selected="ANI"] .bar-label[data-category="cat-ANI"] {
+  opacity: 1;
+}
+.parallel .chart[data-selected="ANI"] .bar[data-category="cat-ANI"] {
+  stroke-width: 2;
+}
+
+/* Charts */
 
 .header {
   alignment-baseline: middle;
@@ -255,18 +383,10 @@ h2 {
   text-anchor: end;
 }
 
-.row-header.selected {
-  font-weight: 700;
-}
-
 .summary {
   cursor: pointer;
   font-size: 12px;
   alignment-baseline: middle;
-}
-
-.summary.selected {
-  font-weight: 700;
 }
 
 .summary-year {
@@ -279,24 +399,14 @@ h2 {
   font-weight: 600;
   opacity: 0;
   text-anchor: middle;
-
-}
-
-.bar-label.selected {
-  opacity: 1;
 }
 
 .bar {
   opacity: 1;
-  stroke-width: 1;
-}
-
-.bar.selected {
-  opacity: 1;
 }
 
 .bar-cat-shadow {
-  opacity: .15;
+  opacity: .25;
 }
 
 .connector {

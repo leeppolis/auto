@@ -73,7 +73,7 @@
 
       <div class="text">
         <div class="body">
-          <p>Mentre la crescita esponenziale nel numero di veicoli Euro 6 non ci ha stupiti, la variaizone numerica di vecoli appartenenti ad altre categorie ambientali ci ha invece stupiti: <strong>il numero di veicoli Euro 0</strong>, ad esempio, <strong>è rimasto sostanzialmente invariato (-7.144 unità)</strong> benché questa classe sia stata la prima a subire restrizioni, mentre <strong>il numero</strong> di veicoli più efficienti (seppur ormai obsoleti: <strong>Euro 1, 2, 3</strong>) si sia <strong>più che dimezzato</strong> nella stessa finestra temporale. Quale sia il motivo non ci è noto. Possiamo speculare sul fatto che le fasce più a basso reddito non possono permettersi di cambiare spesso auto, oppure supporre che gran parte di questi veicoli siano d’epoca.</p>
+          <p>Mentre la crescita esponenziale nel numero di veicoli Euro 6 non ci ha stupiti, la variazione numerica di vecoli appartenenti ad altre categorie ambientali ci ha invece stupiti: benché questa classe sia stata la prima a subire restrizioni, <strong>il numero di veicoli Euro 0 è sceso meno sensibilmente (-20.349 unità)</strong> rispetto a classi di autoveicoli più efficienti (seppur ormai obsoleti: Euro 1, 2, 3) che hanno visto cali <strong>di più della metà</strong> nella stessa finestra temporale. Quale sia il motivo non ci è noto. Vediamo anche che i veicoli <strong>Non Classificati sono cresciuti di 105 volte</strong>, rimanendo comunque, numericamente, irrilevanti.</p>
           <p><em>Nei grafici che seguono è possibile vedere il dettaglio per ogni categoria.</em></p>
         </div>
       </div>
@@ -91,7 +91,8 @@
       <div class="footer-wrapper">
         <div class="sources">
           <h3>Fonti</h3>
-          <p><a href="https://dati.comune.milano.it/" target="_new">Portale Open Data Comune di Milano</a>, <a href="https://www.istat.it/" target="_new">Istat</a>.</p>
+          <p><a href="https://dati.comune.milano.it/" target="_new">Portale Open Data Comune di Milano</a>, <a href="https://www.istat.it/" target="_new">Istat</a>.</p><h3>Design e Sviluppo</h3>
+          <p><a href="https://simonelippolis.com/" target="_new">Simone Lippolis</a>.</p>
         </div>
         <div class="cols">
           <div class="legal col" id="footer-legal"></div>
@@ -103,7 +104,6 @@
     <script>
       d3.json('./data/data.json')
         .then((data) => {
-          console.log(data);
           const years = Object.keys(data.auto).sort((a,b) => a - b);
           const categories = data.auto[years[0]].sort((a, b) => b.numero - a.numero).map(c => c.classe);
           const notesH = 100;

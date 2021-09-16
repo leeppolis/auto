@@ -4,6 +4,10 @@
   width: 1200px;
 }
 
+p {
+  font-size: 18px;
+}
+
 .chart-wrapper.scroll:after {
   content: none;
   display: none;

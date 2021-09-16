@@ -25,9 +25,3 @@ const d3Locale = d3.formatLocale({
   grouping: [3],
   currency: ['', '€']
 });
-
-// Select Category
-const selectCategory = (c, svgW, svgH, notesH, legendH, years, categories, data) => {
-  SELECTED = c;
-  parallel(svgW, svgH, notesH, legendH, years, categories, data);
-};
