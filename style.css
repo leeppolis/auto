@@ -27,12 +27,31 @@ p {
 
 .wrapper {
   display: block;
-  margin: 0 auto;
-  width: 1200px;
+  margin: 0;
+  width: auto;
+}
+
+svg text {
+  fill: #2F4858;
+}
+
+.assets {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+}
+
+/* Header */
+
+header {
+  display: block;
+  margin: 80px 20px;
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 28px;
   font-weight: 800;
   margin: 40px auto;
   text-align: center;
@@ -41,16 +60,182 @@ h1 {
 
 h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 400;
   margin: 0 auto 40px auto;
-  max-width: 600px;
   text-align: center;
 }
 
-svg text {
-  fill: #2F4858;
+/* Texts */
+
+.text {
+  display: block;
+  margin: 40px 20px;
+  width: auto;
 }
+
+.text .title {
+  font-size: 16px;
+  font-weight: 900;
+  margin: 0 0 40px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.text .body p {
+  margin: 0 0 20px 0;
+}
+
+.text .body p:last-child {
+  margin-bottom: 0;
+}
+
+.text .body p strong {
+  background: #FDF9F0;
+  box-shadow: 0 0 0 2px #FDF9F0;;
+  font-weight: 700;
+}
+
+/* Footer */
+
+.footer {
+  background: #2F4858;
+  border: 0;
+  color: #EDEAE3;
+  display: block;
+  margin-top: 80px;
+  padding: 80px 0;
+  width: auto;
+}
+
+.sources {
+  display: block;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: auto;
+}
+
+.cols {
+  display: block;
+  margin: 0 20px;
+  width: auto;
+}
+
+/* Charts */
+
+.chart-wrapper {
+  display: block;
+  margin: 0 0 80px 0;
+  position: relative;
+}
+
+.chart-wrapper.scroll:after {
+  bottom: 0;
+  content: '← Scroll →';
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  left: 50%;
+  position: absolute;
+  text-transform: uppercase;
+  transform: translate3d(-50%, 100%, 0);
+}
+
+.chart-all {
+  display: block;
+  height: auto;
+  margin: 0 0 80px 0;
+  max-width: 100%;
+  overflow: scroll;
+  padding: 0 0 30px 0;
+  position: relative;
+  width: 100%;
+}
+
+/* Lollipop */
+
+.lollipop .chart {
+  display: block;
+}
+
+.lollipop .chart .line-legend {
+  width: 100%;
+}
+
+.lollipop .chart .line-line-2,
+.lollipop .chart .line-line {
+  fill: none;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.lollipop .chart .line-line-2 {
+  stroke: #0084C4;
+}
+
+.lollipop .chart .line-dot-ab,
+.lollipop .chart .line-dot {
+  fill: #fff;
+  stroke: #2F4858;
+  stroke-width: 1;
+}
+
+.lollipop .chart .line-dot-ab {
+  stroke: #0084C4;
+}
+
+.lollipop .chart .line-label-ab,
+.lollipop .chart .line-axis-label,
+.lollipop .chart .line-label {
+  alignment-baseline: bottom;
+  font-size: 12px;
+}
+
+.lollipop .chart .line-label-ab {
+  fill: #0084C4;
+}
+
+.lollipop .chart .line-axis-label {
+  alignment-baseline: top;
+  font-size: 14px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.lollipop .chart .line-guide-ab,
+.lollipop .chart .line-guide {
+  stroke: #2F4858;
+  stroke-width: 1;
+  stroke-dasharray: none;
+}
+
+.lollipop .chart .line-guide-ab {
+  stroke: #0084C4;
+  stroke-dasharray: 1 2;
+}
+
+.lollipop .chart .line-legend {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.lollipop .chart .line-legend .legend-residente {
+  color: #0084C4;
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+.lollipop .chart .line-legend .legend-auto {
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+
+
+
+/* Parallel */
 
 .header {
   alignment-baseline: middle;
@@ -114,27 +299,10 @@ svg text {
   opacity: .15;
 }
 
-.line-line-2,
-.line-line,
 .connector {
   fill: none;
   stroke-width: 1;
   stroke-dasharray: 4 4;
-}
-
-.line-line-2 {
-  stroke: #0084C4;
-}
-
-.line-dot-ab,
-.line-dot {
-  fill: #fff;
-  stroke: #2F4858;
-  stroke-width: 1;
-}
-
-.line-dot-ab {
-  stroke: #0084C4;
 }
 
 .parallel-annotation-line {
@@ -192,94 +360,31 @@ svg text {
   stroke-width: 1;
 }
 
-#line {
-  display: inline-block;
-  margin: 0 auto;
-  width: 1200px;
-}
 
-#line .line-legend {
-  width: 100%;
-}
+/* Small Multiples */
 
-.line-label-ab,
-.line-axis-label,
-.line-label {
-  alignment-baseline: bottom;
-  font-size: 12px;
-}
 
-.line-label-ab {
-  fill: #0084C4;
-}
-
-.line-axis-label {
-  alignment-baseline: top;
-  font-size: 14px;
-  font-weight: 500;
-  text-anchor: middle;
-}
-
-.line-guide-ab,
-.line-guide {
-  stroke: #2F4858;
-  stroke-width: 1;
-  stroke-dasharray: none;
-}
-
-.line-guide-ab {
-  stroke: #0084C4;
-  stroke-dasharray: 1 2;
-}
-
-.line-legend {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-}
-
-.line-legend .legend-residente {
-  color: #0084C4;
-  font-size: 14px;
-  padding: 0 10px;
-}
-
-.line-legend .legend-auto {
-  font-size: 14px;
-  padding: 0 10px;
-}
-
-#small-m {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.single {
+.smallMultiples .chart {
   display: block;
-  flex: 0 0 33.33%;
-  height: 220px;
-  margin-bottom: 20px;
-  min-height: 100px;
+}
+
+.smallMultiples .chart .single {
+  display: block;
+  height: auto;
+  margin: 0 auto 20px auto;
   position: relative;
+  width: auto;
 }
 
-.single .container {
-  bottom: 10px;
-  left: 10px;
-  position: absolute;
-  right: 10px;
-  top: 10px;
+.smallMultiples .chart .single .container {
+  display: block;
+  margin: 0 auto;
+  width: 340px;
 }
 
-.single svg {
-  left: 0;
-  position: absolute;
-  bottom: 0;
-  z-index: 0;
-}
+.smallMultiples .chart .single svg {}
 
-.single h3 {
+.smallMultiples .chart .single h3 {
   font-size: 14px;
   font-weight: 400;
   left: 50%;
@@ -290,21 +395,22 @@ svg text {
   z-index: 1;
 }
 
-.single h4 {
+.smallMultiples .chart .single h3 {
   font-weight: 800;
   left: 50%;
   margin: 0;
   position: absolute;
+  text-transform: uppercase;
   top: 30px;
   transform: translate3d(-50%, 0, 0);
   z-index: 1;
 }
 
-.axis-label {
+.smallMultiples .chart .axis-label {
   font-size: 12px;
 }
 
-.annotation {
+.smallMultiples .chart .annotation {
   font-size: 18px;
   font-weight: 700;
   text-shadow: 1px 0 0 #EDEAE3,
@@ -317,7 +423,7 @@ svg text {
     1px -1px 0 #EDEAE3;
 }
 
-.numbers {
+.smallMultiples .chart .numbers {
   font-size: 12px;
   font-weight: 500;
   text-shadow: 1px 0 0 #EDEAE3,
@@ -328,80 +434,4 @@ svg text {
     -1px -1px 0 #EDEAE3,
     -1px 1px 0 #EDEAE3,
     1px -1px 0 #EDEAE3;
-}
-
-header {
-  margin: 160px 0;
-}
-
-.text {
-  display: block;
-  margin: 40px auto;
-  width: 900px;
-}
-
-.text .title {
-  font-size: 24px;
-  font-weight: 900;
-  margin: 0 0 40px 0;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.text .body {
-  columns: 2;
-}
-
-.text .body p {
-  margin: 0 0 20px 0;
-}
-
-.text .body p:last-child {
-  margin-bottom: 0;
-}
-
-.text .body p strong {
-  background: #FDF9F0;
-  box-shadow: 0 0 0 2px #FDF9F0;;
-  font-weight: 700;
-}
-
-.assets {
-  display: block;
-  height: 0;
-  overflow: hidden;
-  visibility: hidden;
-  width: 0;
-}
-
-.footer {
-  background: #2F4858;
-  border: 0;
-  color: #EDEAE3;
-  display: block;
-  margin-top: 80px;
-  padding: 80px 0;
-  width: auto;
-}
-
-.sources {
-  display: block;
-  margin: 0 auto;
-  padding: 0 20px;
-  width: 900px;
-}
-
-.cols {
-  display: flex;
-  margin: 0 auto;
-  width: 900px;
-}
-
-.footer .col {
-  flex: 0 0 70%;
-  padding: 0 20px;
-}
-
-.footer .corporate {
-  flex: 0 0 30%;
 }

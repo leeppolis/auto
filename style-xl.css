@@ -1,0 +1,22 @@
+.wrapper {
+  display: block;
+  margin: 0 auto;
+  width: 1200px;
+}
+
+.chart-wrapper.scroll:after {
+  content: none;
+  display: none;
+}
+
+/* Texts */
+
+.text .body {
+  column-gap: 60px;
+}
+
+/* Small Multiples */
+
+.smallMultiples .chart .single {
+  flex: 0 0 400px;
+}

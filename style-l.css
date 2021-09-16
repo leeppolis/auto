@@ -1,0 +1,63 @@
+
+
+.wrapper {
+  display: block;
+  margin: 0 auto;
+  width: 960px;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+/* Texts */
+
+.text {
+  width: 900px;
+}
+
+/* Footer */
+
+.footer {
+  background: #2F4858;
+  border: 0;
+  color: #EDEAE3;
+  display: block;
+  margin-top: 80px;
+  padding: 80px 0;
+  width: auto;
+}
+
+.sources {
+  display: block;
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 0 20px;
+  width: auto;
+}
+
+.cols {
+  display: flex;
+  margin: 0 auto;
+  max-width: 900px;
+  width: auto;
+}
+
+.footer .col {
+  flex: 0 0 70%;
+  padding: 0 20px;
+}
+
+.footer .corporate {
+  flex: 0 0 30%;
+}
+
+/* Small Multiples */
+
+.smallMultiples .chart .single {
+  flex: 0 0 480px;
+}

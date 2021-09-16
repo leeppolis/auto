@@ -1,0 +1,59 @@
+.wrapper {
+  margin: 0 40px;
+}
+
+/* Header */
+header {
+  margin: 160px 0;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 18px;
+  width: 600px;
+}
+
+/* Texts */
+
+.text {
+  margin: 40px auto;
+  width: 600px;
+}
+
+.text .title {
+  font-size: 24px;
+}
+
+.text .body {
+  columns: 2;
+  column-gap: 20px;
+}
+
+/* Small Multiples */
+
+.smallMultiples .chart {
+  align-content: stretch;
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;  
+}
+
+.smallMultiples .chart .single {
+  align-self: auto;
+  display: block;
+  flex: 0 0 350px;
+  height: 220px;
+  margin: 0 0 20px 0;
+}
+
+.smallMultiples .chart .single .container {
+  bottom: 10px;
+  left: 10px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
