@@ -11,6 +11,10 @@
 
 /* Texts */
 
+.text {
+  margin: 120px auto;
+}
+
 .text .body {
   column-gap: 60px;
 }
