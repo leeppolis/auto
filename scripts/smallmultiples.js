@@ -8,7 +8,7 @@ const smallMultiples = (years, data) => {
   const vMargin = 40;
 
   if (window.matchMedia('screen and (min-width:768px)').matches) {
-    chartWidth = 340;
+    chartWidth = 330;
   } else if (window.matchMedia('screen and (min-width:1024px)').matches) {
     chartWidth = 460;
   } else if (window.matchMedia('screen and (min-width:1366px)').matches) {

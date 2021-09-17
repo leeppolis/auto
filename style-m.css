@@ -45,7 +45,7 @@ h2 {
 .smallMultiples .chart .single {
   align-self: auto;
   display: block;
-  flex: 0 0 350px;
+  flex: 0 0 330px;
   height: 220px;
   margin: 0 0 20px 0;
 }
