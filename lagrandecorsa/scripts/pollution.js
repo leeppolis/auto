@@ -63,7 +63,7 @@ const pollution = (svgW, years, inquinamento) => {
       });
       gL.append('text')
         .attr('x', x)
-        .attr('y', pollutionChartHeight - 20)
+        .attr('y', pollutionChartHeight - 40)
         .attr('dy', 20)
         .attr('class','pollution-axis-label')
         .text(y);
@@ -97,7 +97,7 @@ const pollution = (svgW, years, inquinamento) => {
       gP.append('line')
         .attr('x1', d.x)
         .attr('x2', d.x)
-        .attr('y1', lineChartHeight - 40)
+        .attr('y1', pollutionChartHeight - 40)
         .attr('y2', y)
         .attr('stroke', colors.DEFAULT)
         .attr('class', `pollution-line-guide pollution-line-${chart.id} ${(d.y !== 0) ? '' : 'shadow'}`);
