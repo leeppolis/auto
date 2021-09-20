@@ -557,3 +557,58 @@ h2 {
     -1px 1px 0 #EDEAE3,
     1px -1px 0 #EDEAE3;
 }
+
+/* Pollution */
+.pollution .chart .pollution-axis-label {
+  alignment-baseline: top;
+  font-size: 14px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.pollution .pollution-annotation {
+  alignment-baseline: bottom;
+  font-size: 12px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.pollution .pollution-circle {
+  fill: #fff;
+  stroke: #2F4858;
+  stroke-width: 1;
+}
+
+.pollution .pollution-circle.shadow {
+  fill: #EDEAE3;
+  stroke: #6F8884;
+  stroke-dasharray: 2 2;
+}
+
+.pollution .chart .pollution-line-guide {
+  stroke: #2F4858;
+  stroke-width: 1;
+  stroke-dasharray: none;
+}
+
+.pollution .chart .pollution-line-guide.shadow {
+  stroke: #6F8884;
+  stroke-dasharray: 2 2;
+}
+
+.pollution .pollution-line {
+  fill: none;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.pollution .chart-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 20px 0 0 0;
+  text-align: center;
+}
+
+.pollution .chart-container {
+  margin: 0 0 60px 0;
+}

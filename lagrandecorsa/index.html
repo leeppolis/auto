@@ -54,7 +54,7 @@
           <p>In un continuo tentativo di ridurre le emissioni dannose per la salute in quella che è una delle città più inquinate d’Europa, negli ultimi anni il <strong>Comune di Milano</strong> 🏴󠁧󠁢󠁥󠁮󠁧󠁿 ha imposto limitazioni sempre più stringenti al traffico privato: è del <strong>2008</strong> l’introduzione da parte della <strong>giunta <a href="https://it.wikipedia.org/wiki/Letizia_Moratti" target="_new">Moratti</a></strong> dell’<strong><a href="https://it.wikipedia.org/wiki/Pedaggi_urbani_di_Milano#Ecopass" target="_new">Ecopass</a></strong>: si trattava in sostanza di un ticket da pagare per poter entrare con mezzi privati all’interno della cerchia più interna della città, la cosiddetta cerchia dei navigli. Dal pagamento del ticket erano esentati i mezzi allora meno inquinanti, autoveicoli a benzina Euro 3 e 4 e veicoli Diesel Euro 4 e 5.</p>
           <p><strong>È del 2012 l’introduzione di <a href="https://it.wikipedia.org/wiki/Pedaggi_urbani_di_Milano#Area_C" target="_new">Area C</a></strong>, che cambia le regole: divieto totale di accesso per i veicoli più inquinanti e pagamento di un ticket per tutti i veicoli autorizzati. Esenti da ticket sono solo i veicoli elettrici, ciclomotori e motocicli.</p>
           <p><strong>Nel 2019 l’amministrazione <a href="https://it.wikipedia.org/wiki/Giuseppe_Sala_(politico)" target="_new">Sala</a></strong> compie un ulteriore passo per la riduzione delle emissioni istituendo <strong><a href="https://www.comune.milano.it/aree-tematiche/mobilita/area-b" target="_new">Area B</a></strong>: in praticamente tutto il territorio comunale <strong>è vietata la circolazione ai mezzi più inquinanti</strong>, secondo un <a href="https://www.comune.milano.it/aree-tematiche/mobilita/area-b/area-b-veicoli-che-non-possono-entrare" target="_new">calendario predefinito</a> che <strong>prevede la messa al bando di tutti i veicoli Diesel nel 2030</strong> (prossima scadenza ottobre 2022 con la messa la bando dei veicoli Euro 2 a benzina e di tutti i Diesel fino a Euro 5).</p>
-          <p>Queste regole hanno contribuito allo svecchiamento del parco auto circolante? Quello che notiamo (e che si vede bene nel grafico qui sotto) è che i veicoli Euro 6 sono al 31 dicembre 2019 diventati dominanti. Che questo serva da solo a migliorare la qualità dell’aria, però, non è certo.</p>
+          <p>Queste regole hanno contribuito allo svecchiamento del parco auto circolante? Quello che notiamo (e che si vede bene nel grafico qui sotto) è che i veicoli Euro 6 sono al 31 dicembre 2019 diventati dominanti. Che questo serva da solo a migliorare la qualità dell’aria, però, non è evidente.</p>
           <p><em>Clicca sul nome di una classe ambientale per evidenziare la sua evoluzione nel tempo</em>.</p>
         </div>
       </div>
@@ -62,6 +62,18 @@
       <div class="chart-wrapper scroll">
         <div class="chart-all parallel">
           <div class="chart" id="parallel"></div>
+        </div>
+      </div>
+
+      <div class="text">
+        <div class="body">
+          <p>Il Comune di Milano 🏴󠁧󠁢󠁥󠁮󠁧󠁿 fornisce dei dati aggregati sull'inquinamento atmosferico. Proviamo a confrontarli con le modifiche incorse nel tempo al parco auto circolante. Nei grafici possiamo vedere, per ogni anno, la rilevazione media di <strong>PM10 😶‍🌫️</strong> e il numero di giorni in cui il valore è stato superiore ai limiti di legge ☁️, il valore medio di <strong>Diossido di Azoto (NO2) 💨</strong>, e il numero di giorni in cui i valori di <strong>Ozono (O3) 😷</strong> sono stati sopra al limite di legge</strong>.</p>
+        </div>
+      </div>
+
+      <div class="chart-wrapper scroll">
+        <div class="chart-all pollution">
+          <div class="chart" id="pollution"></div>
         </div>
       </div>
 
@@ -147,6 +159,7 @@
     <script type="text/javascript" src="./scripts/functions.js"></script>
     <script type="text/javascript" src="./scripts/parallel.js"></script>
     <script type="text/javascript" src="./scripts/lollipop.js"></script>
+    <script type="text/javascript" src="./scripts/pollution.js"></script>
     <script type="text/javascript" src="./scripts/smallmultiples.js"></script>
     <script>
       d3.json('./data/data.json')
@@ -164,8 +177,9 @@
             total[y] = data.auto[y].reduce((acc, d) => acc + d.numero, 0);
           });
 
-          lollipop(svgW, svgH, years, total, data.persone);
+          lollipop(svgW, years, total, data.persone);
           parallel(svgW, svgH, notesH, legendH, years, categories, data);
+          pollution(svgW, years, data.inquinamento);
           smallMultiples(years, data);
         });
 

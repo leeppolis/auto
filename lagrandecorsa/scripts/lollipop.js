@@ -1,5 +1,5 @@
 
-const lollipop = (svgW, svgH, years, total, persone) => {
+const lollipop = (svgW, years, total, persone) => {
   const svgL = d3.select('#line')
     .append('svg')
     .attr('width', svgW)

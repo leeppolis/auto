@@ -55,3 +55,4 @@ const selectedBarHeight = 16;
 const rowHeight = 45;
 const columnWidth = 80;
 const lineChartHeight = 120;
+const pollutionChartHeight = 120;
