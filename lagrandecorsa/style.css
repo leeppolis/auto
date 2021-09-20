@@ -81,6 +81,7 @@ h2 {
   text-transform: uppercase;
 }
 
+.text .glossario p,
 .text .body p {
   margin: 0 0 20px 0;
 }
@@ -609,6 +610,22 @@ h2 {
   text-align: center;
 }
 
+.pollution .chart-title span {
+  font-weight: 500;
+}
+
 .pollution .chart-container {
   margin: 0 0 60px 0;
+}
+
+.pollution .pollution-limit {
+  stroke: #9D4E7A;
+  stroke-width: 1;
+  stroke-dasharray: 4 2;
+}
+
+.pollution .pollution-annotation-limit {
+  alignment-baseline: top;
+  fill: #9D4E7A;
+  text-anchor: start;
 }

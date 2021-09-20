@@ -2,28 +2,30 @@ const pollution = (svgW, years, inquinamento) => {
   const charts = [
     {
       id: 'pm10',
-      title: 'PM10 Medio (limite di legge della media annuale: 40µg/m³)',
+      title: 'PM10 Medio<br /><span>Limite di legge della media annuale: 40µg/m³</span>',
       icon: '😶‍🌫️',
       unit: 'µg/m³',
-      path: [ 'PM10', 'avg' ]
+      path: [ 'PM10', 'avg' ],
+      limit: 40
     },
     {
       id: 'pm10d',
-      title: 'PM10: giorni oltre i limi di legge (limite di legge picco giornaliero: 50µg/m³)',
+      title: 'PM10: giorni oltre i limi di legge<br /><span>Limite di legge picco giornaliero: 50µg/m³</span>',
       icon: '☁️',
       unit: 'giorni',
       path: [ 'PM10', 'days' ]
     },
     {
       id: 'no2',
-      title: 'NO2 Medio (limite di legge della media annuale: 40 µg/m³)',
+      title: 'NO2 Medio<br /><span>limite di legge della media annuale: 40 µg/m³</span>',
       icon: '💨',
       unit: 'µg/m³',
-      path: [ 'NO2', 'avg' ]
+      path: [ 'NO2', 'avg' ],
+      limit: 40
     },
     {
       id: 'o3',
-      title: 'O3: giorni oltre i limiti di legge (limite di legge picco giornaliero: 120 µg/m3)',
+      title: 'O3: giorni oltre i limiti di legge<br /><span>Limite di legge picco giornaliero: 120 µg/m3</span>',
       icon: '😷',
       unit: 'giorni',
       path: [ 'O3', 'days' ]
@@ -40,12 +42,12 @@ const pollution = (svgW, years, inquinamento) => {
     const svg = chartContainer.append('svg')
       .attr('width', svgW)
       .attr('height', pollutionChartHeight)
-      .attr('viewbox', `0 0 ${svgW} 200`)
+      .attr('viewbox', `0 0 ${svgW} ${pollutionChartHeight}`)
       .attr('preserveAspectRatio', 'xMidYMid meet');
     
     chartContainer.append('div')
       .attr('class', 'chart-title')
-      .text(chart.title);
+      .html(chart.title);
 
     const gL = svg.append('g');
     const gP = svg.append('g');
@@ -76,7 +78,7 @@ const pollution = (svgW, years, inquinamento) => {
       .range([pollutionChartHeight - 40, 20]);
     let path = [`M${getXPos(0)} ${yScale(chartData[0].y)}`];
     chartData.forEach((d, l) => {
-      const y = d.y !== 0 ? yScale(d.y) : yScale(max);
+      const y = d.y !== 0 ? yScale(d.y) : yScale(0);
       gC.append('circle')
         .attr('class', `pollution-circle pollution-circle-${chart.id} ${(d.y !== 0) ? '' : 'shadow'}`)
         .attr('cx', d.x)
@@ -95,7 +97,7 @@ const pollution = (svgW, years, inquinamento) => {
       gP.append('line')
         .attr('x1', d.x)
         .attr('x2', d.x)
-        .attr('y1', lineChartHeight - 20)
+        .attr('y1', lineChartHeight - 40)
         .attr('y2', y)
         .attr('stroke', colors.DEFAULT)
         .attr('class', `pollution-line-guide pollution-line-${chart.id} ${(d.y !== 0) ? '' : 'shadow'}`);
@@ -105,5 +107,20 @@ const pollution = (svgW, years, inquinamento) => {
       .attr('d', path.join(','))
       .attr('stroke', colors.NEUTRAL)
       .attr('class', 'pollution-line');
+    if (chart.limit) {
+      gT.append('line')
+        .attr('x1', getXPos(0) - 40)
+        .attr('x2', getXPos(chartData.length - 1) + 20)
+        .attr('y1', yScale(chart.limit))
+        .attr('y2', yScale(chart.limit))
+        .attr('class', 'pollution-limit');
+      gT.append('text')
+        .attr('x', getXPos(0) - 40)
+        .attr('y', yScale(chart.limit))
+        .attr('dy', 12)
+        .attr('class', 'pollution-annotation pollution-annotation-limit')
+        .text(`Limite di legge ${chart.limit}${chart.unit}`);
+
+    }
   });
 };
