@@ -2,7 +2,7 @@ const pollution = (svgW, years, inquinamento) => {
   const charts = [
     {
       id: 'pm10',
-      title: 'PM10 Medio<br /><span>Limite di legge della media annuale: 40µg/m³</span>',
+      title: 'PM10 Medio',
       icon: '😶‍🌫️',
       unit: 'µg/m³',
       path: [ 'PM10', 'avg' ],
@@ -10,14 +10,14 @@ const pollution = (svgW, years, inquinamento) => {
     },
     {
       id: 'pm10d',
-      title: 'PM10: giorni oltre i limi di legge<br /><span>Limite di legge picco giornaliero: 50µg/m³</span>',
+      title: 'PM10: giorni oltre i limiti di legge<br /><span>Limite di legge picco giornaliero: 50µg/m³</span>',
       icon: '☁️',
       unit: 'giorni',
       path: [ 'PM10', 'days' ]
     },
     {
       id: 'no2',
-      title: 'NO2 Medio<br /><span>limite di legge della media annuale: 40 µg/m³</span>',
+      title: 'NO2 Medio',
       icon: '💨',
       unit: 'µg/m³',
       path: [ 'NO2', 'avg' ],
@@ -119,8 +119,7 @@ const pollution = (svgW, years, inquinamento) => {
         .attr('y', yScale(chart.limit))
         .attr('dy', 12)
         .attr('class', 'pollution-annotation pollution-annotation-limit')
-        .text(`Limite di legge ${chart.limit}${chart.unit}`);
-
+        .text(`Limite di legge medio annuale ${chart.limit}${chart.unit}`);
     }
   });
 };
