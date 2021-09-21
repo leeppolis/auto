@@ -29,12 +29,12 @@
   </head>
   <body>
     <div class="wrapper">
-      <header>
+      <header class="collapsible">
         <h1>La grande corsa</h1>
-        <h2>Negli ultimi anni incentivi statali e sempre più stringenti limitazioni al traffico privato hanno cambiato il parco macchine dei milanesi. Usando come fonte i dati pubblici forniti dal Comune di Milano 🏴󠁧󠁢󠁥󠁮󠁧󠁿 abbiamo provato a vedere cosa è cambiato, e come.</h2>
+        <h2>Negli ultimi anni incentivi statali e sempre più stringenti limitazioni al traffico privato hanno cambiato il parco macchine dei milanesi. Usando come fonte i dati pubblici forniti dal Comune di Milano abbiamo provato a vedere cosa è cambiato, e come.</h2>
       </header>
 
-      <div class="text">
+      <div class="text collapsible">
         <h3 class="title">Auto Registrate</h3>
         <div class="body">
           <p>A partire dal 2007 al 2019 (ultimo anno per cui i dati sono disponibili), il numero di vetture private 🚘 intestate a residenti 👨‍🦲 nel Comune di Milano 🏴󠁧󠁢󠁥󠁮󠁧󠁿 è sceso del <strong>4,95%</strong>. È stato registrato un picco negativo <strong>tra il 2013 e il 2014</strong> (<strong>-14.922 unità</strong>), le immatricolazioni hanno iniziato poi, lentamente, a risalire.</p>
@@ -46,12 +46,13 @@
         <div class="chart-all lollipop">
           <div id="line" class="chart"></div>
         </div>
+        <button class="confronta">⫕⫖ Confronta</button>
       </div>
 
-      <div class="text">
+      <div class="text collapsible">
         <h3 class="title">Evoluzione delle classi Ambientali</h3>
-        <div class="body">
-          <p>In un continuo tentativo di ridurre le emissioni dannose per la salute in quella che è una delle città più inquinate d’Europa, negli ultimi anni il <strong>Comune di Milano</strong> 🏴󠁧󠁢󠁥󠁮󠁧󠁿 ha imposto limitazioni sempre più stringenti al traffico privato: è del <strong>2008</strong> l’introduzione da parte della <strong>giunta <a href="https://it.wikipedia.org/wiki/Letizia_Moratti" target="_new">Moratti</a></strong> dell’<strong><a href="https://it.wikipedia.org/wiki/Pedaggi_urbani_di_Milano#Ecopass" target="_new">Ecopass</a></strong>: si trattava in sostanza di un ticket da pagare per poter entrare con mezzi privati all’interno della cerchia più interna della città, la cosiddetta cerchia dei navigli. Dal pagamento del ticket erano esentati i mezzi allora meno inquinanti, autoveicoli a benzina Euro 3 e 4 e veicoli Diesel Euro 4 e 5.</p>
+        <div class="body ">
+          <p>In un continuo tentativo di ridurre le emissioni dannose per la salute in quella che è una delle città più inquinate d’Europa, negli ultimi anni il <strong>Comune di Milano</strong> ha imposto limitazioni sempre più stringenti al traffico privato: è del <strong>2008</strong> l’introduzione da parte della <strong>giunta <a href="https://it.wikipedia.org/wiki/Letizia_Moratti" target="_new">Moratti</a></strong> dell’<strong><a href="https://it.wikipedia.org/wiki/Pedaggi_urbani_di_Milano#Ecopass" target="_new">Ecopass</a></strong>: si trattava in sostanza di un ticket da pagare per poter entrare con mezzi privati all’interno della cerchia più interna della città, la cosiddetta cerchia dei navigli. Dal pagamento del ticket erano esentati i mezzi allora meno inquinanti, autoveicoli a benzina Euro 3 e 4 e veicoli Diesel Euro 4 e 5.</p>
           <p><strong>È del 2012 l’introduzione di <a href="https://it.wikipedia.org/wiki/Pedaggi_urbani_di_Milano#Area_C" target="_new">Area C</a></strong>, che cambia le regole: divieto totale di accesso per i veicoli più inquinanti e pagamento di un ticket per tutti i veicoli autorizzati. Esenti da ticket sono solo i veicoli elettrici, ciclomotori e motocicli.</p>
           <p><strong>Nel 2019 l’amministrazione <a href="https://it.wikipedia.org/wiki/Giuseppe_Sala_(politico)" target="_new">Sala</a></strong> compie un ulteriore passo per la riduzione delle emissioni istituendo <strong><a href="https://www.comune.milano.it/aree-tematiche/mobilita/area-b" target="_new">Area B</a></strong>: in praticamente tutto il territorio comunale <strong>è vietata la circolazione ai mezzi più inquinanti</strong>, secondo un <a href="https://www.comune.milano.it/aree-tematiche/mobilita/area-b/area-b-veicoli-che-non-possono-entrare" target="_new">calendario predefinito</a> che <strong>prevede la messa al bando di tutti i veicoli Diesel nel 2030</strong> (prossima scadenza ottobre 2022 con la messa la bando dei veicoli Euro 2 a benzina e di tutti i Diesel fino a Euro 5).</p>
           <p>Queste regole hanno contribuito allo svecchiamento del parco auto circolante? Quello che notiamo (e che si vede bene nel grafico qui sotto) è che i veicoli Euro 6 sono al 31 dicembre 2019 diventati dominanti. Che questo serva da solo a migliorare la qualità dell’aria, però, non è evidente.</p>
@@ -63,11 +64,13 @@
         <div class="chart-all parallel">
           <div class="chart" id="parallel"></div>
         </div>
+        <button class="confronta">⫕⫖ Confronta</button>
       </div>
 
-      <div class="text">
+      <div class="text collapsible">
+        <h3 class="title">Effetti sull'inquinamento atmosferico</h3>
         <div class="body">
-          <p>Il Comune di Milano 🏴󠁧󠁢󠁥󠁮󠁧󠁿 fornisce dei dati aggregati sull'inquinamento atmosferico. Proviamo a confrontarli con le modifiche incorse nel tempo al parco auto circolante. Nei grafici possiamo vedere, per ogni anno, la rilevazione media di <strong>PM10</strong> e il numero di giorni in cui il valore è stato superiore ai limiti di legge, il valore medio di <strong>Diossido di Azoto (NO2)</strong>, e il numero di giorni in cui i valori di <strong>Ozono (O3)</strong> sono stati sopra al limite di legge</strong>. <strong>Per maggiori dettagli sulla qualità dell'aria a Milano</strong>, con dati aggiornati quotidianamente, visita <a href="https://aria.mia.mi.it/" target="_new">aria.mia.mi.it</a>.</p>
+          <p>Il Comune di Milano fornisce dei dati aggregati sull'inquinamento atmosferico. Proviamo a confrontarli con le modifiche incorse nel tempo al parco auto circolante. Nei grafici possiamo vedere, per ogni anno, la rilevazione media di <strong>PM10</strong> e il numero di giorni in cui il valore è stato superiore ai limiti di legge, il valore medio di <strong>Diossido di Azoto (NO2)</strong>, e il numero di giorni in cui i valori di <strong>Ozono (O3)</strong> sono stati sopra al limite di legge</strong>. <strong>Per maggiori dettagli sulla qualità dell'aria a Milano</strong>, con dati aggiornati quotidianamente, visita <a href="https://aria.mia.mi.it/" target="_new">aria.mia.mi.it</a>.</p>
         </div>
       </div>
 
@@ -75,22 +78,24 @@
         <div class="chart-all pollution">
           <div class="chart" id="pollution"></div>
         </div>
+        <button class="confronta">⫕⫖ Confronta</button>
       </div>
 
-      <div class="text">
+      <div class="text collapsible">
+        <h3 class="title">Dettaglio delle classi ambientali</h3>
         <div class="body">
           <p>Mentre la crescita esponenziale nel numero di veicoli Euro 6 non ci ha stupiti, la variazione numerica di vecoli appartenenti ad altre categorie ambientali ci ha invece colti di sorpresa: benché questa classe sia stata la prima a subire restrizioni, <strong>il numero di veicoli Euro 0 è sceso meno sensibilmente (-20.349 unità)</strong> rispetto a classi di autoveicoli più efficienti (seppur ormai obsoleti: Euro 1, 2, 3) che hanno visto cali <strong>di più della metà</strong> nella stessa finestra temporale. Quale sia il motivo non ci è noto. Vediamo anche che i veicoli <strong>Non Classificati sono cresciuti di 105 volte</strong>, rimanendo comunque, numericamente, irrilevanti.</p>
           <p><em>Nei grafici che seguono è possibile vedere il dettaglio per ogni categoria.</em></p>
         </div>
       </div>
 
-      <div class="chart-wrapper">
+      <div class="chart-wrapper collapsible">
         <div class="chart-single smallMultiples">
           <div class="chart" id="small-m"></div>
         </div>
       </div>
 
-      <div class="text">
+      <div class="text collapsible">
         <h3 class="title">Glossario</h3>
         <div class="glossario">
           <h4>Classe Ambientale</h4>
@@ -115,8 +120,6 @@
           <p>Il diossido di azoto è un gas rosso bruno a temperatura ordinaria dall'odore soffocante, irritante e caratteristico. È un forte irritante delle vie polmonari; già a moderate concentrazioni nell'aria provoca tosse acuta, dolori al torace, convulsioni e insufficienza circolatoria (<a href="https://it.wikipedia.org/wiki/Diossido_di_azoto" title="Diossido di Azoto su Wikipedia" target="_new">Wikipedia</a>)</p>
           <h4>Ozono - O3</h4>
           <p>L'ozono è una forma allotropica dell'ossigeno, dal caratteristico odore agliaceo. Le sue molecole sono formate da tre atomi di ossigeno. È presente negli strati alti dell'atmosfera concentrandosi soprattutto a 25 km di altezza dove è presente l'ozonosfera: è considerato un gas serra, ma diversamente da altri gas serra che trattengono l'energia proveniente dalla superficie terrestre, l'ozono assorbe e trattiene parte dell'energia proveniente direttamente dal Sole. L'ozono è presente in piccola parte anche negli strati più bassi dell'atmosfera (è uno dei principali componenti dello smog prodotto dall'uomo nelle grandi città): diversamente dall'ozono che si trova nella stratosfera, quello troposferico risulta essere un inquinante molto velenoso se respirato a grandi dosi (<a href="https://it.wikipedia.org/wiki/Ozono" title="Ozono su Wikipedia" target="_new">Wikipedia</a>).</p>
-        </div>
-        <div class="body">
         </div>
       </div>
     </div>
@@ -147,7 +150,7 @@
       </svg>
     </div>
 
-    <footer id="footer" class="footer vn">
+    <footer id="footer" class="footer vn collapsible">
       <div class="footer-wrapper">
         <div class="sources">
           <h3>Fonti</h3>
@@ -188,6 +191,30 @@
           parallel(svgW, svgH, notesH, legendH, years, categories, data);
           pollution(svgW, years, data.inquinamento);
           smallMultiples(years, data);
+        });
+
+        const scrolls = document.querySelectorAll('.chart-all');
+        scrolls.forEach((scroll) => {
+          scroll.addEventListener('scroll', (e) => {
+            scrolls.forEach((inner) => {
+              inner.scrollLeft = scroll.scrollLeft;
+            });
+          });
+        })
+
+        document.querySelectorAll('.confronta').forEach((button) => {
+          button.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('body').classList.add('collapsed');
+            window.scrollTo(0, 0);
+          })
+        })
+
+        document.querySelector('body').addEventListener('click', (e) => {
+          e.preventDefault();
+          if (e.target.classList.contains('collapsed')) {
+            document.querySelector('body').classList.remove('collapsed');
+          }
         });
 
         fetch(document.querySelector('#corporate').getAttribute('href'))

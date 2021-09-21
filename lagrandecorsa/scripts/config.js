@@ -44,7 +44,7 @@ const colors = {
   ANI: '#9D4E7A',
   ANC: '#99A89E',
   NEUTRAL: '#6F8884',
-  DEFAULT: '#2F4858333',
+  DEFAULT: '#2F4858',
   EMPTY: '#EDEAE3',
   HIGHLIGHT: '#EDEAE3',
   TEXT: '#2F4858',
