@@ -1,3 +1,12 @@
+@keyframes scroll {
+  from {
+    transform: translate3d(-15%, 100%, 0);
+  }
+  to {
+    transform: translate3d(15%, 100%, 0);
+  }
+}
+
 body {
   background: #EDEAE3;
   border: 0;
@@ -142,7 +151,13 @@ h2 {
   position: relative;
 }
 
-.chart-wrapper.scroll:after {
+.chart-wrapper.scroll::after {
+  animation-name: scroll;
+  animation-duration: .75s;
+  animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
+  animation-delay: 0;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
   bottom: 0;
   content: '← Scroll →';
   display: block;
