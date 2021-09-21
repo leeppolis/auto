@@ -192,28 +192,30 @@
           pollution(svgW, years, data.inquinamento);
           smallMultiples(years, data);
         });
-
+        const body = document.querySelector('body');
         const scrolls = document.querySelectorAll('.chart-all');
         scrolls.forEach((scroll) => {
           scroll.addEventListener('scroll', (e) => {
-            scrolls.forEach((inner) => {
-              inner.scrollLeft = scroll.scrollLeft;
-            });
+            if (body.classList.contains('collapsed')) {
+              scrolls.forEach((inner) => {
+                inner.scrollLeft = scroll.scrollLeft;
+              });
+            }
           });
         })
 
         document.querySelectorAll('.confronta').forEach((button) => {
           button.addEventListener('click', (e) => {
             e.preventDefault();
-            document.querySelector('body').classList.add('collapsed');
+            body.classList.add('collapsed');
             window.scrollTo(0, 0);
           })
         })
 
-        document.querySelector('body').addEventListener('click', (e) => {
+        body.addEventListener('click', (e) => {
           e.preventDefault();
           if (e.target.classList.contains('collapsed')) {
-            document.querySelector('body').classList.remove('collapsed');
+            body.classList.remove('collapsed');
           }
         });
 
