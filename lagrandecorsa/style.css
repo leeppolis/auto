@@ -265,129 +265,175 @@ h2 {
 
 /* Parallel */
 /* Interactions */
+.parallel .chart[data-hovered="EURO0"] .summary[data-category="cat-EURO0"],
+.parallel .chart[data-hovered="EURO0"] .row-header[data-category="cat-EURO0"]
 .parallel .chart[data-selected="EURO0"] .summary[data-category="cat-EURO0"],
 .parallel .chart[data-selected="EURO0"] .row-header[data-category="cat-EURO0"] {
   font-weight: 700;
 }
+.parallel .chart[data-hovered="EURO0"] .connector[data-category="cat-EURO0"] .connector,
 .parallel .chart[data-selected="EURO0"] .connector[data-category="cat-EURO0"] .connector {
   stroke-width: 2;
   stroke-dasharray: none;
 }
+.parallel .chart[data-hovered="EURO0"] .bar-label[data-category="cat-EURO0"],
 .parallel .chart[data-selected="EURO0"] .bar-label[data-category="cat-EURO0"] {
   opacity: 1;
 }
+.parallel .chart[data-hovered="EURO0"] .bar[data-category="cat-EURO0"],
 .parallel .chart[data-selected="EURO0"] .bar[data-category="cat-EURO0"] {
   stroke-width: 2;
 }
+.parallel .chart[data-hovered="EURO1"] .summary[data-category="cat-EURO1"],
+.parallel .chart[data-hovered="EURO1"] .row-header[data-category="cat-EURO1"],
 .parallel .chart[data-selected="EURO1"] .summary[data-category="cat-EURO1"],
 .parallel .chart[data-selected="EURO1"] .row-header[data-category="cat-EURO1"] {
   font-weight: 700;
 }
+.parallel .chart[data-hovered="EURO1"] .connector[data-category="cat-EURO1"] .connector,
 .parallel .chart[data-selected="EURO1"] .connector[data-category="cat-EURO1"] .connector {
   stroke-width: 2;
   stroke-dasharray: none;
 }
+.parallel .chart[data-hovered="EURO1"] .bar-label[data-category="cat-EURO1"],
 .parallel .chart[data-selected="EURO1"] .bar-label[data-category="cat-EURO1"] {
   opacity: 1;
 }
+.parallel .chart[data-hovered="EURO1"] .bar[data-category="cat-EURO1"],
 .parallel .chart[data-selected="EURO1"] .bar[data-category="cat-EURO1"] {
   stroke-width: 2;
 }
+.parallel .chart[data-hovered="EURO2"] .summary[data-category="cat-EURO2"],
+.parallel .chart[data-hovered="EURO2"] .row-header[data-category="cat-EURO2"],
 .parallel .chart[data-selected="EURO2"] .summary[data-category="cat-EURO2"],
 .parallel .chart[data-selected="EURO2"] .row-header[data-category="cat-EURO2"] {
   font-weight: 700;
 }
+.parallel .chart[data-hovered="EURO2"] .connector[data-category="cat-EURO2"] .connector,
 .parallel .chart[data-selected="EURO2"] .connector[data-category="cat-EURO2"] .connector {
   stroke-width: 2;
   stroke-dasharray: none;
 }
+.parallel .chart[data-hovered="EURO2"] .bar-label[data-category="cat-EURO2"],
 .parallel .chart[data-selected="EURO2"] .bar-label[data-category="cat-EURO2"] {
   opacity: 1;
 }
+.parallel .chart[data-hovered="EURO2"] .bar[data-category="cat-EURO2"],
 .parallel .chart[data-selected="EURO2"] .bar[data-category="cat-EURO2"] {
   stroke-width: 2;
 }
+.parallel .chart[data-hovered="EURO3"] .summary[data-category="cat-EURO3"],
+.parallel .chart[data-hovered="EURO3"] .row-header[data-category="cat-EURO3"],
 .parallel .chart[data-selected="EURO3"] .summary[data-category="cat-EURO3"],
 .parallel .chart[data-selected="EURO3"] .row-header[data-category="cat-EURO3"] {
   font-weight: 700;
 }
+.parallel .chart[data-hovered="EURO3"] .connector[data-category="cat-EURO3"] .connector,
 .parallel .chart[data-selected="EURO3"] .connector[data-category="cat-EURO3"] .connector {
   stroke-width: 2;
   stroke-dasharray: none;
 }
+.parallel .chart[data-hovered="EURO3"] .bar-label[data-category="cat-EURO3"],
 .parallel .chart[data-selected="EURO3"] .bar-label[data-category="cat-EURO3"] {
   opacity: 1;
 }
+.parallel .chart[data-hovered="EURO3"] .bar[data-category="cat-euro3"],
 .parallel .chart[data-selected="EURO3"] .bar[data-category="cat-euro3"] {
   stroke-width: 2;
 }
+.parallel .chart[data-hovered="EURO4"] .summary[data-category="cat-EURO4"],
+.parallel .chart[data-hovered="EURO4"] .row-header[data-category="cat-EURO4"],
 .parallel .chart[data-selected="EURO4"] .summary[data-category="cat-EURO4"],
 .parallel .chart[data-selected="EURO4"] .row-header[data-category="cat-EURO4"] {
   font-weight: 700;
 }
+.parallel .chart[data-hovered="EURO4"] .connector[data-category="cat-EURO4"] .connector,
 .parallel .chart[data-selected="EURO4"] .connector[data-category="cat-EURO4"] .connector {
   stroke-width: 2;
   stroke-dasharray: none;
 }
+.parallel .chart[data-hovered="EURO4"] .bar-label[data-category="cat-EURO4"],
 .parallel .chart[data-selected="EURO4"] .bar-label[data-category="cat-EURO4"] {
   opacity: 1;
 }
+.parallel .chart[data-hovered="EURO4"] .bar[data-category="cat-EURO4"],
 .parallel .chart[data-selected="EURO4"] .bar[data-category="cat-EURO4"] {
   stroke-width: 2;
 }
+.parallel .chart[data-hovered="EURO5"] .summary[data-category="cat-EURO5"],
+.parallel .chart[data-hovered="EURO5"] .row-header[data-category="cat-EURO5"],
 .parallel .chart[data-selected="EURO5"] .summary[data-category="cat-EURO5"],
 .parallel .chart[data-selected="EURO5"] .row-header[data-category="cat-EURO5"] {
   font-weight: 700;
 }
+.parallel .chart[data-hovered="EURO5"] .connector[data-category="cat-EURO5"] .connector,
 .parallel .chart[data-selected="EURO5"] .connector[data-category="cat-EURO5"] .connector {
   stroke-width: 2;
   stroke-dasharray: none;
 }
+.parallel .chart[data-hovered="EURO5"] .bar-label[data-category="cat-EURO5"],
 .parallel .chart[data-selected="EURO5"] .bar-label[data-category="cat-EURO5"] {
   opacity: 1;
 }
+.parallel .chart[data-hovered="EURO5"] .bar[data-category="cat-EURO5"],
 .parallel .chart[data-selected="EURO5"] .bar[data-category="cat-EURO5"] {
   stroke-width: 2;
 }
+.parallel .chart[data-hovered="EURO6"] .summary[data-category="cat-EURO6"],
+.parallel .chart[data-hovered="EURO6"] .row-header[data-category="cat-EURO6"],
 .parallel .chart[data-selected="EURO6"] .summary[data-category="cat-EURO6"],
 .parallel .chart[data-selected="EURO6"] .row-header[data-category="cat-EURO6"] {
   font-weight: 700;
 }
+
+.parallel .chart[data-hovered="EURO6"] .connector[data-category="cat-EURO6"] .connector,
 .parallel .chart[data-selected="EURO6"] .connector[data-category="cat-EURO6"] .connector {
   stroke-width: 2;
   stroke-dasharray: none;
 }
+.parallel .chart[data-hovered="EURO6"] .bar-label[data-category="cat-EURO6"],
 .parallel .chart[data-selected="EURO6"] .bar-label[data-category="cat-EURO6"] {
   opacity: 1;
 }
+.parallel .chart[data-hovered="EURO6"] .bar[data-category="cat-EURO6"],
 .parallel .chart[data-selected="EURO6"] .bar[data-category="cat-EURO6"] {
   stroke-width: 2;
 }
+.parallel .chart[data-hovered="ANC"] .summary[data-category="cat-ANC"],
+.parallel .chart[data-hovered="ANC"] .row-header[data-category="cat-ANC"],
 .parallel .chart[data-selected="ANC"] .summary[data-category="cat-ANC"],
 .parallel .chart[data-selected="ANC"] .row-header[data-category="cat-ANC"] {
   font-weight: 700;
 }
+.parallel .chart[data-hovered="ANC"] .connector[data-category="cat-ANC"] .connector,
 .parallel .chart[data-selected="ANC"] .connector[data-category="cat-ANC"] .connector {
   stroke-width: 2;
   stroke-dasharray: none;
 }
+.parallel .chart[data-hovered="ANC"] .bar-label[data-category="cat-ANC"],
 .parallel .chart[data-selected="ANC"] .bar-label[data-category="cat-ANC"] {
   opacity: 1;
 }
+.parallel .chart[data-hovered="ANC"] .bar[data-category="cat-ANC"],
 .parallel .chart[data-selected="ANC"] .bar[data-category="cat-ANC"] {
   stroke-width: 2;
 }
+.parallel .chart[data-hovered="ANI"] .summary[data-category="cat-ANI"],
+.parallel .chart[data-hovered="ANI"] .row-header[data-category="cat-ANI"],
 .parallel .chart[data-selected="ANI"] .summary[data-category="cat-ANI"],
 .parallel .chart[data-selected="ANI"] .row-header[data-category="cat-ANI"] {
   font-weight: 700;
 }
+.parallel .chart[data-hovered="ANI"] .connector[data-category="cat-ANI"] .connector,
 .parallel .chart[data-selected="ANI"] .connector[data-category="cat-ANI"] .connector {
   stroke-width: 2;
   stroke-dasharray: none;
 }
+.parallel .chart[data-hovered="ANI"] .bar-label[data-category="cat-ANI"],
 .parallel .chart[data-selected="ANI"] .bar-label[data-category="cat-ANI"] {
   opacity: 1;
 }
+.parallel .chart[data-hovered="ANI"] .bar[data-category="cat-ANI"],
 .parallel .chart[data-selected="ANI"] .bar[data-category="cat-ANI"] {
   stroke-width: 2;
 }
@@ -584,15 +630,36 @@ h2 {
 }
 
 .pollution .pollution-annotation {
-  alignment-baseline: bottom;
   font-size: 12px;
   font-weight: 500;
-  text-anchor: middle;
+}
+
+.pollution .pollution-annotation.pollution-annotation-0-0 {
+  alignment-baseline: bottom;
+  fill: #5C9AA0;
+}
+
+.pollution .pollution-annotation.pollution-annotation-0-1 {
+  alignment-baseline: top;
+  fill: #9D4E7A;
+}
+
+.pollution .pollution-annotation.pollution-annotation-1-1 {
+  alignment-baseline: top;
+  fill: #6AAB9E;
+}
+
+.pollution .pollution-annotation.pollution-annotation-1-0 {
+  alignment-baseline: bottom;
+  fill: #9D4E7A;
+}
+
+.pollution .pollution-annotation.pollution-annotation-na {
+  fill: #6F8884;
 }
 
 .pollution .pollution-circle {
   fill: #fff;
-  stroke: #2F4858;
   stroke-width: 1;
 }
 
@@ -603,9 +670,8 @@ h2 {
 }
 
 .pollution .chart .pollution-line-guide {
-  stroke: #2F4858;
   stroke-width: 1;
-  stroke-dasharray: none;
+  stroke-dasharray: 1 2;
 }
 
 .pollution .chart .pollution-line-guide.shadow {
@@ -621,13 +687,20 @@ h2 {
 
 .pollution .chart-title {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   margin: 20px 0 0 0;
   text-align: center;
 }
 
 .pollution .chart-title span {
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.pollution .chart-title em {
+  font-size: small;
+  font-style: normal;
+  font-weight: 400;
+
 }
 
 .pollution .chart-container {
@@ -635,15 +708,15 @@ h2 {
 }
 
 .pollution .pollution-limit {
-  stroke: #9D4E7A;
+  stroke: #2F4858;
   stroke-width: 1;
-  stroke-dasharray: 4 2;
+  stroke-dasharray: 2 4;
 }
 
 .pollution .pollution-annotation-limit {
-  alignment-baseline: top;
-  fill: #9D4E7A;
-  text-anchor: start;
+  alignment-baseline: middle;
+  fill: #2F4858;
+  text-anchor: end;
 }
 
 /* Detail mode */
@@ -671,8 +744,13 @@ body.collapsed .collapsible {
   display: none;
 }
 
-body.collapsed .chart-wrapper {
+body.collapsed .pollution .chart-container,
+body.collapsed .chart-all {
   margin-bottom: 0;
+}
+
+body.collapsed .chart-wrapper {
+  margin-bottom: 20px;
 }
 
 body.collapsed .wrapper {
@@ -684,8 +762,8 @@ body.collapsed .wrapper::after {
     90deg,
     #EDEAE3,
     #EDEAE3 80px,
-    #ffffff 80px,
-    #ffffff 160px
+    #F5F5F5 80px,
+    #F5F5F5 160px
   );
   bottom: -80px;
   content: '';

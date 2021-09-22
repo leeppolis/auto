@@ -79,7 +79,7 @@
 
       <div class="chart-wrapper scroll">
         <div class="chart-all parallel">
-          <div class="chart" id="parallel"></div>
+          <div class="chart" id="parallel" data-selected=""></div>
         </div>
         <button class="confronta">⫕⫖ Confronta</button>
       </div>
@@ -205,7 +205,7 @@
           });
 
           lollipop(svgW, years, total, data.persone);
-          parallel(svgW, svgH, notesH, legendH, years, categories, data);
+          parallel(svgW, svgH, notesH, years, categories, data);
           pollution(svgW, years, data.inquinamento);
           smallMultiples(years, data);
         });

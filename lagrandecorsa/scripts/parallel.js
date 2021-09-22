@@ -5,11 +5,14 @@ const selectCategory = (c, container) => {
   SELECTED = c;
   container.attr('data-selected', c);
 };
+const hoverCategory = (c, container) => {
+  container.attr('data-hovered', c);
+};
+const outCategory = (c, container) => {
+  container.attr('data-hovered', '');
+};
 
-const parallel = (svgW, svgH, notesH, legendH, years, categories, data) => {
-
-  console.log(years);
-
+const parallel = (svgW, svgH, notesH, years, categories, data) => {
   const connectors = {};
   categories.forEach((c) => { connectors[c] = [] });
   const maxValue = 277675;
@@ -37,7 +40,9 @@ const parallel = (svgW, svgH, notesH, legendH, years, categories, data) => {
       .attr('id', `row-header-${c}`)
       .attr('data-category', `cat-${c}`)
       .text(dictionary[c])
-      .on('click', () => { selectCategory(c, container); });
+      .on('click', () => { selectCategory(c, container); })
+      .on('mouseenter', () => { hoverCategory(c, container); })
+      .on('mouseleave', () => { outCategory(c, container); });
     gRH.append('circle')
       .attr('cx', columnWidth - 5)
       .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2) + notesH)
@@ -78,7 +83,9 @@ const parallel = (svgW, svgH, notesH, legendH, years, categories, data) => {
         .attr('fill', `url('#fill')`)
         .attr('class', `bar bar-year-${y} bar-cat-${b.classe} ${(b.numero > 0) ? '' : 'bar-cat-shadow'} ${b.classe === SELECTED ? 'selected' : ''}`)
         .style('cursor', 'pointer')
-        .on('click', () => { selectCategory(b.classe, container); });;
+        .on('click', () => { selectCategory(b.classe, container); })
+        .on('mouseenter', () => { hoverCategory(b.classe, container); })
+        .on('mouseleave', () => { outCategory(b.classe, container); });
       gYB.append('text')
         .attr('x', xPos)
         .attr('y', getYPos(l, false) + notesH)
@@ -135,7 +142,9 @@ const parallel = (svgW, svgH, notesH, legendH, years, categories, data) => {
       .attr('data-category', `cat-${y.classe}`)
       .attr('class', `summary summary-category`)
       .text(`${dictionary[y.classe]}`)
-      .on('click', () => { selectCategory(y.classe, container); });
+      .on('click', () => { selectCategory(y.classe, container); })
+      .on('mouseenter', () => { hoverCategory(y.classe, container); })
+      .on('mouseleave', () => { outCategory(y.classe, container); });
     gRH.append('circle')
       .attr('cx', svgW - columnWidth + 5)
       .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2) + notesH)

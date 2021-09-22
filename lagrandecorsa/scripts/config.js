@@ -50,9 +50,9 @@ const colors = {
   TEXT: '#2F4858',
 };
 const maxBarWidth = 60;
-const barHeight = 8;
+const barHeight = 16;
 const selectedBarHeight = 16;
 const rowHeight = 45;
 const columnWidth = 80;
 const lineChartHeight = 120;
-const pollutionChartHeight = 120;
+const pollutionChartHeight = 160;
