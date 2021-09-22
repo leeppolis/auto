@@ -760,8 +760,8 @@ body.collapsed .wrapper {
 body.collapsed .wrapper::after {
   background: repeating-linear-gradient(
     90deg,
-    #EDEAE3,
-    #EDEAE3 80px,
+    #fff,
+    #fff 80px,
     #F5F5F5 80px,
     #F5F5F5 160px
   );
