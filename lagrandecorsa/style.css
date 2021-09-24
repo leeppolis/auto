@@ -674,6 +674,11 @@ h2 {
   stroke-dasharray: 1 2;
 }
 
+.pollution .chart .pollution-line-0-1,
+.pollution .chart .pollution-line-1-1 {
+  stroke-dasharray: none;
+}
+
 .pollution .chart .pollution-line-guide.shadow {
   stroke: #6F8884;
   stroke-dasharray: 2 2;
@@ -718,6 +723,66 @@ h2 {
   fill: #2F4858;
   text-anchor: end;
 }
+
+
+
+/* Rain */
+
+.rain .chart {
+  display: block;
+}
+
+.rain .chart .line-legend {
+  width: 100%;
+}
+
+.rain .chart .line-line {
+  fill: none;
+  stroke: #0084C4;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.rain .chart .line-dot {
+  fill: #fff;
+  stroke: #0084C4;
+  stroke-width: 1;
+}
+
+.rain .chart .line-axis-label,
+.rain .chart .line-label {
+  alignment-baseline: bottom;
+  fill: #0084C4;
+  font-size: 12px;
+}
+
+.rain .chart .line-axis-label {
+  alignment-baseline: top;
+  fill: #2F4858;
+  font-size: 14px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.rain .chart .line-guide {
+  stroke: #0084C4;
+  stroke-width: 1;
+  stroke-dasharray: none;
+}
+
+.rain .chart .line-legend {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.rain .chart .line-legend .legend {
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+
 
 /* Detail mode */
 

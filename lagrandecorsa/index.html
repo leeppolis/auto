@@ -99,6 +99,21 @@
       </div>
 
       <div class="text collapsible">
+        <h3 class="title">E il meteo?</h3>
+        <div class="body">
+          <p>Guardando i grafici precedenti ci è venuto da chiederci come mai ad un cambio così deciso e veloce del parco circolante con veicoli sempre più moderni e puliti non sia corrisposto un netto miglioramento degli indicatori relativi all'inquinamento atmosferico.</p>
+          <p>Ogni milanese conosce la sensazione che si prova quando, d'inverno, non piove per diversi giorni. L'aria diventa pesante, e uscendo di casa al mattino si pensa "speriamo che piova, così pulisce un po' l'aria". Ma è vero? Grazie ad <a href="https://www.arpalombardia.it/" target="_new">ARPA Lombardia</a> siamo riusciti a riaggregare i dati sulle precipitazioni negli anni tra il 2007 e il 2019. Questo dovrebbe aiutarci a capire se la "tenuta" dell'inquinamento è dovuta a fattori climatici come, ad esempio, la siccità. <strong>Il grafico mostra la quantità totali di piogge per anno</strong> (in mm, sommando i valori rilevati ogni giorno). Purtroppo siamo riusciti a venire in possesso dei dati di una sola centralina meteo (piazza Zavattari) ma crediamo che sia comunque indicativa degli andamenti annui delle precipitazioni.</p>
+        </div>
+      </div>
+
+      <div class="chart-wrapper scroll">
+        <div class="chart-all rain">
+          <div class="chart" id="rain"></div>
+        </div>
+        <button class="confronta">⫕⫖ Confronta</button>
+      </div>
+
+      <div class="text collapsible">
         <h3 class="title">Dettaglio delle classi ambientali</h3>
         <div class="body">
           <p>Mentre la crescita esponenziale nel numero di veicoli Euro 6 non ci ha stupiti, la variazione numerica di vecoli appartenenti ad altre categorie ambientali ci ha invece colti di sorpresa: benché questa classe sia stata la prima a subire restrizioni, <strong>il numero di veicoli Euro 0 è sceso meno sensibilmente (-20.349 unità)</strong> rispetto a classi di autoveicoli più efficienti (seppur ormai obsoleti: Euro 1, 2, 3) che hanno visto cali <strong>di più della metà</strong> nella stessa finestra temporale. Quale sia il motivo non ci è noto. Vediamo anche che i veicoli <strong>Non Classificati sono cresciuti di 105 volte</strong>, rimanendo comunque, numericamente, irrilevanti.</p>
@@ -186,6 +201,7 @@
     <script type="text/javascript" src="./scripts/functions.js"></script>
     <script type="text/javascript" src="./scripts/parallel.js"></script>
     <script type="text/javascript" src="./scripts/lollipop.js"></script>
+    <script type="text/javascript" src="./scripts/rain.js"></script>
     <script type="text/javascript" src="./scripts/pollution.js"></script>
     <script type="text/javascript" src="./scripts/smallmultiples.js"></script>
     <script>
@@ -207,6 +223,7 @@
           lollipop(svgW, years, total, data.persone);
           parallel(svgW, svgH, notesH, years, categories, data);
           pollution(svgW, years, data.inquinamento);
+          rain(svgW, years, data.pioggia);
           smallMultiples(years, data);
         });
         const body = document.querySelector('body');

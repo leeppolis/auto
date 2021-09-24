@@ -122,7 +122,6 @@ const pollution = (svgW, years, inquinamento) => {
           .attr('class', `pollution-line-guide pollution-line-${n}-${m} ${(d.y !== 0) ? '' : 'shadow'}`);
         path[m].push(`L${d.x} ${y}`);
       });
-      console.log(path);
       gT.append('path')
         .attr('d', path[0].join(','))
         .attr('stroke', chart.series[0].color)
@@ -146,55 +145,5 @@ const pollution = (svgW, years, inquinamento) => {
             .text(`${chart.limitLabel}`);
       }
     });
-    /*
-    chartData.forEach((serie, m) => {
-      serie.forEach((d, l) => {
-        const y = d.y !== 0 ? yScale(d.y) : yScale(0);
-        gC.append('circle')
-          .attr('class', `pollution-circle pollution-circle-${d.id} ${(d.y !== 0) ? '' : 'shadow'}`)
-          .attr('cx', d.x)
-          .attr('cy', y)
-          .attr('r', 5)
-          .attr('stroke', serie.color)
-          .attr('fill', colors.EMPTY);
-        
-        gC.append('text')
-          .attr('x', d.x)
-          .attr('y', y)
-          .attr('dy', -8)
-          .attr('class', 'pollution-annotation')
-          .attr('fill', serie.color)
-          .text(`${(d.y === 0) ? 'N.A.' : (chart.unit === 'giorni') ? formatNumber(d.y) : formatFloat(d.y)} ${(l === 0) ? chart.unit : ''}`);
-        
-        gP.append('line')
-          .attr('x1', d.x)
-          .attr('x2', d.x)
-          .attr('y1', pollutionChartHeight - 40)
-          .attr('y2', y)
-          .attr('stroke', serie.color)
-          .attr('class', `pollution-line-guide pollution-line-${d.id} ${(d.y !== 0) ? '' : 'shadow'}`);
-        path.push(`L${d.x} ${y}`);
-      });
-    });
-
-    gT.append('path')
-      .attr('d', path.join(','))
-      .attr('stroke', colors.NEUTRAL)
-      .attr('class', 'pollution-line');
-    if (chart.limit) {
-      gT.append('line')
-        .attr('x1', getXPos(0) - 40)
-        .attr('x2', getXPos(chartData.length - 1) + 20)
-        .attr('y1', yScale(chart.limit))
-        .attr('y2', yScale(chart.limit))
-        .attr('class', 'pollution-limit');
-      gT.append('text')
-        .attr('x', getXPos(0) - 40)
-        .attr('y', yScale(chart.limit))
-        .attr('dy', 12)
-        .attr('class', 'pollution-annotation pollution-annotation-limit')
-        .text(`Limite di legge medio annuale ${chart.limit}${chart.unit}`);
-    }
-    */
   });
 };
