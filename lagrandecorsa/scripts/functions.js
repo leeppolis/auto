@@ -26,3 +26,15 @@ const d3Locale = d3.formatLocale({
   grouping: [3],
   currency: ['', '€']
 });
+
+const selectYear = (e) => {
+  e.preventDefault();
+  const year = e.target.getAttribute('data-year');
+  if (year) {
+    document.querySelector('body').setAttribute('data-year', year);
+  }
+};
+
+const deselectYear = (e) => {
+  e.preventDefault();
+};

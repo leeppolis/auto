@@ -38,7 +38,10 @@ const lollipop = (svgW, years, total, persone) => {
       .attr('r', 5)
       .attr('stroke', colors.DEFAULT)
       .attr('fill', colors.EMPTY)
-      .attr('class','line-dot');
+      .attr('class','line-dot')
+      .attr('data-year', y)
+      .on('mouseenter', selectYear)
+      .on('mouseleave', deselectYear);
 
     gD.append('circle')
       .attr('cx', xp)
@@ -46,23 +49,28 @@ const lollipop = (svgW, years, total, persone) => {
       .attr('r', 5)
       .attr('stroke', colors.DEFAULT)
       .attr('fill', colors.EMPTY)
-      .attr('class','line-dot-ab');
+      .attr('class','line-dot-ab')
+      .attr('data-year', y)
+      .on('mouseenter', selectYear)
+      .on('mouseleave', deselectYear);
 
     gLB.append('text')
       .attr('x', xp)
       .attr('y', yp)
       .attr('dy', -8)
-      .attr('class','line-label')
+      .attr('class', `line-label ${i === 0 ? 'first' : ''}`)
+      .attr('data-year', y)
       .attr('text-anchor', `${(i === years.length - 1 ? 'start' : (i === 0 ? 'end' : 'middle'))}`)
-      .text(`${(i === 0 ? '🚘' : '')} ${formatNumber(total[y])} ${(i === years.length - 1 ? '🚘' : '')}`);
+      .text(`${(i === 0 ? '🚘' : '')} ${formatNumber(total[y])} ${(i > 0 ? '🚘' : '')}`);
 
     gLB.append('text')
       .attr('x', xp)
       .attr('y', yab)
       .attr('dy', -8)
-      .attr('class','line-label-ab')
+      .attr('class',`line-label-ab ${i === 0 ? 'first' : ''}`)
+      .attr('data-year', y)
       .attr('text-anchor', `${(i === years.length - 1 ? 'start' : (i === 0 ? 'end' : 'middle'))}`)
-      .text(`${(i === 0 ? '👨‍' : '')} ${formatNumber(persone[y])} ${(i === years.length - 1 ? '👨‍' : '')}`);
+      .text(`${(i === 0 ? '👨‍' : '')} ${formatNumber(persone[y])} ${(i > 0 ? '👨‍' : '')}`);
 
     gLB.append('text')
       .attr('x', xp)

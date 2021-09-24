@@ -36,15 +36,19 @@ const rain = (svgW, years, pioggia) => {
       .attr('r', 5)
       .attr('stroke', colors.DEFAULT)
       .attr('fill', colors.EMPTY)
-      .attr('class','line-dot');
+      .attr('class','line-dot')
+      .attr('data-year', y)
+      .on('mouseenter', selectYear)
+      .on('mouseleave', deselectYear);
 
     gLB.append('text')
       .attr('x', xp)
       .attr('y', yp)
       .attr('dy', -8)
-      .attr('class','line-label')
+      .attr('class',`line-label ${i === 0 ? 'first' : ''}`)
+      .attr('data-year', y)
       .attr('text-anchor', `${(i === years.length - 1 ? 'start' : (i === 0 ? 'end' : 'middle'))}`)
-      .text(`${formatNumber(pioggia[y])} ${(i === 0 ? 'mm' : '')}`);
+      .text(`${formatNumber(pioggia[y])}mm`);
 
     gLB.append('text')
       .attr('x', xp)

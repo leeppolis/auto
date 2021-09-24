@@ -3,7 +3,7 @@ const pollution = (svgW, years, inquinamento) => {
     {
       limit: 40,
       limitLabel: '40µg/m³ (*)',
-      title: '<span style="color:#9D4E7A">PM10</span> e <span style="color: #5C9AA0;">Diossido di Azoto</span> Medio<br /><em>(*) Limite di legge del valore medio annuo</em>',
+      title: '<span style="color:#9D4E7A">PM10</span> e <span style="color: #5C9AA0;">Diossido di Azoto (NO2)</span> Medio<br /><em>(*) Limite di legge del valore medio annuo</em>',
       unit: 'µg/m³',
       series: [
         {
@@ -21,7 +21,7 @@ const pollution = (svgW, years, inquinamento) => {
       ]
     },
     {
-      title: '<span style="color:#9D4E7A">PM10</span> (limite picco giornaliero 50µg/m³) e <span style="color: #6AAB9E;">Ozono</span> (limite 120 µg/m3):<br />giorni oltre i limiti di legge',
+      title: '<span style="color:#9D4E7A">PM10</span> (limite picco giornaliero 50µg/m³) e <span style="color: #6AAB9E;">Ozono (O3)</span> (limite 120 µg/m3):<br />giorni oltre i limiti di legge',
       unit: 'giorni',
       series: [
         {
@@ -94,7 +94,6 @@ const pollution = (svgW, years, inquinamento) => {
     let path = [ [`M${getXPos(0)} ${yScale(chartData[0][0].y)}`], [`M${getXPos(0)} ${yScale(chartData[1][0].y)}`] ];
 
     chartData.forEach((serie, m) => {
-      console.log(chart.series[m]);
       serie.forEach((d, i) => {
         const y = d.y !== 0 ? yScale(d.y) : yScale(0);
         gC.append('circle')
@@ -103,15 +102,19 @@ const pollution = (svgW, years, inquinamento) => {
           .attr('cy', y)
           .attr('r', 5)
           .attr('stroke', chart.series[m].color)
-          .attr('fill', colors.EMPTY);
+          .attr('fill', colors.EMPTY)
+          .attr('data-year', d.year)
+          .on('mouseenter', selectYear)
+          .on('mouseleave', deselectYear);
         
         gC.append('text')
           .attr('x', d.x)
           .attr('y', y)
           .attr('dy', (m === 0 || d.y === 0) ? -8 : 17)
-          .attr('class', `pollution-annotation pollution-annotation-${n}-${m} ${d.y === 0 ? 'pollution-annotation-na' : ''}`)
+          .attr('class', `pollution-annotation pollution-annotation-${n}-${m} ${d.y === 0 ? 'pollution-annotation-na' : ''} ${i === 0 ? 'first' : ''}`)
+          .attr('data-year', d.year)
           .attr('text-anchor', i === 0 ? 'end' : 'middle')
-          .text(`${i === 0 ? chart.series[m].label : ''} ${(d.y === 0) ? 'N.A.' : (chart.unit === 'giorni') ? formatNumber(d.y) : formatFloat(d.y)} ${(i === 0) ? chart.unit : ''}`);
+          .text(`${i === 0 ? chart.series[m].label : ''} ${(d.y === 0) ? 'N.A.' : (chart.unit === 'giorni') ? formatNumber(d.y) : formatFloat(d.y)} ${chart.unit}`);
 
         gP.append('line')
           .attr('x1', d.x)

@@ -5,11 +5,13 @@ const selectCategory = (c, container) => {
   SELECTED = c;
   container.attr('data-selected', c);
 };
-const hoverCategory = (c, container) => {
+const hoverCategory = (c, container, e) => {
   container.attr('data-hovered', c);
+  selectYear(e);
 };
-const outCategory = (c, container) => {
+const outCategory = (c, container, e) => {
   container.attr('data-hovered', '');
+  deselectYear(e);
 };
 
 const parallel = (svgW, svgH, notesH, years, categories, data) => {
@@ -41,8 +43,8 @@ const parallel = (svgW, svgH, notesH, years, categories, data) => {
       .attr('data-category', `cat-${c}`)
       .text(dictionary[c])
       .on('click', () => { selectCategory(c, container); })
-      .on('mouseenter', () => { hoverCategory(c, container); })
-      .on('mouseleave', () => { outCategory(c, container); });
+      .on('mouseenter', (e) => { hoverCategory(c, container, e); });
+      // .on('mouseleave', (e) => { outCategory(c, container, e); });
     gRH.append('circle')
       .attr('cx', columnWidth - 5)
       .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2) + notesH)
@@ -83,14 +85,16 @@ const parallel = (svgW, svgH, notesH, years, categories, data) => {
         .attr('fill', `url('#fill')`)
         .attr('class', `bar bar-year-${y} bar-cat-${b.classe} ${(b.numero > 0) ? '' : 'bar-cat-shadow'} ${b.classe === SELECTED ? 'selected' : ''}`)
         .style('cursor', 'pointer')
+        .attr('data-year', y)
         .on('click', () => { selectCategory(b.classe, container); })
-        .on('mouseenter', () => { hoverCategory(b.classe, container); })
-        .on('mouseleave', () => { outCategory(b.classe, container); });
+        .on('mouseenter', (e) => { hoverCategory(b.classe, container, e); });
+        // .on('mouseleave', (e) => { outCategory(b.classe, container, e); });
       gYB.append('text')
         .attr('x', xPos)
         .attr('y', getYPos(l, false) + notesH)
         .attr('dy', -4)
         .attr('data-category', `cat-${b.classe}`)
+        .attr('data-year', y)
         .attr('class', `bar-label bar-label-${b.classe} bar-label-${y}`)
         .text(`${formatNumber(b.numero)} ${y === '2007' ? ' 🚘' : ''}`);
       connectors[b.classe].push(getExtremes(width, l, i));
@@ -143,8 +147,8 @@ const parallel = (svgW, svgH, notesH, years, categories, data) => {
       .attr('class', `summary summary-category`)
       .text(`${dictionary[y.classe]}`)
       .on('click', () => { selectCategory(y.classe, container); })
-      .on('mouseenter', () => { hoverCategory(y.classe, container); })
-      .on('mouseleave', () => { outCategory(y.classe, container); });
+      .on('mouseenter', (e) => { hoverCategory(y.classe, container, e); });
+      // .on('mouseleave', (e) => { outCategory(y.classe, container, e); });
     gRH.append('circle')
       .attr('cx', svgW - columnWidth + 5)
       .attr('cy', ((i + 1) * rowHeight) + (rowHeight / 2) + notesH)
