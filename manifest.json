@@ -1,6 +1,8 @@
 {
  "name": "Traffico a Milano",
  "short_name":  "Traffico",
+ "version": "1.0",
+ "updated": "2021-09-27T15:37:00UTC",
  "icons": [
   {
    "src": "\/icons\/android-icon-36x36.png",
