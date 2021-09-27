@@ -752,6 +752,10 @@ h2 {
   display: block;
 }
 
+.rain .chart-container {
+  margin: 0 0 60px 0;
+}
+
 .rain .chart .line-legend {
   width: 100%;
 }
@@ -837,6 +841,7 @@ body.collapsed .collapsible {
   display: none;
 }
 
+body.collapsed .rain .chart-container,
 body.collapsed .pollution .chart-container,
 body.collapsed .chart-all {
   margin-bottom: 0;
