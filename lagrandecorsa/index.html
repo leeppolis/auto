@@ -247,8 +247,8 @@
         })
 
         body.addEventListener('click', (e) => {
-          e.preventDefault();
           if (e.target.classList.contains('collapsed')) {
+            e.preventDefault();
             body.classList.remove('collapsed');
           }
         });
