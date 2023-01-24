@@ -110,6 +110,13 @@
         const prezzoMinimo = {};
         const prezzoMassimo = {};
         const prezzoMedio = {};
+        const distributoriMinimo = {};
+        const distributoriMassimo = {};
+
+        const drawList = items => {
+          const list = items.map(i => `<div class="item"><h4>${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small></h4><p>${i.indirizzo} - ${i.comune}</p><button class="dettagli" data-id="${i.id_impianto}">Dettagli</button><div class="dettagli" id="${i.id_impianto}"></div></div>`);
+          return list.join();
+        }
 
         const drawAverage = () => {
           const target = '#prezziMedi';
@@ -172,6 +179,31 @@
                 .html(prezzoMedio[t]);
           });
         };
+
+        const drawExtremes = () => {
+          const target = '#prezziEstremi';
+
+          const container = d3.select(target);
+          const chart = container.append('div')
+            .attr('class', 'prezziEstremiWrapper');
+          tipi.forEach((t) => {
+            const singleContainer = chart.append('div')
+              .attr('class', `estremo ${t.toLowerCase().replace(/ /ig, '-')}`);
+            singleContainer.append('div')
+              .attr('class', 'titolo')
+              .html(`<h3>${t}</h3>`);
+            const chartContainer = singleContainer.append('div')
+              .attr('class', 'chart');
+            
+            chartContainer.append('div')
+              .attr('class', 'bassi')
+              .html(`<h2>Prezzo più basso: ${prezzoMinimo[t]}<small>${units[t]}</small></h2><div>${drawList(distributoriMinimo[t])}</div>`);
+
+            chartContainer.append('div')
+              .attr('class', 'bassi')
+              .html(`<h2>Prezzo più alto: ${prezzoMassimo[t]}<small>${units[t]}</small></h2><div>${drawList(distributoriMassimo[t])}</div>`);
+          });
+        };
       
         d3.json('https://api-benzina.visualizenews.com/?comune=%5B%22milano%22%5D')
         .then((data) => {
@@ -185,10 +217,14 @@
                     prezzoMinimo[t] = d3.min(prezzi[`${t}-tutti`], d => d.prezzo).toFixed(3);
                     prezzoMassimo[t] = d3.max(prezzi[`${t}-tutti`], d => d.prezzo).toFixed(3);
                     prezzoMedio[t] = (prezzi[`${t}-tutti`].reduce((a, d) => a + d.prezzo, 0) / prezzi[`${t}-tutti`].length).toFixed(3);
+
+                    distributoriMinimo[t] = prezzi[`${t}-tutti`].filter(d => d.prezzo.toFixed(3) === prezzoMinimo[t]);
+                    distributoriMassimo[t] = prezzi[`${t}-tutti`].filter(d => d.prezzo.toFixed(3) === prezzoMassimo[t]);
                 });
             }
-            console.log(prezzi, prezzoMinimo, prezzoMassimo, prezzoMedio);
+            console.log(prezzi, prezzoMinimo, prezzoMassimo, prezzoMedio, distributoriMinimo, distributoriMassimo);
             drawAverage();
+            drawExtremes();
         });
 
         fetch(document.querySelector('#corporate').getAttribute('href'))
