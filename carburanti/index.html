@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,user-scalable=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Carburanti - Il Traffico di Milano</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="include" href="https://visualize.news/remotes/footer/corporate_it.html" id="corporate" />
+    <link rel="include" href="https://visualize.news/remotes/footer/legal_it.html" id="legal" />
+    <link rel="stylesheet" href="https://visualize.news/remotes/footer/footer.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/style.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/style-m.css" type="text/css" media="only screen and (min-width: 768px)"/>
+    <link rel="stylesheet" href="/styles/style-l.css" type="text/css" media="only screen and (min-width: 1024px)"/>
+    <link rel="stylesheet" href="/styles/style-xl.css" type="text/css" media="only screen and (min-width: 1366px)"/>
+    <link rel="stylesheet" href="./style.css" type="text/css" media="only screen and (min-width: 1366px)"/>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JM07W28N0C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JM07W28N0C');
+    </script>
+    <!-- Scripts -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#EDEAE3">
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#EDEAE3">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="collapsible">
+        <h1>Carburanti</h1>
+        <h2>I prezzi dei carburanti nel comune di Milano</h2>
+      </header>
+
+      <div class="text">
+        <h3 class="title">Prezzi alla pompa</h3>
+        <div id="prezziMedi" class="prezziMedi">
+
+        </div>
+      </div>
+    </div>
+
+      
+
+    <footer id="footer" class="footer vn collapsible">
+      <div class="footer-wrapper">
+        <div class="sources">
+          <h3>Fonti</h3>
+          <p><a href="https://carburanti.mise.gov.it/" target="_blank">MISE</a>.</p>
+          <h3>Design e Sviluppo</h3>
+          <p><a href="https://simonelippolis.com/" target="_blank">Simone Lippolis</a>.</p>
+        </div>
+        <div class="cols">
+          <div class="legal col" id="footer-legal"></div>
+          <div class="corporate col" id="footer-corporate"></div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        const tipi = [
+            'Benzina',
+            'Benzina Speciale',
+            'Diesel',
+            'Diesel Speciale',
+            'GPL',
+            'Metano',
+        ];
+
+        const units = {
+          'Benzina': '€/l',
+          'Benzina Speciale': '€/l',
+          'Diesel': '€/l',
+          'Diesel Speciale': '€/l',
+          'GPL': '€/m3',
+          'Metano': '€/kg',
+        }
+
+        const prezzi = {};
+        const prezzoMinimo = {};
+        const prezzoMassimo = {};
+        const prezzoMedio = {};
+
+        const drawAverage = () => {
+          const target = '#prezziMedi';
+
+          const container = d3.select(target);
+          const chart = container.append('div');
+          let maxY = Math.max(...Object.values(prezzoMassimo));
+
+          const yScale = d3.scaleLinear()
+            .range([0, 300])
+            .domain([0, maxY]);
+
+          tipi.forEach((t) => {
+            const singleContainer = chart.append('div')
+              .attr('class', `carburante ${t.toLowerCase().replace(/ /ig, '-')}`);
+            singleContainer.append('div')
+              .attr('class', 'titolo')
+              .html(`<h3>${t} <small>— ${units[t]}</small></h3>`);
+            const chartContainer = singleContainer.append('div')
+              .attr('class', 'chart');
+            chartContainer.append('div')
+              .attr('class', 'shadow')
+              .style('left', 0)
+              .style('width', yScale(maxY));
+            
+            chartContainer.append('div')
+              .attr('class', 'bar')
+              .style('left', `${yScale(prezzoMinimo[t])}px`)
+              .style('width', `${yScale(prezzoMassimo[t] - prezzoMinimo[t])}px`);
+            
+            chartContainer.append('div')
+              .attr('class', 'min')
+              .style('left', `${yScale(prezzoMinimo[t])}px`)
+              .append('div')
+                .attr('class', 'label')
+                .html(prezzoMinimo[t]);
+            
+            chartContainer.append('div')
+              .attr('class', 'max')
+              .style('left', `${yScale(prezzoMassimo[t])}px`)
+              .append('div')
+                .attr('class', 'label')
+                .html(prezzoMassimo[t]);
+            
+            chartContainer.append('div')
+              .attr('class', 'avg')
+              .style('left', `${yScale(prezzoMedio[t])}px`)
+              .append('div')
+                .attr('class', 'label')
+                .html(prezzoMedio[t]);
+          });
+        };
+      
+        d3.json('https://api-benzina.visualizenews.com/?comune=%5B%22milano%22%5D')
+        .then((data) => {
+            console.log(data);
+            if (!data.error) {
+                tipi.forEach((t) => {
+                    prezzi[`${t}-tutti`] = data.data.filter(d => d.nome_comune.toLowerCase() === t.toLowerCase());
+                    [0, 1].forEach((s) => {
+                      prezzi[`${t}-${s === 0 ? 'servito' : 'self'}`] = prezzi[`${t}-tutti`].filter(d => Number(d.self) === s);
+                    });
+                    prezzoMinimo[t] = d3.min(prezzi[`${t}-tutti`], d => d.prezzo).toFixed(3);
+                    prezzoMassimo[t] = d3.max(prezzi[`${t}-tutti`], d => d.prezzo).toFixed(3);
+                    prezzoMedio[t] = (prezzi[`${t}-tutti`].reduce((a, d) => a + d.prezzo, 0) / prezzi[`${t}-tutti`].length).toFixed(3);
+                });
+            }
+            console.log(prezzi, prezzoMinimo, prezzoMassimo, prezzoMedio);
+            drawAverage();
+        });
+
+        fetch(document.querySelector('#corporate').getAttribute('href'))
+        .then(response => response.text())
+        .then(content => {
+            document.querySelector('#footer-corporate').innerHTML =content;
+        });
+        fetch(document.querySelector('#legal').getAttribute('href'))
+        .then(response => response.text())
+        .then(content => {
+            document.querySelector('#footer-legal').innerHTML =content;
+        });
+    </script>
+  </body>
+</html>

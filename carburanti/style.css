@@ -1,0 +1,129 @@
+.prezziMedi {
+  display: block;
+  margin: 0 auto;
+}
+
+.prezziMedi .carburante {
+  display: block;
+}
+
+.prezziMedi .titolo h3 {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.prezziMedi .chart {
+  display: block;
+  height: 40px;
+  position: relative;
+  width: 300px;
+}
+
+.prezziMedi .shadow {
+  background: rgba(255, 255, 255, .5);
+  display: block;
+  height: 12px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  width: auto;
+}
+
+.prezziMedi .bar {
+  background: rgba(255, 255, 255, 1);
+  display: block;
+  height: 6px;
+  left: 0;
+  position: absolute;
+  right: auto;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  width: auto;
+}
+
+.prezziMedi .avg,
+.prezziMedi .max,
+.prezziMedi .min {
+  background: transparent;
+  display: block;
+  height: 14px;
+  left: 0;
+  mix-blend-mode: multiply;
+  position: absolute;
+  right: auto;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  width: 10px;
+}
+
+.prezziMedi .min::before {
+  background: limegreen;
+  content: '';
+  display: block;
+  height: 14px;
+  width: 2px;
+}
+
+.prezziMedi .max::before {
+  background: red;
+  content: '';
+  display: block;
+  height: 14px;
+  width: 2px;
+}
+
+.prezziMedi .avg {
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.prezziMedi .avg::before {
+  background: black;
+  content: '';
+  display: block;
+  height: 14px;
+  width: 2px;
+}
+
+.prezziMedi .min .label {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  height: 20px;
+  line-height: 20px;
+  padding-right: 2px;
+  position: absolute;
+  right: 100%;
+  text-align: right;
+  top: 100%;
+  transform: translate3d(0, -50%, 0);
+}
+
+.prezziMedi .max .label {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  height: 20px;
+  left: 100%;
+  line-height: 20px;
+  padding-left: 2px;
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  transform: translate3d(0, -50%, 0);
+}
+
+.prezziMedi .avg .label {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  height: 20px;
+  left: 100%;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  bottom: 100%;
+  transform: translate3d(calc(-50% - 5px), 0, 0);
+}
