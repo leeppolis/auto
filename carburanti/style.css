@@ -3,25 +3,53 @@
   margin: 0 auto;
 }
 
+.prezziMedi .prezziMediWrapper {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .prezziMedi .prezziMediWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -20px;
+  }
+}
+
 .prezziMedi .carburante {
   display: block;
+  margin-bottom: 80px;
+}
+
+@media screen and (min-width: 768px) {
+  .prezziMedi .carburante {
+    flex: 0 0 50%;
+    padding: 0 20px;
+  }
 }
 
 .prezziMedi .titolo h3 {
   font-size: 12px;
   font-weight: 800;
+  margin: 0 0 10px 20px;
   text-transform: uppercase;
+}
+
+@media screen and (min-width: 768px) {
+  .prezziMedi .titolo h3 {
+    margin-left: 0;
+  }
 }
 
 .prezziMedi .chart {
   display: block;
-  height: 40px;
+  height: 50px;
   position: relative;
-  width: 300px;
+  width: 100%;
 }
 
-.prezziMedi .shadow {
-  background: rgba(255, 255, 255, .5);
+.prezziMedi .background {
+  background: rgba(255, 255, 255, .1);
   display: block;
   height: 12px;
   left: 0;
@@ -32,10 +60,45 @@
   width: auto;
 }
 
-.prezziMedi .bar {
-  background: rgba(255, 255, 255, 1);
+.prezziMedi .background .label {
   display: block;
-  height: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  height: 20px;
+  left: 0;
+  line-height: 20px;
+  padding-left: 2px;
+  position: absolute;
+  top: 100%;
+  white-space: nowrap;
+}
+
+.prezziMedi .background .label small {
+  font-weight: 400;
+}
+
+@media screen and (min-width: 768px) {
+  .prezziMedi .background .label {
+    padding: 0;
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.prezziMedi .shadow {
+  background: rgba(111, 136, 132, .5);
+  display: block;
+  height: 4px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  width: auto;
+}
+
+.prezziMedi .bar {
+  background: rgb(111, 136, 132, 1);
+  display: block;
+  height: 4px;
   left: 0;
   position: absolute;
   right: auto;
@@ -49,30 +112,29 @@
 .prezziMedi .min {
   background: transparent;
   display: block;
-  height: 14px;
+  height: 10;
   left: 0;
   mix-blend-mode: multiply;
   position: absolute;
   right: auto;
   top: 50%;
   transform: translate3d(0, -50%, 0);
-  width: 10px;
 }
 
 .prezziMedi .min::before {
-  background: limegreen;
+  background: rgb(111, 136, 132, 1);
   content: '';
   display: block;
-  height: 14px;
-  width: 2px;
+  height: 8px;
+  width: 1px;
 }
 
 .prezziMedi .max::before {
-  background: red;
+  background: rgb(111, 136, 132, 1);
   content: '';
   display: block;
-  height: 14px;
-  width: 2px;
+  height: 8px;
+  width: 1px;
 }
 
 .prezziMedi .avg {
@@ -80,50 +142,82 @@
 }
 
 .prezziMedi .avg::before {
-  background: black;
+  background: rgb(111, 136, 132, 1);
   content: '';
   display: block;
-  height: 14px;
-  width: 2px;
+  height: 8px;
+  width: 1px;
 }
 
-.prezziMedi .min .label {
+.prezziMedi .label {
   display: block;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 600;
   height: 20px;
+  left: auto;
   line-height: 20px;
-  padding-right: 2px;
+  padding-left: 2px;
   position: absolute;
   right: 100%;
   text-align: right;
   top: 100%;
-  transform: translate3d(0, -50%, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.prezziMedi .min .label::after {
+  border-bottom: 3px solid rgb(111, 136, 132, 1);
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  content: '';
+  height: 0;
+  left: 100%;
+  position: absolute;
+  top: 0;
+  transform: translate3d(-50%, 0, 0);
+  width: 0;
 }
 
 .prezziMedi .max .label {
-  display: block;
-  font-size: 12px;
-  font-weight: 400;
-  height: 20px;
   left: 100%;
   line-height: 20px;
-  padding-left: 2px;
-  position: absolute;
+  padding-left: 0;
+  padding-right: 2px;
+  right: auto;
   text-align: left;
-  top: 100%;
-  transform: translate3d(0, -50%, 0);
+}
+
+.prezziMedi .max .label::after {
+  border-bottom: 3px solid rgb(111, 136, 132, 1);
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  content: '';
+  height: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translate3d(-50%, 0, 0);
+  width: 0;
 }
 
 .prezziMedi .avg .label {
-  display: block;
-  font-size: 12px;
-  font-weight: 400;
-  height: 20px;
-  left: 100%;
-  line-height: 20px;
-  position: absolute;
-  text-align: center;
   bottom: 100%;
-  transform: translate3d(calc(-50% - 5px), 0, 0);
+  left: auto;
+  padding: 0;
+  right: auto;
+  text-align: center;
+  top: auto;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.prezziMedi .avg .label::after {
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 3px solid rgb(111, 136, 132, 1);
+  bottom: 0;
+  content: '';
+  height: 0;
+  left: 50%;
+  position: absolute;
+  transform: translate3d(-50%, 0, 0);
+  width: 0;
 }

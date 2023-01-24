@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/styles/style-m.css" type="text/css" media="only screen and (min-width: 768px)"/>
     <link rel="stylesheet" href="/styles/style-l.css" type="text/css" media="only screen and (min-width: 1024px)"/>
     <link rel="stylesheet" href="/styles/style-xl.css" type="text/css" media="only screen and (min-width: 1366px)"/>
-    <link rel="stylesheet" href="./style.css" type="text/css" media="only screen and (min-width: 1366px)"/>
+    <link rel="stylesheet" href="./style.css" type="text/css" media="only screen"/>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JM07W28N0C"></script>
     <script>
@@ -54,7 +54,18 @@
 
       <div class="text">
         <h3 class="title">Prezzi alla pompa</h3>
+      </div>
+      <div class="chart-wrapper">
         <div id="prezziMedi" class="prezziMedi">
+
+        </div>
+      </div>
+
+      <div class="text">
+        <h3 class="title">Distributori</h3>
+      </div>
+      <div class="chart-wrapper">
+        <div id="prezziEstremi" class="prezziEstremi">
 
         </div>
       </div>
@@ -104,26 +115,36 @@
         const drawAverage = () => {
           const target = '#prezziMedi';
 
-          const container = d3.select(target);
-          const chart = container.append('div');
-          let maxY = Math.max(...Object.values(prezzoMassimo));
-
+          const maxY = Math.max(...Object.values(prezzoMassimo));
+          const minY = 0;
+          const width = 280;
           const yScale = d3.scaleLinear()
-            .range([0, 300])
-            .domain([0, maxY]);
+            .range([0, width])
+            .domain([minY, maxY]);
+
+          const container = d3.select(target);
+          const chart = container.append('div')
+            .attr('class', 'prezziMediWrapper');
 
           tipi.forEach((t) => {
             const singleContainer = chart.append('div')
               .attr('class', `carburante ${t.toLowerCase().replace(/ /ig, '-')}`);
             singleContainer.append('div')
               .attr('class', 'titolo')
-              .html(`<h3>${t} <small>— ${units[t]}</small></h3>`);
+              .html(`<h3>${t}</h3>`);
             const chartContainer = singleContainer.append('div')
               .attr('class', 'chart');
+
+            chartContainer.append('div')
+              .attr('class', 'background')
+              .style('left', 0)
+              .append('div')
+                .attr('class', 'label')
+                .html(`${minY} <small>(${units[t]})</small>`);
+
             chartContainer.append('div')
               .attr('class', 'shadow')
-              .style('left', 0)
-              .style('width', yScale(maxY));
+              .style('width', `${yScale(prezzoMassimo[t])}px`);
             
             chartContainer.append('div')
               .attr('class', 'bar')
