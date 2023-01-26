@@ -77,7 +77,7 @@
       <div class="footer-wrapper">
         <div class="sources">
           <h3>Fonti</h3>
-          <p>Prezzi: <a href="https://carburanti.mise.gov.it" target="_blank"></a>MiSE</a>.</p>
+          <p>Prezzi: <a href="https://carburanti.mise.gov.it" target="_blank">MiSE</a>.</p>
           <h3>Design e Sviluppo</h3>
           <p><a href="https://simonelippolis.com/" target="_blank">Simone Lippolis</a>.</p>
         </div>
@@ -115,8 +115,8 @@
         const distributoriMassimo = {};
 
         const drawList = items => {
-          const list = items.map(i => `<div class="item"><div class="limit"><h4>${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small></h4><p>${i.indirizzo.toLowerCase()} - ${i.comune.toLowerCase()}</p><button class="dettagli" data-id="${i.id_impianto}">Dettagli</button><div class="dettagli" id="${i.id_impianto}"></div></div></div>`);
-          return list.join();
+          const list = items.map(i => `<div class="item"><div class="limit"><button class="dettagli" data-id="${i.id_impianto}"><h4>${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small></button></h4><p>${i.indirizzo.toLowerCase()} - ${i.comune.toLowerCase()}</p><div class="dettagli" id="${i.id_impianto}"></div></div></div>`);
+          return list.join('');
         }
 
         const drawAverage = () => {
