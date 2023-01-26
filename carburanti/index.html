@@ -1,404 +1,465 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,user-scalable=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Carburanti a Milano - Il Traffico di Milano</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="include" href="https://visualize.news/remotes/footer/corporate_it.html" id="corporate" />
-    <link rel="include" href="https://visualize.news/remotes/footer/legal_it.html" id="legal" />
-    <link rel="stylesheet" href="https://visualize.news/remotes/footer/footer.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/style.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/style-m.css" type="text/css" media="only screen and (min-width: 768px)"/>
-    <link rel="stylesheet" href="/styles/style-l.css" type="text/css" media="only screen and (min-width: 1024px)"/>
-    <link rel="stylesheet" href="/styles/style-xl.css" type="text/css" media="only screen and (min-width: 1366px)"/>
-    <link rel="stylesheet" href="./style.css" type="text/css" media="only screen"/>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JM07W28N0C"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-JM07W28N0C');
-    </script>
-    <!-- Scripts -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="msapplication-TileColor" content="#EDEAE3">
-    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
-    <meta name="theme-color" content="#EDEAE3">
-  </head>
-  <body>
-    <div class="wrapper">
-      <header class="collapsible">
-        <h1>Carburanti a Milano</h1>
-      </header>
 
-      <div class="text">
-        <h3 class="title">Prezzi alla pompa</h3>
-        <p>In questi grafici è possibile vedere la <em>forchetta</em> in cui si muovono i prezzi per ogni tipo di carburante. Nel grafico sono mostrati prezzo minimo (<span class="pictogram">↓</span>), medio (<span class="pictogram">↔︎</span>) e massimo (<span class="pictogram">↑</span>) comunicati dai gestori all'apposito servizio del <a href="https://carburanti.mise.gov.it" target="_blank">MiSE</a>.</p>
-      </div>
-      <div class="chart-wrapper">
-        <div id="prezziMedi" class="prezziMedi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,user-scalable=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Carburanti a Milano - Il Traffico di Milano</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="include" href="https://visualize.news/remotes/footer/corporate_it.html" id="corporate" />
+  <link rel="include" href="https://visualize.news/remotes/footer/legal_it.html" id="legal" />
+  <link rel="stylesheet" href="https://visualize.news/remotes/footer/footer.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/style.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/style-m.css" type="text/css" media="only screen and (min-width: 768px)" />
+  <link rel="stylesheet" href="/styles/style-l.css" type="text/css" media="only screen and (min-width: 1024px)" />
+  <link rel="stylesheet" href="/styles/style-xl.css" type="text/css" media="only screen and (min-width: 1366px)" />
+  <link rel="stylesheet" href="./style.css" type="text/css" media="only screen" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JM07W28N0C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-JM07W28N0C');
+  </script>
+  <!-- Scripts -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#EDEAE3">
+  <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#EDEAE3">
+</head>
 
-        </div>
-      </div>
+<body>
+  <div class="wrapper">
+    <header class="collapsible">
+      <h1>Carburanti a Milano</h1>
+      <h2>Quanta strada puoi fare con <strong>50€</strong> di carburante? Riempire il serbatoio con la benzina meno costosa cambia veramente la distanza che puoi percorrere in città?</h2>
+      <h2>Raccogliamo ogni giorno i dati forniti dall'<a href="https://carburanti.mise.gov.it" target="_blank">Osservatorio Carburanti del MiSE</a> relativi ai distributori nel Comune di <strong>Milano</strong> per poter rispondere a questa e ad altre domande.</h2>
+    </header>
 
-      <div class="text">
-        <h3 class="title">Confronto tra Distributori </h3>
-      </div>
-      <div class="chart-wrapper">
-        <div id="prezziEstremi" class="prezziEstremi">
-
-        </div>
+    <div class="text selector">
+      <h5 class="title">Per iniziare, seleziona il tuo carburante</h5>
+      <div class="wrapper">
+        <div class="flex" id="selector"></div>
       </div>
     </div>
 
-      
+    <div class="text">
+      <h3 class="title">Prezzi alla pompa</h3>
+      <p>In questi grafici è possibile vedere la <em>forchetta</em> in cui si muovono i prezzi per ogni tipo di
+        carburante. Nel grafico sono mostrati prezzo minimo (<span class="pictogram">↓</span>), medio (<span
+          class="pictogram">↔︎</span>) e massimo (<span class="pictogram">↑</span>) comunicati dai gestori all'apposito
+        servizio del <a href="https://carburanti.mise.gov.it" target="_blank">MiSE</a>.</p>
+    </div>
+    <div class="chart-wrapper">
+      <div id="prezziMedi" class="prezziMedi">
 
-    <footer id="footer" class="footer vn collapsible">
-      <div class="footer-wrapper">
-        <div class="sources">
-          <h3>Fonti</h3>
-          <p>
-            Prezzi: <a href="https://carburanti.mise.gov.it" target="_blank">MiSE</a>.<br />
-            Consumi: <a href="https://it.motor1.com/reviews/445109/fiat-panda-mild-hybrid-prova-consumi/" target="_blank">Fiat Panda</a>, <a href="https://it.motor1.com/reviews/232789/fiat-panda-gpl-prova-consumi/" target="_blank">Fiat Panda GPL</a>, <a href="https://www.gpone.com/it/2020/10/16/auto-test/prova-fiat-500-c-hybrid-caratteristiche-consumo-e-prezzi-della-500-mild-hybrid" target="_blank">Fiat 500</a>, <a href="https://it.motor1.com/reviews/221374/ford-fiesta-10-prova-consumi/" target="_blank">Ford Fiesta</a>, <a href="https://www.hdmotori.it/renault/speciali/n527166/renault-clio-e-tech-hybrid-prova-consumi-reali/" target="_blank">Renault Clio</a>, <a href="https://it.motor1.com/reviews/426660/lancia-ypsilon-mild-hybrid-prova-consumi/" target="_blank">Lancia Y</a>, <a href="https://www.tagliandiauto.it/it/consumi-reali/108-lancia/531-consumi-lancia-ypsilon-consumi-reali-rilevati-dai-possessori" target="_blank">Lancia Y GPL</a>, <a href="https://www.drivek.it/guide/renault-arkana-e-tech-prova-consumi/" target="_blank">Renault Arkana</a>, <a href="https://it.motor1.com/reviews/429184/volkswagen-golf-mild-hybrid-prova-consumi/" target="_blank">VW Golf Mild Hybrid</a>, <a href="https://www.ultimatespecs.com/it/auto-caratteristiche-tecniche/Volkswagen/118823/Volkswagen-Golf-8-20-TDI-115HP.html" target="_blank">VW Golf Diesel</a>, <a href="https://it.motor1.com/reviews/267319/jeep-renegade-10-prova-consumi-roma-forli/" target="_blank">Jeep Renegade</a>, <a href="https://www.gazzetta.it/motori/la-mia-auto/prove-auto/14-12-2022/dacia-duster-gpl-prova-consumi-e-prezzo-del-suv-bifuel.shtml" target="_blank">Dacia Duster GPL</a>, <a href="https://www.drivek.it/confronta/audi-a4?vehicleHistoricalId=1000373553" target="_blank">Audi A4 Benzina</a>, <a href="https://www.noleggiosemplice.it/noleggio-lungo-termine/audi/a4-avant-20-30-tdi-186" target="_blank">Audi A4 Diesel</a>, <a href="https://www.motorbox.com/auto/auto-viste-e-provate/auto-day-by-day/alfa-romeo-stelvio-2020-a-benzina-prova-consumi-prezzi" target="_blank">Alfa Romeo Stelvio Benzina</a>, <a href="https://it.motor1.com/reviews/221479/alfa-romeo-stelvio-prova-consumi/" target="_blank">Alfa Romeo Stelvio Diesel</a>.</p>
-          <h3>Design e Sviluppo</h3>
-          <p><a href="https://simonelippolis.com/" target="_blank">Simone Lippolis</a>.</p>
-        </div>
-        <div class="cols">
-          <div class="legal col" id="footer-legal"></div>
-          <div class="corporate col" id="footer-corporate"></div>
-        </div>
       </div>
-    </footer>
+    </div>
 
-    <script>
-        const tipi = [
-            'Benzina',
-            'Benzina Speciale',
-            'Diesel',
-            'Diesel Speciale',
-            'GPL',
-            'Metano',
-        ];
+    <div class="text">
+      <h3 class="title">Confronto tra Distributori </h3>
+    </div>
+    <div class="chart-wrapper">
+      <div id="prezziEstremi" class="prezziEstremi">
 
-        const units = {
-          'Benzina': '€/l',
-          'Benzina Speciale': '€/l',
-          'Diesel': '€/l',
-          'Diesel Speciale': '€/l',
-          'GPL': '€/m3',
-          'Metano': '€/kg',
-        }
+      </div>
+    </div>
+  </div>
 
-        const cars = [
-          {
-            segment: 'A',
-            brand: 'Fiat',
-            model: 'Panda',
-            fuel: ['Benzina', 'Benzina Speciale'],
-            hybrid: 'mild',
-            priceFrom: 15600,
-            consumption: 15.63,
-          },
-          {
-            segment: 'A',
-            brand: 'Fiat',
-            model: 'Panda',
-            fuel: ['GPL'],
-            hybrid: 'no',
-            priceFrom: 12400,
-            consumption: 10,
-          },
-          {
-            segment: 'A',
-            brand: 'Fiat',
-            model: '500',
-            fuel: ['Benzina', 'Benzina Speciale'],
-            hybrid: 'mild',
-            priceFrom: 16623,
-            consumption: 12.23,
-          },
-          {
-            segment: 'B',
-            brand: 'Ford',
-            model: 'Fiesta',
-            fuel: ['Benzina', 'Benzina Speciale'],
-            hybrid: 'mild',
-            priceFrom: 21250,
-            consumption: 11.36,
-          },
-          {
-            segment: 'B',
-            brand: 'Renault',
-            model: 'Clio',
-            fuel: ['Benzina', 'Benzina Speciale'],
-            hybrid: 'full',
-            priceFrom: 21600,
-            consumption: 38.46,
-          },
-          {
-            segment: 'B',
-            brand: 'Lancia',
-            model: 'Y',
-            fuel: ['Benzina', 'Benzina Speciale'],
-            hybrid: 'mild',
-            priceFrom: 17100,
-            consumption: 14.7,
-          },
-          {
-            segment: 'B',
-            brand: 'Lancia',
-            model: 'Y',
-            fuel: ['GPL'],
-            hybrid: 'no',
-            priceFrom: 20500,
-            consumption: 17.69,
-          },
-          {
-            segment: 'C',
-            brand: 'Volkswagen',
-            model: 'Golf',
-            fuel: ['Diesel'],
-            hybrid: 'no',
-            priceFrom: 31850,
-            consumption: 25,
-          },
-          {
-            segment: 'C',
-            brand: 'Volkswagen',
-            model: 'Golf',
-            fuel: ['Metano'],
-            hybrid: 'no',
-            priceFrom: 32850,
-            consumption: 16.5,
-          },
-          {
-            segment: 'C',
-            brand: 'Volkswagen',
-            model: 'Golf',
-            fuel: ['Benzina', 'Benzina Speciale'],
-            hybrid: 'mild',
-            priceFrom: 31100,
-            consumption: 14.7,
-          },
-          {
-            segment: 'C',
-            brand: 'Renault',
-            model: 'Arkana',
-            fuel: ['Benzina', 'Benzina Speciale'],
-            hybrid: 'full',
-            priceFrom: 33050,
-            consumption: 16.5,
-          },
-          {
-            segment: 'C',
-            brand: 'Jeep',
-            model: 'Renegade',
-            fuel: ['Benzina', 'Benzina Speciale'],
-            hybrid: 'mild',
-            priceFrom: 26300,
-            consumption: 12.6,
-          },
-          {
-            segment: 'C',
-            brand: 'Dacia',
-            model: 'Duster',
-            fuel: ['GPL'],
-            hybrid: 'no',
-            priceFrom: 17300,
-            consumption: 14.29,
-          },
-          {
-            segment: 'D',
-            brand: 'Audi',
-            model: 'A4',
-            fuel: ['Benzina', 'Benzina Speciale'],
-            hybrid: 'mild',
-            priceFrom: 41050,
-            consumption: 13.89,
-          },
-          {
-            segment: 'D',
-            brand: 'Audi',
-            model: 'A4',
-            fuel: ['Diesel'],
-            hybrid: 'no',
-            priceFrom: 42700,
-            consumption: 22.72,
-          },
-          {
-            segment: 'D',
-            brand: 'Alfa Romeo',
-            model: 'Stelvio',
-            fuel: ['Diesel'],
-            hybrid: 'no',
-            priceFrom: 53150,
-            consumption: 8.33,
-          },
-          {
-            segment: 'D',
-            brand: 'Alfa Romeo',
-            model: 'Stelvio',
-            fuel: ['Benzina', 'Benzina Speciale'],
-            hybrid: 'no',
-            priceFrom: 53150,
-            consumption: 8.47,
-          },
-        ];
 
-        const prezzi = {};
-        const prezzoMinimo = {};
-        const prezzoMassimo = {};
-        const prezzoMedio = {};
-        const distributoriMinimo = {};
-        const distributoriMassimo = {};
 
-        const drawList = items => {
-          const list = items.map(i => `<div class="item"><div class="limit"><button class="dettagli" data-id="${i.id_impianto}"><h4>${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small></button></h4><p>${i.indirizzo.toLowerCase()} - ${i.comune.toLowerCase()}</p><div class="dettagli" id="${i.id_impianto}"></div></div></div>`);
-          return list.join('');
-        }
+  <footer id="footer" class="footer vn collapsible">
+    <div class="footer-wrapper">
+      <div class="sources">
+        <h3>Fonti</h3>
+        <p>
+          Prezzi: <a href="https://carburanti.mise.gov.it" target="_blank">MiSE</a>.<br />
+          Consumi: <a href="https://it.motor1.com/reviews/445109/fiat-panda-mild-hybrid-prova-consumi/"
+            target="_blank">Fiat Panda</a>, <a href="https://it.motor1.com/reviews/232789/fiat-panda-gpl-prova-consumi/"
+            target="_blank">Fiat Panda GPL</a>, <a
+            href="https://www.gpone.com/it/2020/10/16/auto-test/prova-fiat-500-c-hybrid-caratteristiche-consumo-e-prezzi-della-500-mild-hybrid"
+            target="_blank">Fiat 500</a>, <a href="https://it.motor1.com/reviews/221374/ford-fiesta-10-prova-consumi/"
+            target="_blank">Ford Fiesta</a>, <a
+            href="https://www.hdmotori.it/renault/speciali/n527166/renault-clio-e-tech-hybrid-prova-consumi-reali/"
+            target="_blank">Renault Clio</a>, <a
+            href="https://it.motor1.com/reviews/426660/lancia-ypsilon-mild-hybrid-prova-consumi/" target="_blank">Lancia
+            Y</a>, <a
+            href="https://www.tagliandiauto.it/it/consumi-reali/108-lancia/531-consumi-lancia-ypsilon-consumi-reali-rilevati-dai-possessori"
+            target="_blank">Lancia Y GPL</a>, <a href="https://www.drivek.it/guide/renault-arkana-e-tech-prova-consumi/"
+            target="_blank">Renault Arkana</a>, <a
+            href="https://it.motor1.com/reviews/429184/volkswagen-golf-mild-hybrid-prova-consumi/" target="_blank">VW
+            Golf Mild Hybrid</a>, <a
+            href="https://www.ultimatespecs.com/it/auto-caratteristiche-tecniche/Volkswagen/118823/Volkswagen-Golf-8-20-TDI-115HP.html"
+            target="_blank">VW Golf Diesel</a>, <a
+            href="https://it.motor1.com/reviews/267319/jeep-renegade-10-prova-consumi-roma-forli/" target="_blank">Jeep
+            Renegade</a>, <a
+            href="https://www.gazzetta.it/motori/la-mia-auto/prove-auto/14-12-2022/dacia-duster-gpl-prova-consumi-e-prezzo-del-suv-bifuel.shtml"
+            target="_blank">Dacia Duster GPL</a>, <a
+            href="https://www.drivek.it/confronta/audi-a4?vehicleHistoricalId=1000373553" target="_blank">Audi A4
+            Benzina</a>, <a href="https://www.noleggiosemplice.it/noleggio-lungo-termine/audi/a4-avant-20-30-tdi-186"
+            target="_blank">Audi A4 Diesel</a>, <a
+            href="https://www.motorbox.com/auto/auto-viste-e-provate/auto-day-by-day/alfa-romeo-stelvio-2020-a-benzina-prova-consumi-prezzi"
+            target="_blank">Alfa Romeo Stelvio Benzina</a>, <a
+            href="https://it.motor1.com/reviews/221479/alfa-romeo-stelvio-prova-consumi/" target="_blank">Alfa Romeo
+            Stelvio Diesel</a>.</p>
+        <h3>Design e Sviluppo</h3>
+        <p><a href="https://simonelippolis.com/" target="_blank">Simone Lippolis</a>.</p>
+      </div>
+      <div class="cols">
+        <div class="legal col" id="footer-legal"></div>
+        <div class="corporate col" id="footer-corporate"></div>
+      </div>
+    </div>
+  </footer>
 
-        const drawAverage = () => {
-          const target = '#prezziMedi';
+  <script>
+    const tipi = [
+      'Benzina',
+      'Benzina Speciale',
+      'Diesel',
+      'Diesel Speciale',
+      'GPL',
+      'Metano',
+    ];
 
-          const maxY = Math.max(...Object.values(prezzoMassimo));
-          const minY = 0;
-          const width = 280;
-          const yScale = d3.scaleLinear()
-            .range([0, width])
-            .domain([minY, maxY]);
+    const units = {
+      'Benzina': '€/l',
+      'Benzina Speciale': '€/l',
+      'Diesel': '€/l',
+      'Diesel Speciale': '€/l',
+      'GPL': '€/m3',
+      'Metano': '€/kg',
+    }
 
-          const container = d3.select(target);
-          const chart = container.append('div')
-            .attr('class', 'prezziMediWrapper');
+    const cars = [
+      {
+        segment: 'A',
+        brand: 'Fiat',
+        model: 'Panda',
+        fuel: ['Benzina', 'Benzina Speciale'],
+        hybrid: 'mild',
+        priceFrom: 15600,
+        consumption: 15.63,
+      },
+      {
+        segment: 'A',
+        brand: 'Fiat',
+        model: 'Panda',
+        fuel: ['GPL'],
+        hybrid: 'no',
+        priceFrom: 12400,
+        consumption: 10,
+      },
+      {
+        segment: 'A',
+        brand: 'Fiat',
+        model: '500',
+        fuel: ['Benzina', 'Benzina Speciale'],
+        hybrid: 'mild',
+        priceFrom: 16623,
+        consumption: 12.23,
+      },
+      {
+        segment: 'B',
+        brand: 'Ford',
+        model: 'Fiesta',
+        fuel: ['Benzina', 'Benzina Speciale'],
+        hybrid: 'mild',
+        priceFrom: 21250,
+        consumption: 11.36,
+      },
+      {
+        segment: 'B',
+        brand: 'Renault',
+        model: 'Clio',
+        fuel: ['Benzina', 'Benzina Speciale'],
+        hybrid: 'full',
+        priceFrom: 21600,
+        consumption: 38.46,
+      },
+      {
+        segment: 'B',
+        brand: 'Lancia',
+        model: 'Y',
+        fuel: ['Benzina', 'Benzina Speciale'],
+        hybrid: 'mild',
+        priceFrom: 17100,
+        consumption: 14.7,
+      },
+      {
+        segment: 'B',
+        brand: 'Lancia',
+        model: 'Y',
+        fuel: ['GPL'],
+        hybrid: 'no',
+        priceFrom: 20500,
+        consumption: 17.69,
+      },
+      {
+        segment: 'C',
+        brand: 'Volkswagen',
+        model: 'Golf',
+        fuel: ['Diesel'],
+        hybrid: 'no',
+        priceFrom: 31850,
+        consumption: 25,
+      },
+      {
+        segment: 'C',
+        brand: 'Volkswagen',
+        model: 'Golf',
+        fuel: ['Metano'],
+        hybrid: 'no',
+        priceFrom: 32850,
+        consumption: 16.5,
+      },
+      {
+        segment: 'C',
+        brand: 'Volkswagen',
+        model: 'Golf',
+        fuel: ['Benzina', 'Benzina Speciale'],
+        hybrid: 'mild',
+        priceFrom: 31100,
+        consumption: 14.7,
+      },
+      {
+        segment: 'C',
+        brand: 'Renault',
+        model: 'Arkana',
+        fuel: ['Benzina', 'Benzina Speciale'],
+        hybrid: 'full',
+        priceFrom: 33050,
+        consumption: 16.5,
+      },
+      {
+        segment: 'C',
+        brand: 'Jeep',
+        model: 'Renegade',
+        fuel: ['Benzina', 'Benzina Speciale'],
+        hybrid: 'mild',
+        priceFrom: 26300,
+        consumption: 12.6,
+      },
+      {
+        segment: 'C',
+        brand: 'Dacia',
+        model: 'Duster',
+        fuel: ['GPL'],
+        hybrid: 'no',
+        priceFrom: 17300,
+        consumption: 14.29,
+      },
+      {
+        segment: 'D',
+        brand: 'Audi',
+        model: 'A4',
+        fuel: ['Benzina', 'Benzina Speciale'],
+        hybrid: 'mild',
+        priceFrom: 41050,
+        consumption: 13.89,
+      },
+      {
+        segment: 'D',
+        brand: 'Audi',
+        model: 'A4',
+        fuel: ['Diesel'],
+        hybrid: 'no',
+        priceFrom: 42700,
+        consumption: 22.72,
+      },
+      {
+        segment: 'D',
+        brand: 'Alfa Romeo',
+        model: 'Stelvio',
+        fuel: ['Diesel'],
+        hybrid: 'no',
+        priceFrom: 53150,
+        consumption: 8.33,
+      },
+      {
+        segment: 'D',
+        brand: 'Alfa Romeo',
+        model: 'Stelvio',
+        fuel: ['Benzina', 'Benzina Speciale'],
+        hybrid: 'no',
+        priceFrom: 53150,
+        consumption: 8.47,
+      },
+    ];
 
+    let selected = '';
+    const prezzi = {};
+    const prezzoMinimo = {};
+    const prezzoMassimo = {};
+    const prezzoMedio = {};
+    const distributoriMinimo = {};
+    const distributoriMassimo = {};
+
+    const drawList = items => {
+      const list = items.map(i => `<div class="item"><div class="limit"><button class="dettagli" data-id="${i.id_impianto}"><h4>${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small></button></h4><p>${i.indirizzo.toLowerCase()} - ${i.comune.toLowerCase()}</p><div class="dettagli" id="${i.id_impianto}"></div></div></div>`);
+      return list.join('');
+    }
+
+    const drawAverage = () => {
+      const target = '#prezziMedi';
+
+      const maxY = Math.max(...Object.values(prezzoMassimo));
+      const minY = 0;
+      const width = 280;
+      const yScale = d3.scaleLinear()
+        .range([0, width])
+        .domain([minY, maxY]);
+
+      const container = d3.select(target);
+      const chart = container.append('div')
+        .attr('class', 'prezziMediWrapper');
+
+      tipi.forEach((t) => {
+        const singleContainer = chart.append('div')
+          .attr('class', `carburante ${t.toLowerCase().replace(/ /ig, '-')}`);
+        singleContainer.append('div')
+          .attr('class', 'titolo')
+          .html(`<h3>${t}</h3>`);
+        const chartContainer = singleContainer.append('div')
+          .attr('class', 'chart');
+
+        chartContainer.append('div')
+          .attr('class', 'background')
+          .style('left', 0)
+          .append('div')
+          .attr('class', 'label')
+          .html(`${minY} <small>(${units[t]})</small>`);
+
+        chartContainer.append('div')
+          .attr('class', 'shadow')
+          .style('width', `${yScale(prezzoMassimo[t])}px`);
+
+        chartContainer.append('div')
+          .attr('class', 'bar')
+          .style('left', `${yScale(prezzoMinimo[t])}px`)
+          .style('width', `${yScale(prezzoMassimo[t] - prezzoMinimo[t])}px`);
+
+        chartContainer.append('div')
+          .attr('class', 'min')
+          .style('left', `${yScale(prezzoMinimo[t])}px`)
+          .append('div')
+          .attr('class', 'label')
+          .html(`${prezzoMinimo[t]} ↓`);
+
+        chartContainer.append('div')
+          .attr('class', 'max')
+          .style('left', `${yScale(prezzoMassimo[t])}px`)
+          .append('div')
+          .attr('class', 'label')
+          .html(`${prezzoMassimo[t]} ↑`);
+
+        chartContainer.append('div')
+          .attr('class', 'avg')
+          .style('left', `${yScale(prezzoMedio[t])}px`)
+          .append('div')
+          .attr('class', 'label')
+          .html(`${prezzoMedio[t]} ↔︎`);
+      });
+    };
+
+    const drawExtremes = () => {
+      const target = '#prezziEstremi';
+
+      const container = d3.select(target);
+      const chart = container.append('div')
+        .attr('class', 'prezziEstremiWrapper');
+      tipi.forEach((t) => {
+        const singleContainer = chart.append('div')
+          .attr('class', `estremo ${t.toLowerCase().replace(/ /ig, '-')}`);
+        singleContainer.append('div')
+          .attr('class', 'titolo')
+          .html(`<h3>${t}</h3>`);
+        const chartContainer = singleContainer.append('div')
+          .attr('class', 'chart');
+
+        chartContainer.append('div')
+          .attr('class', 'bassi')
+          .html(`<h3>Prezzo più basso</h3><h2>${prezzoMinimo[t]}<small>${units[t]}</small></h2><div>${drawList(distributoriMinimo[t])}</div>`);
+
+        chartContainer.append('div')
+          .attr('class', 'divisorio');
+
+        chartContainer.append('div')
+          .attr('class', 'alti')
+          .html(`<h3>Prezzo più alto</h3><h2>${prezzoMassimo[t]}<small>${units[t]}</small></h2><div>${drawList(distributoriMassimo[t])}</div>`);
+      });
+    };
+
+    const addSelectors = () => {
+      const target = '#selector';
+
+      const wrapper = d3.select(target);
+
+      tipi.forEach((t) => {
+        console.log(t);
+        wrapper.append('div')
+          .attr('class', `item ${t.toLowerCase().replace(/ /ig, '')}`)
+          .append('a')
+          .attr('data-id', t)
+          .text(t);
+      });
+    };
+
+    d3.json('https://api-benzina.visualizenews.com/?comune=%5B%22milano%22%5D')
+      .then((data) => {
+        console.log(data);
+        if (!data.error) {
           tipi.forEach((t) => {
-            const singleContainer = chart.append('div')
-              .attr('class', `carburante ${t.toLowerCase().replace(/ /ig, '-')}`);
-            singleContainer.append('div')
-              .attr('class', 'titolo')
-              .html(`<h3>${t}</h3>`);
-            const chartContainer = singleContainer.append('div')
-              .attr('class', 'chart');
+            prezzi[`${t}-tutti`] = data.data.filter(d => d.nome_comune.toLowerCase() === t.toLowerCase());
+            [0, 1].forEach((s) => {
+              prezzi[`${t}-${s === 0 ? 'servito' : 'self'}`] = prezzi[`${t}-tutti`].filter(d => Number(d.self) === s);
+            });
+            prezzoMinimo[t] = d3.min(prezzi[`${t}-tutti`], d => d.prezzo).toFixed(3);
+            prezzoMassimo[t] = d3.max(prezzi[`${t}-tutti`], d => d.prezzo).toFixed(3);
+            prezzoMedio[t] = (prezzi[`${t}-tutti`].reduce((a, d) => a + d.prezzo, 0) / prezzi[`${t}-tutti`].length).toFixed(3);
 
-            chartContainer.append('div')
-              .attr('class', 'background')
-              .style('left', 0)
-              .append('div')
-                .attr('class', 'label')
-                .html(`${minY} <small>(${units[t]})</small>`);
-
-            chartContainer.append('div')
-              .attr('class', 'shadow')
-              .style('width', `${yScale(prezzoMassimo[t])}px`);
-            
-            chartContainer.append('div')
-              .attr('class', 'bar')
-              .style('left', `${yScale(prezzoMinimo[t])}px`)
-              .style('width', `${yScale(prezzoMassimo[t] - prezzoMinimo[t])}px`);
-            
-            chartContainer.append('div')
-              .attr('class', 'min')
-              .style('left', `${yScale(prezzoMinimo[t])}px`)
-              .append('div')
-                .attr('class', 'label')
-                .html(`${prezzoMinimo[t]} ↓`);
-            
-            chartContainer.append('div')
-              .attr('class', 'max')
-              .style('left', `${yScale(prezzoMassimo[t])}px`)
-              .append('div')
-                .attr('class', 'label')
-                .html(`${prezzoMassimo[t]} ↑`);
-            
-            chartContainer.append('div')
-              .attr('class', 'avg')
-              .style('left', `${yScale(prezzoMedio[t])}px`)
-              .append('div')
-                .attr('class', 'label')
-                .html(`${prezzoMedio[t]} ↔︎`);
+            distributoriMinimo[t] = prezzi[`${t}-tutti`].filter(d => d.prezzo.toFixed(3) === prezzoMinimo[t]);
+            distributoriMassimo[t] = prezzi[`${t}-tutti`].filter(d => d.prezzo.toFixed(3) === prezzoMassimo[t]);
           });
-        };
+        }
+        console.log(prezzi, prezzoMinimo, prezzoMassimo, prezzoMedio, distributoriMinimo, distributoriMassimo);
+        addSelectors();
+        drawAverage();
+        drawExtremes();
+      });
 
-        const drawExtremes = () => {
-          const target = '#prezziEstremi';
+    fetch(document.querySelector('#corporate').getAttribute('href'))
+      .then(response => response.text())
+      .then(content => {
+        document.querySelector('#footer-corporate').innerHTML = content;
+      });
+    fetch(document.querySelector('#legal').getAttribute('href'))
+      .then(response => response.text())
+      .then(content => {
+        document.querySelector('#footer-legal').innerHTML = content;
+      });
+  </script>
+</body>
 
-          const container = d3.select(target);
-          const chart = container.append('div')
-            .attr('class', 'prezziEstremiWrapper');
-          tipi.forEach((t) => {
-            const singleContainer = chart.append('div')
-              .attr('class', `estremo ${t.toLowerCase().replace(/ /ig, '-')}`);
-            singleContainer.append('div')
-              .attr('class', 'titolo')
-              .html(`<h3>${t}</h3>`);
-            const chartContainer = singleContainer.append('div')
-              .attr('class', 'chart');
-            
-            chartContainer.append('div')
-              .attr('class', 'bassi')
-              .html(`<h3>Prezzo più basso</h3><h2>${prezzoMinimo[t]}<small>${units[t]}</small></h2><div>${drawList(distributoriMinimo[t])}</div>`);
-
-              chartContainer.append('div')
-                .attr('class', 'divisorio');
-
-            chartContainer.append('div')
-              .attr('class', 'alti')
-              .html(`<h3>Prezzo più alto</h3><h2>${prezzoMassimo[t]}<small>${units[t]}</small></h2><div>${drawList(distributoriMassimo[t])}</div>`);
-          });
-        };
-      
-        d3.json('https://api-benzina.visualizenews.com/?comune=%5B%22milano%22%5D')
-        .then((data) => {
-            console.log(data);
-            if (!data.error) {
-                tipi.forEach((t) => {
-                    prezzi[`${t}-tutti`] = data.data.filter(d => d.nome_comune.toLowerCase() === t.toLowerCase());
-                    [0, 1].forEach((s) => {
-                      prezzi[`${t}-${s === 0 ? 'servito' : 'self'}`] = prezzi[`${t}-tutti`].filter(d => Number(d.self) === s);
-                    });
-                    prezzoMinimo[t] = d3.min(prezzi[`${t}-tutti`], d => d.prezzo).toFixed(3);
-                    prezzoMassimo[t] = d3.max(prezzi[`${t}-tutti`], d => d.prezzo).toFixed(3);
-                    prezzoMedio[t] = (prezzi[`${t}-tutti`].reduce((a, d) => a + d.prezzo, 0) / prezzi[`${t}-tutti`].length).toFixed(3);
-
-                    distributoriMinimo[t] = prezzi[`${t}-tutti`].filter(d => d.prezzo.toFixed(3) === prezzoMinimo[t]);
-                    distributoriMassimo[t] = prezzi[`${t}-tutti`].filter(d => d.prezzo.toFixed(3) === prezzoMassimo[t]);
-                });
-            }
-            console.log(prezzi, prezzoMinimo, prezzoMassimo, prezzoMedio, distributoriMinimo, distributoriMassimo);
-            drawAverage();
-            drawExtremes();
-        });
-
-        fetch(document.querySelector('#corporate').getAttribute('href'))
-        .then(response => response.text())
-        .then(content => {
-            document.querySelector('#footer-corporate').innerHTML =content;
-        });
-        fetch(document.querySelector('#legal').getAttribute('href'))
-        .then(response => response.text())
-        .then(content => {
-            document.querySelector('#footer-legal').innerHTML =content;
-        });
-    </script>
-  </body>
 </html>

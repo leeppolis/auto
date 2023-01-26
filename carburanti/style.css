@@ -2,6 +2,61 @@
   font-family: Montserrat, sans-serif;
 }
 
+.selector h5.title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.selector .wrapper {
+  display: block;
+  height: 40px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.selector .flex {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 20px;
+  justify-content: flex-start;
+  width: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .selector .flex {
+    justify-content: center;
+  }
+}
+
+.selector .item {
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  padding-right: 20px;
+  white-space: nowrap;
+}
+
+.selector a,
+.selector a:link,
+.selector a:visited,
+.selector a:active,
+.selector a:hover,
+.selector a:visited {
+  color: #2F4858;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  height: 20px;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+.selector .item .selected a {
+  border-bottom: 1px solid rgb(111, 136, 132, 1);
+}
+
 .prezziMedi {
   display: block;
   margin: 0 auto;
