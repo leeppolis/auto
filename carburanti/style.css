@@ -1,3 +1,7 @@
+.pictogram {
+  font-family: Montserrat, sans-serif;
+}
+
 .prezziMedi {
   display: block;
   margin: 0 auto;
@@ -114,7 +118,6 @@
   display: block;
   height: 10;
   left: 0;
-  mix-blend-mode: multiply;
   position: absolute;
   right: auto;
   top: 50%;
@@ -162,6 +165,7 @@
   text-align: right;
   top: 100%;
   transform: translate3d(0, 0, 0);
+  white-space: nowrap;
 }
 
 .prezziMedi .min .label::after {
@@ -172,8 +176,8 @@
   height: 0;
   left: 100%;
   position: absolute;
-  top: 0;
-  transform: translate3d(-50%, 0, 0);
+  top: -1px;
+  transform: translate3d(-2.5px, 0, 0);
   width: 0;
 }
 
@@ -184,6 +188,7 @@
   padding-right: 2px;
   right: auto;
   text-align: left;
+  white-space: nowrap;
 }
 
 .prezziMedi .max .label::after {
@@ -194,8 +199,8 @@
   height: 0;
   left: 0;
   position: absolute;
-  top: 0;
-  transform: translate3d(-50%, 0, 0);
+  top: -1px;
+  transform: translate3d(-3.5px, 0, 0);
   width: 0;
 }
 
@@ -207,17 +212,118 @@
   text-align: center;
   top: auto;
   transform: translate3d(-50%, 0, 0);
+  white-space: nowrap;
 }
 
 .prezziMedi .avg .label::after {
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
   border-top: 3px solid rgb(111, 136, 132, 1);
-  bottom: 0;
+  bottom: -1px;
   content: '';
   height: 0;
   left: 50%;
   position: absolute;
-  transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-2.5px, 0, 0);
   width: 0;
+}
+
+.estremo {
+  margin-bottom: 40px;
+}
+
+.estremo .titolo {
+  flex: 0 0 100%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.estremo .titolo h3 {
+  font-size: 16px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.estremo .chart {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0 -20px;
+}
+
+.estremo .chart .alti,
+.estremo .chart .bassi {
+  flex: 0 0 50%;
+  padding: 0 20px;
+  text-align: left;
+}
+
+@media screen and (min-width:768px) {
+  .estremo .chart .alti,
+  .estremo .chart .bassi {
+    flex: 0 0 40%;
+  }
+}
+
+.estremo .chart .bassi {
+  text-align: right;
+}
+
+.estremo .chart .divisorio {
+  display: none;
+  flex: 0 0 20%;
+  padding: 20px;
+}
+
+@media screen and (min-width:768px) {
+  .estremo .chart .divisorio {
+    display: block;
+  }
+}
+
+.estremo .chart h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  text-align: left;
+  margin: 0 0 20px 0;
+  width: auto;
+}
+
+.estremo .chart .bassi h2 {
+  text-align: right;
+}
+
+.estremo .chart h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  width: auto;
+}
+
+.estremo .item {
+  display: block;
+}
+
+.estremo .item .limit {
+  max-width: 300px;
+}
+
+.estremo .bassi .item .limit {
+  margin-left: auto;
+}
+
+.estremo .item h4 {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.estremo .item p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  margin: 0;
+  text-transform: capitalize;
 }

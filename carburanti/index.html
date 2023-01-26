@@ -53,6 +53,7 @@
 
       <div class="text">
         <h3 class="title">Prezzi alla pompa</h3>
+        <p>In questi grafici è possibile vedere la <em>forchetta</em> in cui si muovono i prezzi per ogni tipo di carburante. Nel grafico sono mostrati prezzo minimo (<span class="pictogram">↓</span>), medio (<span class="pictogram">↔︎</span>) e massimo (<span class="pictogram">↑</span>) comunicati dai gestori all'apposito servizio del <a href="https://carburanti.mise.gov.it" target="_blank">MiSE</a>.</p>
       </div>
       <div class="chart-wrapper">
         <div id="prezziMedi" class="prezziMedi">
@@ -61,7 +62,7 @@
       </div>
 
       <div class="text">
-        <h3 class="title">Distributori</h3>
+        <h3 class="title">Confronto tra Distributori </h3>
       </div>
       <div class="chart-wrapper">
         <div id="prezziEstremi" class="prezziEstremi">
@@ -76,7 +77,7 @@
       <div class="footer-wrapper">
         <div class="sources">
           <h3>Fonti</h3>
-          <p><a href="https://carburanti.mise.gov.it/" target="_blank">MISE</a>.</p>
+          <p>Prezzi: <a href="https://carburanti.mise.gov.it" target="_blank"></a>MiSE</a>.</p>
           <h3>Design e Sviluppo</h3>
           <p><a href="https://simonelippolis.com/" target="_blank">Simone Lippolis</a>.</p>
         </div>
@@ -114,7 +115,7 @@
         const distributoriMassimo = {};
 
         const drawList = items => {
-          const list = items.map(i => `<div class="item"><h4>${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small></h4><p>${i.indirizzo} - ${i.comune}</p><button class="dettagli" data-id="${i.id_impianto}">Dettagli</button><div class="dettagli" id="${i.id_impianto}"></div></div>`);
+          const list = items.map(i => `<div class="item"><div class="limit"><h4>${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small></h4><p>${i.indirizzo.toLowerCase()} - ${i.comune.toLowerCase()}</p><button class="dettagli" data-id="${i.id_impianto}">Dettagli</button><div class="dettagli" id="${i.id_impianto}"></div></div></div>`);
           return list.join();
         }
 
@@ -162,21 +163,21 @@
               .style('left', `${yScale(prezzoMinimo[t])}px`)
               .append('div')
                 .attr('class', 'label')
-                .html(prezzoMinimo[t]);
+                .html(`${prezzoMinimo[t]} ↓`);
             
             chartContainer.append('div')
               .attr('class', 'max')
               .style('left', `${yScale(prezzoMassimo[t])}px`)
               .append('div')
                 .attr('class', 'label')
-                .html(prezzoMassimo[t]);
+                .html(`${prezzoMassimo[t]} ↑`);
             
             chartContainer.append('div')
               .attr('class', 'avg')
               .style('left', `${yScale(prezzoMedio[t])}px`)
               .append('div')
                 .attr('class', 'label')
-                .html(prezzoMedio[t]);
+                .html(`${prezzoMedio[t]} ↔︎`);
           });
         };
 
@@ -197,11 +198,14 @@
             
             chartContainer.append('div')
               .attr('class', 'bassi')
-              .html(`<h2>Prezzo più basso: ${prezzoMinimo[t]}<small>${units[t]}</small></h2><div>${drawList(distributoriMinimo[t])}</div>`);
+              .html(`<h3>Prezzo più basso</h3><h2>${prezzoMinimo[t]}<small>${units[t]}</small></h2><div>${drawList(distributoriMinimo[t])}</div>`);
+
+              chartContainer.append('div')
+                .attr('class', 'divisorio');
 
             chartContainer.append('div')
-              .attr('class', 'bassi')
-              .html(`<h2>Prezzo più alto: ${prezzoMassimo[t]}<small>${units[t]}</small></h2><div>${drawList(distributoriMassimo[t])}</div>`);
+              .attr('class', 'alti')
+              .html(`<h3>Prezzo più alto</h3><h2>${prezzoMassimo[t]}<small>${units[t]}</small></h2><div>${drawList(distributoriMassimo[t])}</div>`);
           });
         };
       
