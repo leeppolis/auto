@@ -272,6 +272,18 @@
   display: none;
   flex: 0 0 20%;
   padding: 20px;
+  position: relative;
+}
+
+.estremo .chart .divisorio::before {
+  border-top: 2px dotted rgb(111, 136, 132, 1);
+  content: '';
+  display: block;
+  height: 1px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 21px;
 }
 
 @media screen and (min-width:768px) {
