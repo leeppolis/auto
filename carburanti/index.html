@@ -77,7 +77,9 @@
       <div class="footer-wrapper">
         <div class="sources">
           <h3>Fonti</h3>
-          <p>Prezzi: <a href="https://carburanti.mise.gov.it" target="_blank">MiSE</a>.</p>
+          <p>
+            Prezzi: <a href="https://carburanti.mise.gov.it" target="_blank">MiSE</a>.<br />
+            Consumi: <a href="https://it.motor1.com/reviews/445109/fiat-panda-mild-hybrid-prova-consumi/" target="_blank">Fiat Panda</a>, <a href="https://it.motor1.com/reviews/232789/fiat-panda-gpl-prova-consumi/" target="_blank">Fiat Panda GPL</a>, <a href="https://www.gpone.com/it/2020/10/16/auto-test/prova-fiat-500-c-hybrid-caratteristiche-consumo-e-prezzi-della-500-mild-hybrid" target="_blank">Fiat 500</a>, <a href="https://it.motor1.com/reviews/221374/ford-fiesta-10-prova-consumi/" target="_blank">Ford Fiesta</a>, <a href="https://www.hdmotori.it/renault/speciali/n527166/renault-clio-e-tech-hybrid-prova-consumi-reali/" target="_blank">Renault Clio</a>, <a href="https://it.motor1.com/reviews/426660/lancia-ypsilon-mild-hybrid-prova-consumi/" target="_blank">Lancia Y</a>, <a href="https://www.tagliandiauto.it/it/consumi-reali/108-lancia/531-consumi-lancia-ypsilon-consumi-reali-rilevati-dai-possessori" target="_blank">Lancia Y GPL</a>, <a href="https://www.drivek.it/guide/renault-arkana-e-tech-prova-consumi/" target="_blank">Renault Arkana</a>, <a href="https://it.motor1.com/reviews/429184/volkswagen-golf-mild-hybrid-prova-consumi/" target="_blank">VW Golf Mild Hybrid</a>, <a href="https://www.ultimatespecs.com/it/auto-caratteristiche-tecniche/Volkswagen/118823/Volkswagen-Golf-8-20-TDI-115HP.html" target="_blank">VW Golf Diesel</a>, <a href="https://it.motor1.com/reviews/267319/jeep-renegade-10-prova-consumi-roma-forli/" target="_blank">Jeep Renegade</a>, <a href="https://www.gazzetta.it/motori/la-mia-auto/prove-auto/14-12-2022/dacia-duster-gpl-prova-consumi-e-prezzo-del-suv-bifuel.shtml" target="_blank">Dacia Duster GPL</a>, <a href="https://www.drivek.it/confronta/audi-a4?vehicleHistoricalId=1000373553" target="_blank">Audi A4 Benzina</a>, <a href="https://www.noleggiosemplice.it/noleggio-lungo-termine/audi/a4-avant-20-30-tdi-186" target="_blank">Audi A4 Diesel</a>, <a href="https://www.motorbox.com/auto/auto-viste-e-provate/auto-day-by-day/alfa-romeo-stelvio-2020-a-benzina-prova-consumi-prezzi" target="_blank">Alfa Romeo Stelvio Benzina</a>, <a href="https://it.motor1.com/reviews/221479/alfa-romeo-stelvio-prova-consumi/" target="_blank">Alfa Romeo Stelvio Diesel</a>.</p>
           <h3>Design e Sviluppo</h3>
           <p><a href="https://simonelippolis.com/" target="_blank">Simone Lippolis</a>.</p>
         </div>
@@ -106,6 +108,162 @@
           'GPL': '€/m3',
           'Metano': '€/kg',
         }
+
+        const cars = [
+          {
+            segment: 'A',
+            brand: 'Fiat',
+            model: 'Panda',
+            fuel: ['Benzina', 'Benzina Speciale'],
+            hybrid: 'mild',
+            priceFrom: 15600,
+            consumption: 15.63,
+          },
+          {
+            segment: 'A',
+            brand: 'Fiat',
+            model: 'Panda',
+            fuel: ['GPL'],
+            hybrid: 'no',
+            priceFrom: 12400,
+            consumption: 10,
+          },
+          {
+            segment: 'A',
+            brand: 'Fiat',
+            model: '500',
+            fuel: ['Benzina', 'Benzina Speciale'],
+            hybrid: 'mild',
+            priceFrom: 16623,
+            consumption: 12.23,
+          },
+          {
+            segment: 'B',
+            brand: 'Ford',
+            model: 'Fiesta',
+            fuel: ['Benzina', 'Benzina Speciale'],
+            hybrid: 'mild',
+            priceFrom: 21250,
+            consumption: 11.36,
+          },
+          {
+            segment: 'B',
+            brand: 'Renault',
+            model: 'Clio',
+            fuel: ['Benzina', 'Benzina Speciale'],
+            hybrid: 'full',
+            priceFrom: 21600,
+            consumption: 38.46,
+          },
+          {
+            segment: 'B',
+            brand: 'Lancia',
+            model: 'Y',
+            fuel: ['Benzina', 'Benzina Speciale'],
+            hybrid: 'mild',
+            priceFrom: 17100,
+            consumption: 14.7,
+          },
+          {
+            segment: 'B',
+            brand: 'Lancia',
+            model: 'Y',
+            fuel: ['GPL'],
+            hybrid: 'no',
+            priceFrom: 20500,
+            consumption: 17.69,
+          },
+          {
+            segment: 'C',
+            brand: 'Volkswagen',
+            model: 'Golf',
+            fuel: ['Diesel'],
+            hybrid: 'no',
+            priceFrom: 31850,
+            consumption: 25,
+          },
+          {
+            segment: 'C',
+            brand: 'Volkswagen',
+            model: 'Golf',
+            fuel: ['Metano'],
+            hybrid: 'no',
+            priceFrom: 32850,
+            consumption: 16.5,
+          },
+          {
+            segment: 'C',
+            brand: 'Volkswagen',
+            model: 'Golf',
+            fuel: ['Benzina', 'Benzina Speciale'],
+            hybrid: 'mild',
+            priceFrom: 31100,
+            consumption: 14.7,
+          },
+          {
+            segment: 'C',
+            brand: 'Renault',
+            model: 'Arkana',
+            fuel: ['Benzina', 'Benzina Speciale'],
+            hybrid: 'full',
+            priceFrom: 33050,
+            consumption: 16.5,
+          },
+          {
+            segment: 'C',
+            brand: 'Jeep',
+            model: 'Renegade',
+            fuel: ['Benzina', 'Benzina Speciale'],
+            hybrid: 'mild',
+            priceFrom: 26300,
+            consumption: 12.6,
+          },
+          {
+            segment: 'C',
+            brand: 'Dacia',
+            model: 'Duster',
+            fuel: ['GPL'],
+            hybrid: 'no',
+            priceFrom: 17300,
+            consumption: 14.29,
+          },
+          {
+            segment: 'D',
+            brand: 'Audi',
+            model: 'A4',
+            fuel: ['Benzina', 'Benzina Speciale'],
+            hybrid: 'mild',
+            priceFrom: 41050,
+            consumption: 13.89,
+          },
+          {
+            segment: 'D',
+            brand: 'Audi',
+            model: 'A4',
+            fuel: ['Diesel'],
+            hybrid: 'no',
+            priceFrom: 42700,
+            consumption: 22.72,
+          },
+          {
+            segment: 'D',
+            brand: 'Alfa Romeo',
+            model: 'Stelvio',
+            fuel: ['Diesel'],
+            hybrid: 'no',
+            priceFrom: 53150,
+            consumption: 8.33,
+          },
+          {
+            segment: 'D',
+            brand: 'Alfa Romeo',
+            model: 'Stelvio',
+            fuel: ['Benzina', 'Benzina Speciale'],
+            hybrid: 'no',
+            priceFrom: 53150,
+            consumption: 8.47,
+          },
+        ];
 
         const prezzi = {};
         const prezzoMinimo = {};
