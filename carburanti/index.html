@@ -70,6 +70,8 @@
 
       <h5 class="title">Quanti km riesci a fare?</h5>
 
+      <p>Grafici delle macchine</p>
+
       <h5 class="title">Questi i distributori più e meno convenienti</h5>
 
       <div id="prezziEstremi" class="prezziEstremi">
@@ -318,7 +320,7 @@
     const drawAverage = () => {
       const target = '#prezziMedi';
 
-      const maxY = Math.round(Math.max(...Object.values(prezzoMassimo)) * 1.25);
+      const maxY = Math.round(Math.max(...Object.values(prezzoMassimo)) + 1);
       const minY = 0;
       const width = document.querySelector('#prezziMedi').offsetWidth || 300;
       const yScale = d3.scaleLinear()
