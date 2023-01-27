@@ -11,8 +11,10 @@
 .selector .wrapper {
   display: block;
   height: 40px;
+  margin-bottom: 40px;
   overflow-x: auto;
   overflow-y: hidden;
+  position: sticky;
 }
 
 .selector .flex {
@@ -25,7 +27,7 @@
 
 @media screen and (min-width: 768px) {
   .selector .flex {
-    justify-content: center;
+    /* justify-content: center; */
   }
 }
 
@@ -50,11 +52,12 @@
   font-weight: 900;
   height: 20px;
   line-height: 20px;
+  text-decoration: none;
   text-transform: uppercase;
 }
 
-.selector .item .selected a {
-  border-bottom: 1px solid rgb(111, 136, 132, 1);
+.selector .item.selected a {
+  color: #FF907B;
 }
 
 .prezziMedi {
@@ -66,43 +69,16 @@
   display: block;
 }
 
-@media screen and (min-width: 768px) {
-  .prezziMedi .prezziMediWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 0 -20px;
-  }
-}
-
 .prezziMedi .carburante {
   display: block;
   margin-bottom: 80px;
 }
 
-@media screen and (min-width: 768px) {
-  .prezziMedi .carburante {
-    flex: 0 0 50%;
-    padding: 0 20px;
-  }
-}
-
-.prezziMedi .titolo h3 {
-  font-size: 12px;
-  font-weight: 800;
-  margin: 0 0 10px 20px;
-  text-transform: uppercase;
-}
-
-@media screen and (min-width: 768px) {
-  .prezziMedi .titolo h3 {
-    margin-left: 0;
-  }
-}
-
 .prezziMedi .chart {
   display: block;
   height: 50px;
+  margin: 0 auto;
+  max-width: 300px;
   position: relative;
   width: 100%;
 }
@@ -144,7 +120,7 @@
 }
 
 .prezziMedi .shadow {
-  background: rgba(111, 136, 132, .5);
+  background: rgba(67, 177, 160, .25);
   display: block;
   height: 4px;
   left: 0;
@@ -155,7 +131,7 @@
 }
 
 .prezziMedi .bar {
-  background: rgb(111, 136, 132, 1);
+  background: #43B1A0;
   display: block;
   height: 4px;
   left: 0;
@@ -180,7 +156,7 @@
 }
 
 .prezziMedi .min::before {
-  background: rgb(111, 136, 132, 1);
+  background: #43B1A0;
   content: '';
   display: block;
   height: 8px;
@@ -188,7 +164,7 @@
 }
 
 .prezziMedi .max::before {
-  background: rgb(111, 136, 132, 1);
+  background: #43B1A0;
   content: '';
   display: block;
   height: 8px;
@@ -200,7 +176,7 @@
 }
 
 .prezziMedi .avg::before {
-  background: rgb(111, 136, 132, 1);
+  background: #43B1A0;
   content: '';
   display: block;
   height: 8px;
@@ -208,6 +184,7 @@
 }
 
 .prezziMedi .label {
+  color: #43B1A0;
   display: block;
   font-size: 12px;
   font-weight: 600;
@@ -224,7 +201,7 @@
 }
 
 .prezziMedi .min .label::after {
-  border-bottom: 3px solid rgb(111, 136, 132, 1);
+  border-bottom: 3px solid #43B1A0;
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
   content: '';
@@ -247,7 +224,7 @@
 }
 
 .prezziMedi .max .label::after {
-  border-bottom: 3px solid rgb(111, 136, 132, 1);
+  border-bottom: 3px solid #43B1A0;
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
   content: '';
@@ -273,7 +250,7 @@
 .prezziMedi .avg .label::after {
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
-  border-top: 3px solid rgb(111, 136, 132, 1);
+  border-top: 3px solid #43B1A0;
   bottom: -1px;
   content: '';
   height: 0;
@@ -331,7 +308,7 @@
 }
 
 .estremo .chart .divisorio::before {
-  border-top: 2px dotted rgb(111, 136, 132, 1);
+  border-top: 2px dotted #43B1A0;
   content: '';
   display: block;
   height: 1px;
@@ -343,7 +320,7 @@
 
 .estremo .chart .divisorio::after {
   background: #EDEAE3;
-  border: 0px solid rgb(111, 136, 132, 1);
+  border: 0px solid #43B1A0;
   border-radius: 50%;
   content: '⛽️';
   display: block;
