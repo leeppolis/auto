@@ -318,7 +318,7 @@
     const drawAverage = () => {
       const target = '#prezziMedi';
 
-      const maxY = Math.max(...Object.values(prezzoMassimo));
+      const maxY = Math.round(Math.max(...Object.values(prezzoMassimo)) * 1.25);
       const minY = 0;
       const width = document.querySelector('#prezziMedi').offsetWidth || 300;
       const yScale = d3.scaleLinear()
