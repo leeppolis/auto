@@ -25,12 +25,6 @@
   width: auto;
 }
 
-@media screen and (min-width: 768px) {
-  .selector .flex {
-    /* justify-content: center; */
-  }
-}
-
 .selector .item {
   display: block;
   height: 20px;
@@ -78,7 +72,6 @@
   display: block;
   height: 50px;
   margin: 0 auto;
-  max-width: 300px;
   position: relative;
   width: 100%;
 }
@@ -96,6 +89,7 @@
 }
 
 .prezziMedi .background .label {
+  bottom: 0;
   display: block;
   font-size: 12px;
   font-weight: 600;
@@ -104,19 +98,42 @@
   line-height: 20px;
   padding-left: 2px;
   position: absolute;
-  top: 100%;
+  transform: translate3d(0, 20px, 0);
+  white-space: nowrap;
+}
+
+.prezziMedi .background .label::after {
+  background: #43B1A0;
+  bottom: 100%;
+  content: '';
+  display: block;
+  height: 30px;
+  left: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.prezziMedi .background .label.label-max::after {
+  left: auto;
+  right: 0;
+}
+
+.prezziMedi .background .label.label-max {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  height: 20px;
+  left: auto;
+  line-height: 20px;
+  padding-right: 2px;
+  position: absolute;
+  right: 0;
+  text-align: right;
   white-space: nowrap;
 }
 
 .prezziMedi .background .label small {
   font-weight: 400;
-}
-
-@media screen and (min-width: 768px) {
-  .prezziMedi .background .label {
-    padding: 0;
-    transform: translate3d(-50%, 0, 0);
-  }
 }
 
 .prezziMedi .shadow {
@@ -200,6 +217,7 @@
   white-space: nowrap;
 }
 
+.prezziMedi .max .label::after,
 .prezziMedi .min .label::after {
   border-bottom: 3px solid #43B1A0;
   border-left: 3px solid transparent;
@@ -214,16 +232,13 @@
 }
 
 .prezziMedi .max .label {
-  left: 100%;
-  line-height: 20px;
+  left: auto;
   padding-left: 0;
   padding-right: 2px;
-  right: auto;
-  text-align: left;
-  white-space: nowrap;
+  right: 0;
 }
 
-.prezziMedi .max .label::after {
+/* .prezziMedi .max .label::after {
   border-bottom: 3px solid #43B1A0;
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
@@ -234,7 +249,7 @@
   top: -1px;
   transform: translate3d(-3.5px, 0, 0);
   width: 0;
-}
+} */
 
 .prezziMedi .avg .label {
   bottom: 100%;

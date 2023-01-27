@@ -65,9 +65,7 @@
       <h5 class="title">Prezzi minimi, (<span class="pictogram">↓</span>), medi (<span
         class="pictogram">↔︎</span>) e massimi (<span class="pictogram">↑</span>) in città</h5>
       <div class="chart-wrapper">
-        <div id="prezziMedi" class="prezziMedi">
-  
-        </div>
+        <div id="prezziMedi" class="prezziMedi"></div>
       </div>
 
       <h5 class="title">Quanti km riesci a fare?</h5>
@@ -322,7 +320,7 @@
 
       const maxY = Math.max(...Object.values(prezzoMassimo));
       const minY = 0;
-      const width = 280;
+      const width = document.querySelector('#prezziMedi').offsetWidth || 300;
       const yScale = d3.scaleLinear()
         .range([0, width])
         .domain([minY, maxY]);
@@ -337,12 +335,17 @@
       const chartContainer = singleContainer.append('div')
         .attr('class', 'chart');
 
-      chartContainer.append('div')
+      const background = chartContainer.append('div')
         .attr('class', 'background')
-        .style('left', 0)
-        .append('div')
-        .attr('class', 'label')
+        .style('left', 0);
+
+      background.append('div')
+        .attr('class', 'label label-min')
         .html(`${minY} <small>(${units[selected]})</small>`);
+
+      background.append('div')
+        .attr('class', 'label label-max')
+        .html(`${maxY} <small>(${units[selected]})</small>`);
 
       chartContainer.append('div')
         .attr('class', 'shadow')
@@ -359,9 +362,9 @@
         .append('div')
         .attr('class', 'label')
         .html(`${prezzoMinimo[selected]} ↓`);
-
+      const pushDown = yScale(prezzoMassimo[selected]) - yScale(prezzoMinimo[selected]) < 50;
       chartContainer.append('div')
-        .attr('class', 'max')
+        .attr('class', `max ${pushDown ? 'pushDown' : ''}`)
         .style('left', `${yScale(prezzoMassimo[selected])}px`)
         .append('div')
         .attr('class', 'label')
@@ -417,8 +420,8 @@
       });
     };
 
-    const selectItem = newSelected => {
-      if (newSelected !== selected || !newSelected) {
+    const selectItem = (newSelected, force = false) => {
+      if (newSelected !== selected || !newSelected || force) {
         selected = (tipi.find(d => d === newSelected)) ? newSelected : tipi[0];
         const selectedObj = document.querySelector('#selector .item.selected');
         const newSelectedObj = document.querySelector(`#selector .item.${clearClass(selected)}`)
@@ -472,6 +475,9 @@
         enableClick();
         // drawAverage();
         // drawExtremes();
+        window.addEventListener('resize', () => {
+          selectItem(selected);
+        });
       });
 
     fetch(document.querySelector('#corporate').getAttribute('href'))
