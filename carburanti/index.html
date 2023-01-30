@@ -57,18 +57,23 @@
       <h2>Raccogliamo ogni giorno i dati forniti dall'<a href="https://carburanti.mise.gov.it" target="_blank">Osservatorio Carburanti del MiSE</a> relativi ai distributori nel Comune di <strong>Milano</strong> per poter rispondere a questa e ad altre domande.</h2>
     </header>
 
-    <div class="text selector">
-      <h5 class="title">Per iniziare, seleziona il tuo carburante</h5>
-      <div class="wrapper">
-        <div class="flex" id="selector"></div>
-      </div>
-      <h5 class="title">Prezzi minimi, (<span class="pictogram">↓</span>), medi (<span
-        class="pictogram">↔︎</span>) e massimi (<span class="pictogram">↑</span>) in città</h5>
+    <div class="text">
+      <h3 class="title selection">
+        La mia auto usa:
+        <div class="selector" id="selector">
+          <div class="selected" id="selected"></div>
+          <div class="list" id="list">
+            <ul></ul>
+          </div>
+        </div>
+      </h3>
+      
+      <h5 class="title">Prezzi minimi, medi e massimi in città</h5>
       <div class="chart-wrapper">
         <div id="prezziMedi" class="prezziMedi"></div>
       </div>
 
-      <h5 class="title">Quanti km riesci a fare?</h5>
+      <h5 class="title">Quanti km riesci a fare con <strong>50 euro</strong>?</h5>
 
       <p>Grafici delle macchine</p>
 
@@ -363,21 +368,20 @@
         .style('left', `${yScale(prezzoMinimo[selected])}px`)
         .append('div')
         .attr('class', 'label')
-        .html(`${prezzoMinimo[selected]} ↓`);
-      const pushDown = yScale(prezzoMassimo[selected]) - yScale(prezzoMinimo[selected]) < 50;
+        .html(`${prezzoMinimo[selected]}`);
       chartContainer.append('div')
-        .attr('class', `max ${pushDown ? 'pushDown' : ''}`)
+        .attr('class', 'max')
         .style('left', `${yScale(prezzoMassimo[selected])}px`)
         .append('div')
         .attr('class', 'label')
-        .html(`${prezzoMassimo[selected]} ↑`);
+        .html(`${prezzoMassimo[selected]}`);
 
       chartContainer.append('div')
         .attr('class', 'avg')
         .style('left', `${yScale(prezzoMedio[selected])}px`)
         .append('div')
         .attr('class', 'label')
-        .html(`${prezzoMedio[selected]} ↔︎`);
+        .html(`${prezzoMedio[selected]}`);
     };
 
     const drawExtremes = () => {
@@ -411,46 +415,40 @@
       drawExtremes();
     };
 
-    const enableClick = () => {
-      const targets = document.querySelectorAll('#selector .item a');
-      targets.forEach((t) => {
-        t.addEventListener('click', (e) => {
-          e.preventDefault();
-          console.log();
-          selectItem(e.target.getAttribute('data-id'));
-        })
-      });
-    };
-
-    const selectItem = (newSelected, force = false) => {
+    const selectItem = (event, newSelected, force = false) => {
+      if (event.preventDefault) {
+        event.preventDefault();
+      }
       if (newSelected !== selected || !newSelected || force) {
         selected = (tipi.find(d => d === newSelected)) ? newSelected : tipi[0];
         const selectedObj = document.querySelector('#selector .item.selected');
         const newSelectedObj = document.querySelector(`#selector .item.${clearClass(selected)}`)
-        console.log(selectedObj, newSelectedObj);
         if (selectedObj) {
           selectedObj.classList.toggle('selected');
         }
         if (newSelectedObj) {
           newSelectedObj.classList.toggle('selected');
+          d3.select('#selector #selected')
+            .text(selected);
         }
-        window.localStorage.setItem(localStorageKey, newSelected);
+        window.localStorage.setItem(localStorageKey, selected);
       }
       showSelected();
     }
 
     const addSelectors = () => {
       const target = '#selector';
-      const wrapper = d3.select(target);
+      d3.select(`${target} #selected`).text(selected);
+      const list = d3.select(`${target} #list ul`);
       tipi.forEach((t) => {
-        console.log(t);
-        wrapper.append('div')
-          .attr('class', `item ${clearClass(t)}`)
+        list.append('li')
+          .attr('class', `item ${selected === t ? 'selected' : ''} ${clearClass(t)}`)
           .append('a')
-          .attr('href', `#${t}`)
-          .attr('data-id', t)
-          .text(t);
+          .attr('href', '#')
+          .text(t)
+          .on('click', e => selectItem(e, t));
       });
+      
     };
 
     d3.json('https://api-benzina.visualizenews.com/?comune=%5B%22milano%22%5D')
@@ -473,12 +471,9 @@
         console.log(prezzi, prezzoMinimo, prezzoMassimo, prezzoMedio, distributoriMinimo, distributoriMassimo);
         addSelectors();
         const fromStorage = window.localStorage.getItem(localStorageKey);
-        selectItem(fromStorage);
-        enableClick();
-        // drawAverage();
-        // drawExtremes();
+        selectItem({}, fromStorage);
         window.addEventListener('resize', () => {
-          selectItem(selected);
+          selectItem({}, selected);
         });
       });
 

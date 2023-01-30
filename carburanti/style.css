@@ -1,57 +1,117 @@
+body {
+  min-height: 100vh;
+}
+
 .pictogram {
   font-family: Montserrat, sans-serif;
 }
 
-.selector h5.title {
+.text {
+  position: relative;
+}
+
+.text .title {
   font-size: 14px;
-  font-weight: 600;
-  margin: 0 0 10px 0;
 }
 
-.selector .wrapper {
-  display: block;
-  height: 40px;
-  margin-bottom: 40px;
-  overflow-x: auto;
-  overflow-y: hidden;
+.text .title.selection {
+  font-size: 16px;
+} 
+
+.text .title strong {
+  color: #4941AA;
+  font-weight: 900;
+}
+
+.selection {
+  background: #EDEAE3;
   position: sticky;
+  top: 0;
+  z-index: 99;
 }
 
-.selector .flex {
-  display: flex;
-  flex-wrap: nowrap;
-  height: 20px;
-  justify-content: flex-start;
+.selector {
+  border-bottom: 2px dotted #E9995B;
+  color: #E9995B;
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  margin: 0 auto 40px auto;
+  max-width: 220px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
   width: auto;
 }
 
-.selector .item {
+@media screen and (min-width: 768px) {
+  .selector {
+    display: inline-block;
+    margin: 20px auto;
+    padding: 0 20px;
+    text-align: left;
+    min-width: 220px;
+  }
+}
+
+.selector .list {
+  background: #EDEAE3;
+  border: 1px solid #2F4858;
+  display: none;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: auto;
+  z-index: 99;
+}
+
+.selector:hover .list,
+.selector:active .list {
   display: block;
-  height: 20px;
-  line-height: 20px;
-  padding-right: 20px;
+}
+
+.selector .list ul,
+.selector .list li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.selector li.item {
+  border-bottom: 1px solid #2F4858;
+  display: block;
+  height: 30px;
+  line-height: 29px;
+  padding: 0 20px;
   white-space: nowrap;
+}
+
+.selector .item:last-child {
+  border-bottom: none;
 }
 
 .selector a,
 .selector a:link,
 .selector a:visited,
-.selector a:active,
-.selector a:hover,
 .selector a:visited {
   color: #2F4858;
   display: block;
   font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  font-weight: 900;
-  height: 20px;
-  line-height: 20px;
+  font-size: 12px;
+  font-weight: 600;
   text-decoration: none;
   text-transform: uppercase;
 }
 
+.selector a:active,
+.selector a:hover {
+  color: #E9995B;
+}
+
 .selector .item.selected a {
-  color: #FF907B;
+  font-weight: 900;
 }
 
 .prezziMedi {
@@ -79,7 +139,7 @@
 .prezziMedi .background {
   background: rgba(255, 255, 255, .2);
   display: block;
-  height: 12px;
+  height: 14px;
   left: 0;
   position: absolute;
   right: 0;
@@ -89,7 +149,7 @@
 }
 
 .prezziMedi .background .label {
-  bottom: 0;
+  color: #9EB0A2;
   display: block;
   font-size: 12px;
   font-weight: 400;
@@ -97,7 +157,7 @@
   left: 0;
   line-height: 20px;
   position: absolute;
-  transform: translate3d(0, 20px, 0);
+  top: 100%;
   white-space: nowrap;
 }
 
@@ -106,7 +166,7 @@
   bottom: 100%;
   content: '';
   display: block;
-  height: 30px;
+  height: 14px;
   left: 0;
   position: absolute;
   width: 1px;
@@ -114,7 +174,7 @@
 
 .prezziMedi .background .label.label-max::after {
   left: auto;
-  right: 0;
+  right: -2px;
 }
 
 .prezziMedi .background .label.label-max {
@@ -129,7 +189,7 @@
 }
 
 .prezziMedi .shadow {
-  background: rgba(158, 176, 162, .5);
+  background: rgba(158, 176, 162, .15);
   display: block;
   height: 4px;
   left: 0;
@@ -141,6 +201,7 @@
 
 .prezziMedi .bar {
   background: #9EB0A2;
+  background: linear-gradient(90deg, #00C9AC 0%, #FF907B 100%);
   display: block;
   height: 4px;
   left: 0;
@@ -156,75 +217,84 @@
 .prezziMedi .min {
   background: transparent;
   display: block;
-  height: 10;
+  height: 20;
   left: 0;
+  padding: 0 2px 0 0;
   position: absolute;
   right: auto;
   top: 50%;
-  transform: translate3d(0, -50%, 0);
+  transform: translate3d(-100%, -50%, 0);
 }
 
 .prezziMedi .min::before {
-  background: #9EB0A2;
+  background: #00C9AC;
   content: '';
   display: block;
+  position: absolute;
+  right: 0;
   height: 8px;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
   width: 1px;
 }
 
+.prezziMedi .max {
+  padding: 0 0 0 2px;
+  transform: translate3d(0, -50%, 0);
+}
+
 .prezziMedi .max::before {
-  background: #9EB0A2;
+  background: #FF907B;
   content: '';
   display: block;
   height: 8px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
   width: 1px;
 }
 
 .prezziMedi .avg {
-  transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, calc(-100% - 10px), 0);
 }
 
 .prezziMedi .avg::before {
-  background: #9EB0A2;
+  background: #7F3F01;
   content: '';
   display: block;
-  height: 8px;
+  height: 12px;
+  left: 50%;
+  position: absolute;
+  top: calc(100% - 2px);
+  transform: translate3d(-50%, 0, 0);
   width: 1px;
 }
 
+.prezziMedi .avg::after {
+  background: #7F3F01;
+  border-radius: 50%;
+  content: '';
+  display: block;
+  height: 5px;
+  left: 50%;
+  position: absolute;
+  top: 100%;
+  transform: translate3d(-50%, 7px, 0);
+  width: 5px;
+}
+
 .prezziMedi .label {
-  color: #9EB0A2;
+  color: #7F3F01;
   display: block;
   font-size: 12px;
   font-weight: 600;
   height: 20px;
-  left: auto;
   line-height: 20px;
   padding-left: 2px;
-  position: absolute;
-  right: 100%;
   text-align: right;
-  top: 100%;
   transform: translate3d(0, 0, 0);
   white-space: nowrap;
-}
-
-.prezziMedi .max.pushDown .label {
-  top: calc(100% + 12px);
-}
-
-.prezziMedi .max .label::after,
-.prezziMedi .min .label::after {
-  border-bottom: 3px solid #9EB0A2;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  content: '';
-  height: 0;
-  left: 100%;
-  position: absolute;
-  top: -1px;
-  transform: translate3d(-2.5px, 0, 0);
-  width: 0;
 }
 
 .prezziMedi .min .label {
@@ -233,47 +303,9 @@
 
 .prezziMedi .max .label {
   color: #FF907B;
-  left: auto;
-  padding-left: 0;
-  padding-right: 2px;
-  right: 0;
 }
 
-.prezziMedi .max.pushDown .label::after {
-  top: -12px;
-}
-
-.prezziMedi .max .label::after {
-  border-bottom: 3px solid #FF907B;
-}
-
-.prezziMedi .min .label::after {
-  border-bottom: 3px solid #00C9AC;
-}
-
-.prezziMedi .avg .label {
-  bottom: 100%;
-  left: auto;
-  padding: 0;
-  right: auto;
-  text-align: center;
-  top: auto;
-  transform: translate3d(-50%, 0, 0);
-  white-space: nowrap;
-}
-
-.prezziMedi .avg .label::after {
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  border-top: 3px solid #9EB0A2;
-  bottom: -1px;
-  content: '';
-  height: 0;
-  left: 50%;
-  position: absolute;
-  transform: translate3d(-2.5px, 0, 0);
-  width: 0;
-}
+.prezziMedi .avg .label {}
 
 .estremo {
   margin-bottom: 40px;
