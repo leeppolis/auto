@@ -10,6 +10,21 @@ body {
   position: relative;
 }
 
+.notes {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.group {
+  margin-bottom: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .group {
+    margin-bottom: 80px;
+  }
+}
+
 .text .title {
   font-size: 14px;
 }
@@ -119,13 +134,16 @@ body {
   margin: 0 auto;
 }
 
+.prezziMedi .chart-wrapper {
+  margin: 0;
+}
+
 .prezziMedi .prezziMediWrapper {
   display: block;
 }
 
 .prezziMedi .carburante {
   display: block;
-  margin-bottom: 80px;
 }
 
 .prezziMedi .chart {
@@ -260,7 +278,7 @@ body {
 }
 
 .prezziMedi .avg::before {
-  background: #7F3F01;
+  background: #43B1A0;
   content: '';
   display: block;
   height: 12px;
@@ -272,7 +290,7 @@ body {
 }
 
 .prezziMedi .avg::after {
-  background: #7F3F01;
+  background: #43B1A0;
   border-radius: 50%;
   content: '';
   display: block;
@@ -285,7 +303,7 @@ body {
 }
 
 .prezziMedi .label {
-  color: #7F3F01;
+  color: #43B1A0;
   display: block;
   font-size: 12px;
   font-weight: 600;
@@ -447,4 +465,136 @@ body {
   line-height: 40px;
   padding: 0;
   text-decoration: underline;
+}
+
+.cars {
+  display: block;
+}
+
+.cars .cars-wrapper {
+  display: block;
+}
+
+.cars .single-car {
+  display: block;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .cars .single-car {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 40px;
+  }
+}
+
+.cars .charts,
+.cars .description {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .cars .description {
+    flex: 0 0 150px;
+    padding-right: 20px;
+  }
+
+  .cars .charts {
+    flex: 0 0 auto;
+    padding-top: 20px;
+  }
+}
+
+.cars .description h4 {
+  font-size: 12px;
+  margin: 0;
+}
+
+.cars .description dl {
+  display: none;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  width: 140px;
+}
+
+@media screen and (min-width: 768px) {
+  .cars .description dl {
+    display: block;
+  }
+}
+
+.cars .description dd,
+.cars .description dt {
+  display: block;
+  font-size: 8px;
+  line-height: 14px;
+  margin: 0;
+  padding: 0;
+  white-space: wrap;
+  width: 100%;
+}
+
+.cars .description dd {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.cars .chart {
+  display: block;
+  height: 40px;
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .cars .chart {
+    flex: 0 0 auto;
+  }
+}
+
+.cars .chart h6 {
+  font-size: 8px;
+  font-weight: 200;
+  left: 0;
+  margin: 0;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
+  white-space: nowrap;
+}
+
+.cars .chart .bar {
+  background: rgba(158, 176, 162, .15);
+  height: 12px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
+.cars .chart-min .bar {
+  background: #00C9AC;
+}
+
+.cars .chart-avg .bar {
+  background: #43B1A0;
+}
+
+.cars .chart-max .bar {
+  background: #FF907B;
+}
+
+.cars .chart .label {
+  font-size: 10px;
+  font-weight: 600;
+  padding-left: 2px;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
+.cars .chart .label.invert {
+  color: #fff;
+  padding: 0 2px 0 0;
+  transform: translate3d(-100%, -50%, 0);
 }

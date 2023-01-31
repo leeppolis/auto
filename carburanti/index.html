@@ -68,19 +68,23 @@
         </div>
       </h3>
       
-      <h5 class="title">Prezzi minimi, medi e massimi in città</h5>
-      <div class="chart-wrapper">
+      <div class="group">
+        <h5 class="title">Prezzi minimi, medi e massimi in città</h5>
         <div id="prezziMedi" class="prezziMedi"></div>
       </div>
 
-      <h5 class="title">A questi prezzi, quanti km riesci a fare con <strong>50 euro</strong>?</h5>
-
-      <p>Grafici delle macchine</p>
-
-      <h5 class="title">Questi i distributori più e meno convenienti</h5>
-
-      <div id="prezziEstremi" class="prezziEstremi">
-
+      <div class="group">
+        <h5 class="title">A questi prezzi, quanti km riesci a fare con <strong><span id="money">10</span> euro</strong>?</h5>
+        <div class="cars" id="cars"></div>
+        <div class="notes">
+          <p>
+            <sup>*</sup> I consumi di ciascuna auto mostrata sono basati sulle fonti indicate a fondo pagina.
+          </p>
+        </div>
+      </div>
+      <div class="group">
+        <h5 class="title">Questi i distributori più e meno convenienti</h5>
+        <div id="prezziEstremi" class="prezziEstremi"></div>
       </div>
     </div>
   </div>
@@ -133,6 +137,7 @@
 
   <script>
     const localStorageKey = 'it.mia.mi.traffico.carburanti.selected';
+    const money = 10;
     const tipi = [
       'Benzina',
       'Benzina Speciale',
@@ -219,7 +224,7 @@
         segment: 'C',
         brand: 'Volkswagen',
         model: 'Golf',
-        fuel: ['Diesel'],
+        fuel: ['Diesel', 'Diesel Speciale'],
         hybrid: 'no',
         priceFrom: 31850,
         consumption: 25,
@@ -282,7 +287,7 @@
         segment: 'D',
         brand: 'Audi',
         model: 'A4',
-        fuel: ['Diesel'],
+        fuel: ['Diesel', 'Diesel Speciale'],
         hybrid: 'no',
         priceFrom: 42700,
         consumption: 22.72,
@@ -291,7 +296,7 @@
         segment: 'D',
         brand: 'Alfa Romeo',
         model: 'Stelvio',
-        fuel: ['Diesel'],
+        fuel: ['Diesel', 'Diesel Speciale'],
         hybrid: 'no',
         priceFrom: 53150,
         consumption: 8.33,
@@ -322,8 +327,127 @@
       return list.join('');
     }
 
-    const drawAverage = () => {
-      const target = '#prezziMedi';
+    const drawCars = () => {
+      const target = '#cars';
+      const singleItemHeight = 75;
+      const vMargins = 20;
+      const innerMargin = 10;
+      const boxWidth = window.matchMedia('screen and (min-width: 768px)').matches ? 150 : 0;
+
+      const container = d3.select(target);
+
+      container.html('');
+
+      if (selected === 'GPL' || selected === 'Metano') {
+       container.html('<p>Non disponiamo ancora di abbastanza dati per calcolare le percorrenze.'); 
+      } else {
+
+        const wrapper = container
+          .append('div')
+          .attr('class', 'cars-wrapper');
+
+        const sources = cars.filter(d => d.fuel.find(e => e === selected));
+        const percorrenza = {
+          min: {},
+          avg: {},
+          max: {},
+        };
+
+        const distances = [];
+
+        sources.forEach((s) => {
+          const min = Number((money / prezzoMinimo[selected] * s.consumption).toFixed(2));
+          const avg = Number((money / prezzoMedio[selected] * s.consumption).toFixed(2));
+          const max = Number((money / prezzoMassimo[selected] * s.consumption).toFixed(2));
+          distances.push(min);
+          distances.push(avg);
+          distances.push(max);
+          percorrenza.min[clearClass(`${s.brand}${s.model}`)] = min;
+          percorrenza.avg[clearClass(`${s.brand}${s.model}`)] = avg;
+          percorrenza.max[clearClass(`${s.brand}${s.model}`)] = max;
+        });
+
+        const chartWidth = document.querySelector(target).offsetWidth - boxWidth;
+        const originalMaxY = Math.max(...distances);
+        const maxY = Math.ceil(((originalMaxY * 100) + 1000) / 100);
+
+
+        const scaleY = d3.scaleLinear()
+          .domain([0, maxY])
+          .range([0, chartWidth]);
+
+        sources.forEach((s, i) => {
+          const item = wrapper.append('div')
+            .attr('class', 'single-car');
+
+          const description = item.append('div')
+            .attr('class', 'description');
+          
+          description.append('h4')
+            .text(`${s.brand} ${s.model} ${originalMaxY === percorrenza.min[clearClass(`${s.brand}${s.model}`)] ? '👑' : ''}`);
+          const list = description.append('dl');
+          list.append('dt')
+            .text('Segmento');
+          list.append('dd')
+            .text(s.segment);
+          list.append('dt')
+            .text('Prezzo');
+          list.append('dd')
+            .html(`da ${s.priceFrom}<small>€</small>`);
+          list.append('dt')
+            .text('Tecnologia');
+          list.append('dd')
+            .text(`${s.hybrid === 'full' ? 'Full Hybrid' : (s.hybrid === 'mild' ? 'Mild Hybrid' : 'Combustione')}`);
+          list.append('dt')
+            .text('Ciclo urbano');
+          list.append('dd')
+            .html(`~${s.consumption}<small>km/l</small>`);
+
+          const charts = item.append('div')
+            .attr('class', 'charts');
+
+          const chartMin = charts.append('div')
+            .attr('class', 'chart chart-min');
+          chartMin.append('h6')
+            .html(`Prezzo Minimo <small>${prezzoMinimo[selected]}<small>€/l</small></small>`);
+          chartMin.append('div')
+            .attr('class', 'bar')
+            .style('width', `${scaleY(percorrenza.min[clearClass(`${s.brand}${s.model}`)])}px`);
+          chartMin.append('div')
+            .attr('class', `label ${(chartWidth / 4 * 3) <= scaleY(percorrenza.min[clearClass(`${s.brand}${s.model}`)]) ? 'invert' : ''}`)
+            .style('left', `${scaleY(percorrenza.min[clearClass(`${s.brand}${s.model}`)])}px`)
+            .text(`${percorrenza.min[clearClass(`${s.brand}${s.model}`)]}km`);
+
+          const chartAvg = charts.append('div')
+            .attr('class', 'chart chart-avg');
+          chartAvg.append('h6')
+            .html(`Prezzo Medio <small>${prezzoMedio[selected]}<small>€/l</small></small>`);
+          chartAvg.append('div')
+            .attr('class', 'bar')
+            .style('width', `${scaleY(percorrenza.avg[clearClass(`${s.brand}${s.model}`)])}px`);
+          chartAvg.append('div')
+            .attr('class', `label ${(chartWidth / 4 * 3) <= scaleY(percorrenza.avg[clearClass(`${s.brand}${s.model}`)]) ? 'invert' : ''}`)
+            .style('left', `${scaleY(percorrenza.avg[clearClass(`${s.brand}${s.model}`)])}px`)
+            .text(`${percorrenza.avg[clearClass(`${s.brand}${s.model}`)]}km`);
+
+          const chartMax = charts.append('div')
+            .attr('class', 'chart chart-max');
+          chartMax.append('h6')
+            .html(`Prezzo Massimo <small>${prezzoMassimo[selected]}<small>€/l</small></small>`);
+          chartMax.append('div')
+            .attr('class', 'bar')
+            .style('width', `${scaleY(percorrenza.max[clearClass(`${s.brand}${s.model}`)])}px`);
+          chartMax.append('div')
+            .attr('class', `label ${(chartWidth / 4 * 3) <= scaleY(percorrenza.max[clearClass(`${s.brand}${s.model}`)]) ? 'invert' : ''}`)
+            .style('left', `${scaleY(percorrenza.max[clearClass(`${s.brand}${s.model}`)])}px`)
+            .text(`${percorrenza.max[clearClass(`${s.brand}${s.model}`)]}km`);
+
+        });
+      }
+    };
+
+    const drawAverage = (forceTarget = null) => {
+      const target = forceTarget === null ? '#prezziMedi' : forceTarget;
 
       const maxY = Math.round(Math.max(...Object.values(prezzoMassimo)) + 1);
       const minY = 0;
@@ -412,6 +536,7 @@
 
     const showSelected = () => {
       drawAverage();
+      drawCars();
       drawExtremes();
     };
 
@@ -450,10 +575,9 @@
       });
       
     };
-
+    document.querySelector('#money').innerHTML = money;
     d3.json('https://api-benzina.visualizenews.com/?comune=%5B%22milano%22%5D')
       .then((data) => {
-        console.log(data);
         if (!data.error) {
           tipi.forEach((t) => {
             prezzi[`${t}-tutti`] = data.data.filter(d => d.nome_comune.toLowerCase() === t.toLowerCase());
@@ -468,7 +592,6 @@
             distributoriMassimo[t] = prezzi[`${t}-tutti`].filter(d => d.prezzo.toFixed(3) === prezzoMassimo[t]);
           });
         }
-        console.log(prezzi, prezzoMinimo, prezzoMassimo, prezzoMedio, distributoriMinimo, distributoriMassimo);
         addSelectors();
         const fromStorage = window.localStorage.getItem(localStorageKey);
         selectItem({}, fromStorage);
