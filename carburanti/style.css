@@ -33,13 +33,15 @@ body {
   font-size: 16px;
 } 
 
+header h1 strong,
+header h2 strong,
 .text .title strong {
   color: #E9995B;
   font-weight: 900;
 }
 
 .selection {
-  background: #EDEAE3;
+  background: rgba(237, 234, 227, .95);
   position: sticky;
   top: 0;
   z-index: 99;
@@ -188,6 +190,7 @@ body {
   left: 0;
   position: absolute;
   width: 1px;
+  z-index: 2;
 }
 
 .prezziMedi .background .label.label-max::after {
@@ -495,19 +498,26 @@ body {
 
 @media screen and (min-width: 768px) {
   .cars .description {
-    flex: 0 0 150px;
+    flex: 0 0 200px;
     padding-right: 20px;
   }
 
   .cars .charts {
     flex: 0 0 auto;
-    padding-top: 20px;
+    padding-top: 42px;
   }
 }
 
 .cars .description h4 {
   font-size: 12px;
   margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .cars .description h4 {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
 }
 
 .cars .description dl {
@@ -527,7 +537,7 @@ body {
 .cars .description dd,
 .cars .description dt {
   display: block;
-  font-size: 8px;
+  font-size: 10px;
   line-height: 14px;
   margin: 0;
   padding: 0;
@@ -597,4 +607,22 @@ body {
   color: #fff;
   padding: 0 2px 0 0;
   transform: translate3d(-100%, -50%, 0);
+}
+
+.details {
+  background: #EDEAE3;
+  bottom: 0;
+  display: none;
+  height: auto;
+  left: 0;
+  padding: 20px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: auto;
+  z-index: 999;
+}
+
+.details.visible {
+  display: block;
 }

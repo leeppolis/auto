@@ -51,10 +51,10 @@
 
 <body>
   <div class="wrapper">
-    <header class="collapsible">
+    <header>
       <h1>Carburanti a Milano</h1>
-      <h2>Quanta strada puoi fare con <strong>50€</strong> di carburante? Riempire il serbatoio con la benzina meno costosa cambia veramente la distanza che puoi percorrere in città?</h2>
-      <h2>Raccogliamo ogni giorno i dati forniti dall'<a href="https://carburanti.mise.gov.it" target="_blank">Osservatorio Carburanti del MiSE</a> relativi ai distributori nel Comune di <strong>Milano</strong> per poter rispondere a questa e ad altre domande.</h2>
+      <h2>Quanta strada puoi fare con <strong><span id="money">10</span> euro</strong> di carburante? Riempire il serbatoio con la benzina meno costosa cambia veramente la distanza che puoi percorrere in città?</h2>
+      <h2>Raccogliamo ogni giorno i dati forniti dall'<a href="https://carburanti.mise.gov.it" target="_blank">Osservatorio Carburanti del MiSE</a> relativi ai distributori nel <strong>Comune di Milano</strong> per poter rispondere a questa e ad altre domande.</h2>
     </header>
 
     <div class="text">
@@ -74,7 +74,7 @@
       </div>
 
       <div class="group">
-        <h5 class="title">A questi prezzi, quanti km riesci a fare con <strong><span id="money">10</span> euro</strong>?</h5>
+        <h5 class="title">A questi prezzi, quanti km riesci a fare con <strong><span id="money2">10</span> euro</strong>?</h5>
         <div class="cars" id="cars"></div>
         <div class="notes">
           <p>
@@ -87,6 +87,11 @@
         <div id="prezziEstremi" class="prezziEstremi"></div>
       </div>
     </div>
+  </div>
+
+  <div class="details" id="details">
+    <button class="close" id="close">×</button>
+    <div class="content"></div>
   </div>
 
 
@@ -332,7 +337,7 @@
       const singleItemHeight = 75;
       const vMargins = 20;
       const innerMargin = 10;
-      const boxWidth = window.matchMedia('screen and (min-width: 768px)').matches ? 150 : 0;
+      const boxWidth = window.matchMedia('screen and (min-width: 768px)').matches ? 200 : 0;
 
       const container = d3.select(target);
 
@@ -521,18 +526,61 @@
       const chartContainer = singleContainer.append('div')
         .attr('class', 'chart');
 
-      chartContainer.append('div')
+      const listWrapperBassi = chartContainer.append('div')
         .attr('class', 'bassi')
-        .html(`<h3>Prezzo più basso</h3><h2>${prezzoMinimo[selected]}<small>${units[selected]}</small></h2><div>${drawList(distributoriMinimo[selected])}</div>`);
+        .html(`
+          <h3>Prezzo più basso</h3>
+          <h2>${prezzoMinimo[selected]}<small>${units[selected]}</small></h2>
+        `);
+      
+      distributoriMinimo[selected].forEach((i) => {
+        const item = listWrapperBassi.append('div')
+          .attr('class', 'item');
+        const limit = item.append('div')
+          .attr('class', 'limit');
+        limit.append('button')
+          .attr('class', 'dettagli')
+          .on('click', e => showDetails(e, i.id_impianto))
+          .append('h4')
+          .html(`${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small>`);
+        limit.append('p')
+          .html(`${i.indirizzo.toLowerCase()} - ${i.comune.toLowerCase()}`);
+      });
 
       chartContainer.append('div')
         .attr('class', 'divisorio');
 
-      chartContainer.append('div')
+      const listWrapperAlti = chartContainer.append('div')
         .attr('class', 'alti')
-        .html(`<h3>Prezzo più alto</h3><h2>${prezzoMassimo[selected]}<small>${units[selected]}</small></h2><div>${drawList(distributoriMassimo[selected])}</div>`);
-      
+        .html(`
+          <h3>Prezzo più alto</h3>
+          <h2>${prezzoMassimo[selected]}<small>${units[selected]}</small></h2>
+        `);
+      distributoriMassimo[selected].forEach((i) => {
+        const item = listWrapperAlti.append('div')
+          .attr('class', 'item');
+        const limit = item.append('div')
+          .attr('class', 'limit');
+        limit.append('button')
+          .attr('class', 'dettagli')
+          .on('click', e => showDetails(e, i.id_impianto))
+          .append('h4')
+          .html(`${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small>`);
+        limit.append('p')
+          .html(`${i.indirizzo.toLowerCase()} - ${i.comune.toLowerCase()}`);
+      });
     };
+
+    const showDetails = id => {
+      const target = '#details';
+      document.querySelector(target).classList.add('visible');
+    };
+
+    const closeDetails = () => {
+      const target = '#details';
+      document.querySelector(target).classList.remove('visible');
+      document.querySelector(`${target} .content`).innerHTML = '';
+    }
 
     const showSelected = () => {
       drawAverage();
@@ -576,6 +624,8 @@
       
     };
     document.querySelector('#money').innerHTML = money;
+    document.querySelector('#money2').innerHTML = money;
+    document.querySelector('#close').addEventListener('click', closeDetails, true);
     d3.json('https://api-benzina.visualizenews.com/?comune=%5B%22milano%22%5D')
       .then((data) => {
         if (!data.error) {
