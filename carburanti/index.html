@@ -57,7 +57,7 @@
       <h2>Raccogliamo ogni giorno i dati forniti dall'<a href="https://carburanti.mise.gov.it" target="_blank">Osservatorio Carburanti del MiSE</a> relativi ai distributori nel <strong>Comune di Milano</strong> per poter rispondere a questa e ad altre domande.</h2>
     </header>
 
-    <div class="text">
+    <div class="text" id="text">
       <h3 class="title selection">
         La mia auto usa:
         <div class="selector" id="selector">
@@ -634,6 +634,10 @@
             .text(selected);
         }
         window.localStorage.setItem(localStorageKey, selected);
+        console.log(document.querySelector('#text').getBoundingClientRect().top);
+        document.querySelector('#text').scrollIntoView({
+          behavior: 'smooth'
+        });
       }
       showSelected();
     }
