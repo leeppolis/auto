@@ -318,6 +318,7 @@
     ];
 
     let selected = '';
+    let allData;
     const prezzi = {};
     const prezzoMinimo = {};
     const prezzoMassimo = {};
@@ -326,11 +327,6 @@
     const distributoriMassimo = {};
 
     const clearClass = string => string.replace(/ /ig, '-').toLowerCase();
-
-    const drawList = items => {
-      const list = items.map(i => `<div class="item"><div class="limit"><button class="dettagli" data-id="${i.id_impianto}"><h4>${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small></button></h4><p>${i.indirizzo.toLowerCase()} - ${i.comune.toLowerCase()}</p><div class="dettagli" id="${i.id_impianto}"></div></div></div>`);
-      return list.join('');
-    }
 
     const drawCars = () => {
       const target = '#cars';
@@ -398,7 +394,7 @@
           list.append('dt')
             .text('Prezzo');
           list.append('dd')
-            .html(`da ${s.priceFrom}<small>€</small>`);
+            .html(`da ${new Intl.NumberFormat('it-IT').format(s.priceFrom)}<small>€</small>`);
           list.append('dt')
             .text('Tecnologia');
           list.append('dd')
@@ -406,7 +402,7 @@
           list.append('dt')
             .text('Ciclo urbano');
           list.append('dd')
-            .html(`~${s.consumption}<small>km/l</small>`);
+            .html(`~${new Intl.NumberFormat('it-IT').format(s.consumption)}<small>km/l</small>`);
 
           const charts = item.append('div')
             .attr('class', 'charts');
@@ -414,38 +410,38 @@
           const chartMin = charts.append('div')
             .attr('class', 'chart chart-min');
           chartMin.append('h6')
-            .html(`Prezzo Minimo <small>${prezzoMinimo[selected]}<small>€/l</small></small>`);
+            .html(`Prezzo Minimo <small>${new Intl.NumberFormat('it-IT').format(prezzoMinimo[selected])}<small>€/l</small></small>`);
           chartMin.append('div')
             .attr('class', 'bar')
             .style('width', `${scaleY(percorrenza.min[clearClass(`${s.brand}${s.model}`)])}px`);
           chartMin.append('div')
             .attr('class', `label ${(chartWidth / 4 * 3) <= scaleY(percorrenza.min[clearClass(`${s.brand}${s.model}`)]) ? 'invert' : ''}`)
             .style('left', `${scaleY(percorrenza.min[clearClass(`${s.brand}${s.model}`)])}px`)
-            .text(`${percorrenza.min[clearClass(`${s.brand}${s.model}`)]}km`);
+            .text(`${new Intl.NumberFormat('it-IT').format(percorrenza.min[clearClass(`${s.brand}${s.model}`)])}km`);
 
           const chartAvg = charts.append('div')
             .attr('class', 'chart chart-avg');
           chartAvg.append('h6')
-            .html(`Prezzo Medio <small>${prezzoMedio[selected]}<small>€/l</small></small>`);
+            .html(`Prezzo Medio <small>${new Intl.NumberFormat('it-IT').format(prezzoMedio[selected])}<small>€/l</small></small>`);
           chartAvg.append('div')
             .attr('class', 'bar')
             .style('width', `${scaleY(percorrenza.avg[clearClass(`${s.brand}${s.model}`)])}px`);
           chartAvg.append('div')
             .attr('class', `label ${(chartWidth / 4 * 3) <= scaleY(percorrenza.avg[clearClass(`${s.brand}${s.model}`)]) ? 'invert' : ''}`)
             .style('left', `${scaleY(percorrenza.avg[clearClass(`${s.brand}${s.model}`)])}px`)
-            .text(`${percorrenza.avg[clearClass(`${s.brand}${s.model}`)]}km`);
+            .text(`${new Intl.NumberFormat('it-IT').format(percorrenza.avg[clearClass(`${s.brand}${s.model}`)])}km`);
 
           const chartMax = charts.append('div')
             .attr('class', 'chart chart-max');
           chartMax.append('h6')
-            .html(`Prezzo Massimo <small>${prezzoMassimo[selected]}<small>€/l</small></small>`);
+            .html(`Prezzo Massimo <small>${new Intl.NumberFormat('it-IT').format(prezzoMassimo[selected])}<small>€/l</small></small>`);
           chartMax.append('div')
             .attr('class', 'bar')
             .style('width', `${scaleY(percorrenza.max[clearClass(`${s.brand}${s.model}`)])}px`);
           chartMax.append('div')
             .attr('class', `label ${(chartWidth / 4 * 3) <= scaleY(percorrenza.max[clearClass(`${s.brand}${s.model}`)]) ? 'invert' : ''}`)
             .style('left', `${scaleY(percorrenza.max[clearClass(`${s.brand}${s.model}`)])}px`)
-            .text(`${percorrenza.max[clearClass(`${s.brand}${s.model}`)]}km`);
+            .text(`${new Intl.NumberFormat('it-IT').format(percorrenza.max[clearClass(`${s.brand}${s.model}`)])}km`);
 
         });
       }
@@ -497,20 +493,20 @@
         .style('left', `${yScale(prezzoMinimo[selected])}px`)
         .append('div')
         .attr('class', 'label')
-        .html(`${prezzoMinimo[selected]}`);
+        .html(`${new Intl.NumberFormat('it-IT').format(prezzoMinimo[selected])}`);
       chartContainer.append('div')
         .attr('class', 'max')
         .style('left', `${yScale(prezzoMassimo[selected])}px`)
         .append('div')
         .attr('class', 'label')
-        .html(`${prezzoMassimo[selected]}`);
+        .html(`${new Intl.NumberFormat('it-IT').format(prezzoMassimo[selected])}`);
 
       chartContainer.append('div')
         .attr('class', 'avg')
         .style('left', `${yScale(prezzoMedio[selected])}px`)
         .append('div')
         .attr('class', 'label')
-        .html(`${prezzoMedio[selected]}`);
+        .html(`${new Intl.NumberFormat('it-IT').format(prezzoMedio[selected])}`);
     };
 
     const drawExtremes = () => {
@@ -530,7 +526,7 @@
         .attr('class', 'bassi')
         .html(`
           <h3>Prezzo più basso</h3>
-          <h2>${prezzoMinimo[selected]}<small>${units[selected]}</small></h2>
+          <h2>${new Intl.NumberFormat('it-IT').format(prezzoMinimo[selected])}<small>${units[selected]}</small></h2>
         `);
       
       distributoriMinimo[selected].forEach((i) => {
@@ -554,7 +550,7 @@
         .attr('class', 'alti')
         .html(`
           <h3>Prezzo più alto</h3>
-          <h2>${prezzoMassimo[selected]}<small>${units[selected]}</small></h2>
+          <h2>${new Intl.NumberFormat('it-IT').format(prezzoMassimo[selected])}<small>${units[selected]}</small></h2>
         `);
       distributoriMassimo[selected].forEach((i) => {
         const item = listWrapperAlti.append('div')
@@ -565,14 +561,47 @@
           .attr('class', 'dettagli')
           .on('click', e => showDetails(e, i.id_impianto))
           .append('h4')
-          .html(`${i.marca} <small>(${i.self === 1 ? 'self' : 'servito'})</small>`);
+          .html(`${i.marca} ${i.id_impianto} <small>(${i.self === 1 ? 'self' : 'servito'})</small>`);
         limit.append('p')
           .html(`${i.indirizzo.toLowerCase()} - ${i.comune.toLowerCase()}`);
       });
     };
 
-    const showDetails = id => {
+    const showDetails = (e, id) => {
+      e.preventDefault();
       const target = '#details';
+      const data = [];
+      const info = allData.filter(d => Number(d.id_impianto) === Number(id));
+      console.log(id, info);
+      const container = d3.select(`${target} .content`);
+      container.html('');
+      container.append('h3')
+        .text(info[0].marca);
+      container.append('h4')
+        .append('a')
+        .attr('href', `https://maps.google.com/?q=${info[0].indirizzo.toLowerCase()} - ${info[0].comune.toLowerCase()} Italia`)
+        .attr('target', '_blank')
+        .text(`${info[0].indirizzo.toLowerCase()} - ${info[0].comune.toLowerCase()}`);
+      container.append('h5')
+        .text('Prezzi praticati');
+      const prezzi = container.append('div')
+        .attr('class', 'prezzi');
+      info.forEach((i) => {
+        const riga = prezzi.append('div')
+          .attr('class', 'riga');
+        riga.append('div')
+          .attr('class', 'nome')
+          .html(i.tipo_carburante);
+        riga.append('div')
+          .attr('class', 'prezzo')
+          .html(`${new Intl.NumberFormat('it-IT').format(i.prezzo)}<small>${units[i.nome_comune]}</small>`);
+        riga.append('div')
+          .attr('class', 'self')
+          .html(`${i.self === 1 ? 'self' : ''}`);
+      });
+      container.append('footer')
+        .append('p')
+        .text(`Ultimo aggiornamento: ${new Intl.DateTimeFormat('it-IT').format(new Date(info[0].aggiornato))}`)
       document.querySelector(target).classList.add('visible');
     };
 
@@ -629,6 +658,7 @@
     d3.json('https://api-benzina.visualizenews.com/?comune=%5B%22milano%22%5D')
       .then((data) => {
         if (!data.error) {
+          allData = data.data;
           tipi.forEach((t) => {
             prezzi[`${t}-tutti`] = data.data.filter(d => d.nome_comune.toLowerCase() === t.toLowerCase());
             [0, 1].forEach((s) => {
@@ -642,6 +672,7 @@
             distributoriMassimo[t] = prezzi[`${t}-tutti`].filter(d => d.prezzo.toFixed(3) === prezzoMassimo[t]);
           });
         }
+        console.log(distributoriMassimo);
         addSelectors();
         const fromStorage = window.localStorage.getItem(localStorageKey);
         selectItem({}, fromStorage);

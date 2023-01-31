@@ -19,6 +19,10 @@ body {
   margin-bottom: 40px;
 }
 
+button {
+  color: #2F4858;
+}
+
 @media screen and (min-width: 768px) {
   .group {
     margin-bottom: 80px;
@@ -610,12 +614,12 @@ header h2 strong,
 }
 
 .details {
-  background: #EDEAE3;
+  background: rgba(237, 234, 227, .75);
   bottom: 0;
   display: none;
   height: auto;
   left: 0;
-  padding: 20px;
+  padding: 80px 20px;
   position: fixed;
   right: 0;
   top: 0;
@@ -625,4 +629,95 @@ header h2 strong,
 
 .details.visible {
   display: block;
+}
+
+.details .close {
+  background: none;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 40px;
+  height: 40px;
+  padding: 0;
+  position: absolute;
+  right: 20px;
+  text-align: right;
+  top: 20px;
+  width: 40px;
+}
+
+.details .content {
+  background: rgba(237, 234, 227, 1);
+  border: 1px solid #2F4858;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.details .content h3 {
+  font-weight: 900;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
+.details .content h4 {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0 0 20px 0;
+  text-transform: capitalize;
+}
+
+.details .content h5 {
+  font-weight: 900;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+}
+
+.details .content .prezzi {
+  margin-bottom: 20px;
+}
+
+.details .content .riga {
+  display: flex;
+  font-size: 10px;
+  flex-wrap: nowrap;
+  line-height: 20px;
+}
+
+.details .content .nome {
+  flex: 0 0 40%;
+  text-transform: uppercase;
+}
+
+.details .content .prezzo {
+  flex: 0 0 40%;
+  padding: 0 20px;
+  text-align: right;
+}
+
+.details .content .self {
+  flex: 0 0 20%;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.details .content footer p {
+  font-size: 10px;
+  font-style: italic;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .details .content {
+    bottom: auto;
+    left: 50%;
+    max-width: 600px;
+    min-width: 500px;
+    position: fixed;
+    right: auto;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: 60%;
+  }
 }
